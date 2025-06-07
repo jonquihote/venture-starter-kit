@@ -14,6 +14,7 @@ return RectorConfig::configure()
         __DIR__ . '/resources',
         __DIR__ . '/routes',
         __DIR__ . '/tests',
+        __DIR__ . '/modules',
     ])
     // uncomment to reach your current PHP version
     // ->withPhpSets()

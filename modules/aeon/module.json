@@ -1,0 +1,9 @@
+{
+    "name": "Aeon",
+    "alias": "aeon",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\Aeon\\Providers\\AeonServiceProvider"],
+    "files": []
+}
