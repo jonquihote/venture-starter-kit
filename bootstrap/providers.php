@@ -2,5 +2,6 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\Filament\ManagePanelProvider::class,
+
+    Venture\Home\Providers\PanelServiceProvider::class,
 ];

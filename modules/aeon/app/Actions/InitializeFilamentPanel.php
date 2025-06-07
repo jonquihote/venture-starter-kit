@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers\Filament;
+namespace Venture\Aeon\Actions;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -8,8 +8,6 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -17,25 +15,40 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Lorisleiva\Actions\Action;
+use Venture\Aeon\Enums\ModulesEnum;
 
-class ManagePanelProvider extends PanelProvider
+class InitializeFilamentPanel extends Action
 {
-    public function panel(Panel $panel): Panel
+    public function handle(Panel $panel, ModulesEnum $module)
     {
+        $name = $module->name();
+        $slug = $module->slug();
+
         return $panel
-            ->default()
-            ->id('manage')
-            ->path('manage')
-            ->login()
-            ->colors([
-                'primary' => Color::Amber,
-            ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->id($slug)
+            ->path($slug)
+            ->topNavigation()
+            ->viteTheme('resources/css/app.css')
+            ->discoverResources(
+                in: base_path("modules/{$slug}/app/Filament/Resources"),
+                for: "Venture\\{$name}\\Filament\\Resources",
+            )
+            ->discoverPages(
+                in: base_path("modules/{$slug}/app/Filament/Pages"),
+                for: "Venture\\{$name}\\Filament\\Pages",
+            )
+            ->discoverWidgets(
+                in: base_path("modules/{$slug}/app/Filament/Widgets"),
+                for: "Venture\\{$name}\\Filament\\Widgets",
+            )
+            ->discoverClusters(
+                in: base_path("modules/{$slug}/app/Filament/Clusters"),
+                for: "Venture\\{$name}\\Filament\\Clusters",
+            )
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
