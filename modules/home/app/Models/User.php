@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Models;
+namespace Venture\Home\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Venture\Home\Database\Factories\UserFactory;
+use Venture\Home\Enums\MigrationsEnum;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    /** @use HasFactory<UserFactory> */
+    use HasFactory;
+
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -44,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getTable(): string
+    {
+        return MigrationsEnum::USERS->table();
+    }
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }
