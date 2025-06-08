@@ -9,6 +9,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Venture\Aeon\Console\Commands\BootstrapCommand;
 use Venture\Aeon\Console\Commands\ResetCommand;
+use Venture\Aeon\Console\Commands\SyncIconsCommand;
 use Venture\Aeon\Enums\ModulesEnum;
 
 class AeonServiceProvider extends ServiceProvider
@@ -45,6 +46,7 @@ class AeonServiceProvider extends ServiceProvider
         $this->commands([
             ResetCommand::class,
             BootstrapCommand::class,
+            SyncIconsCommand::class,
         ]);
     }
 

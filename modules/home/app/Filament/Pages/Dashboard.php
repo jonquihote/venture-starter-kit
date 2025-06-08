@@ -8,6 +8,8 @@ use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
 
 class Dashboard extends BaseDashboard
 {
+    protected static ?string $navigationIcon = 'fad:sharp-gauge';
+
     public static function canAccess(): bool
     {
         return Auth::user()->can(PagePermissionsEnum::DASHBOARD);
