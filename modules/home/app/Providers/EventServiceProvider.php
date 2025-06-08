@@ -3,6 +3,7 @@
 namespace Venture\Home\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Venture\Home\Listeners\UserEventSubscriber;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,6 +13,15 @@ class EventServiceProvider extends ServiceProvider
      * @var array<string, array<int, string>>
      */
     protected $listen = [];
+
+    /**
+     * The subscribers to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        UserEventSubscriber::class,
+    ];
 
     /**
      * Indicates if events should be discovered.

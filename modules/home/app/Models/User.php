@@ -6,14 +6,19 @@ namespace Venture\Home\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Venture\Home\Database\Factories\UserFactory;
 use Venture\Home\Enums\MigrationsEnum;
+use Venture\Home\Events\Models\UserEvent\UserCreatedEvent;
+use Venture\Home\Events\Models\UserEvent\UserDeletedEvent;
+use Venture\Home\Events\Models\UserEvent\UserUpdatedEvent;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 
+    use HasRoles;
     use Notifiable;
 
     /**
@@ -35,6 +40,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * Allows for object-based events for native Eloquent events.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => UserCreatedEvent::class,
+        'updated' => UserUpdatedEvent::class,
+        'deleted' => UserDeletedEvent::class,
     ];
 
     /**

@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Venture\Aeon\Console\Commands\BootstrapCommand;
+use Venture\Aeon\Console\Commands\ResetCommand;
 use Venture\Aeon\Enums\ModulesEnum;
 
 class AeonServiceProvider extends ServiceProvider
@@ -40,7 +42,10 @@ class AeonServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            ResetCommand::class,
+            BootstrapCommand::class,
+        ]);
     }
 
     /**

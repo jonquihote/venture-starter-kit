@@ -6,7 +6,6 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -46,9 +45,6 @@ class InitializeFilamentPanel extends Action
                 in: base_path("modules/{$slug}/app/Filament/Clusters"),
                 for: "Venture\\{$name}\\Filament\\Clusters",
             )
-            ->pages([
-                Pages\Dashboard::class,
-            ])
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,

@@ -9,7 +9,8 @@
     ],
     "require": {
         "lorisleiva/laravel-actions": "^2.9",
-        "nwidart/laravel-modules": "^12.0"
+        "nwidart/laravel-modules": "^12.0",
+        "spatie/laravel-permission": "^6.19"
     },
     "extra": {
         "laravel": {
