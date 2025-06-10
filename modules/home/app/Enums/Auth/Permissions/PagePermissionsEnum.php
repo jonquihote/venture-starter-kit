@@ -8,5 +8,5 @@ enum PagePermissionsEnum: string
 {
     use InteractsWithPermissionsEnum;
 
-    case DASHBOARD = 'home::authorization.permissions.pages.dashboard';
+    case DASHBOARD = 'home::authorization/permissions/pages.dashboard';
 }

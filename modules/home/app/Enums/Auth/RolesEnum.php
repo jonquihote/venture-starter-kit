@@ -4,10 +4,12 @@ namespace Venture\Home\Enums\Auth;
 
 use Illuminate\Support\Collection;
 use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
+use Venture\Home\Enums\Auth\Permissions\UserResourcePermissionsEnum;
 
 enum RolesEnum: string
 {
-    case USER = 'home::authorization.roles.user';
+    case ADMINISTRATOR = 'home::authorization/roles.administrator';
+    case USER = 'home::authorization/roles.user';
 
     public static function all(): Collection
     {
@@ -22,6 +24,10 @@ enum RolesEnum: string
     public function permissions(): Collection
     {
         $permissions = match ($this) {
+            self::ADMINISTRATOR => [
+                PagePermissionsEnum::all(),
+                UserResourcePermissionsEnum::all(),
+            ],
             self::USER => [
                 PagePermissionsEnum::all(),
             ],
