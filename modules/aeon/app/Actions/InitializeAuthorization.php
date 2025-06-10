@@ -16,7 +16,7 @@ class InitializeAuthorization extends Action
         $component->info('Registering Permissions.');
 
         Access::permissions()->each(function (string $permission) use ($component): void {
-            Permission::create([
+            Permission::firstOrCreate([
                 'name' => $permission,
             ]);
 
@@ -26,7 +26,7 @@ class InitializeAuthorization extends Action
         $component->info('Registering Roles.');
 
         Access::roles()->each(function (Collection $permissions, string $role) use ($component): void {
-            $instance = Role::create([
+            $instance = Role::firstOrCreate([
                 'name' => $role,
             ]);
 
