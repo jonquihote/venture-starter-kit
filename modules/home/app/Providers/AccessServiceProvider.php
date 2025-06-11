@@ -15,5 +15,6 @@ class AccessServiceProvider extends ServiceProvider
     {
         Access::addPermissions(PermissionsEnum::all());
         Access::addRoles(RolesEnum::all());
+        Access::addAdministratorRole(RolesEnum::ADMINISTRATOR);
     }
 }
