@@ -6,6 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -31,6 +32,11 @@ class InitializeFilamentPanel extends Action
             ->homeUrl(function () {
                 return route('filament.home.pages.dashboard');
             })
+            ->userMenuItems([
+                'logout' => MenuItem::make()->url(function () {
+                    return route('filament.home.auth.logout');
+                }),
+            ])
             ->discoverResources(
                 in: base_path("modules/{$slug}/app/Filament/Resources"),
                 for: "Venture\\{$name}\\Filament\\Resources",
