@@ -26,6 +26,14 @@ enum ModulesEnum
         };
     }
 
+    public function icon(): string
+    {
+        return match ($this) {
+            self::AEON => 'fad:sharp-block',
+            self::HOME => 'fad:sharp-house-chimney',
+        };
+    }
+
     protected function stringable(): Stringable
     {
         return match ($this) {

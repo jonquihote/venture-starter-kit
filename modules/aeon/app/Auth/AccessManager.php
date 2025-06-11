@@ -13,11 +13,14 @@ class AccessManager
 
     protected Collection $administratorRoles;
 
+    protected Collection $dashboardPages;
+
     public function __construct()
     {
         $this->permissions = new Collection;
         $this->roles = new Collection;
         $this->administratorRoles = new Collection;
+        $this->dashboardPages = new Collection;
     }
 
     public function permissions(): Collection
@@ -35,6 +38,11 @@ class AccessManager
         return $this->administratorRoles;
     }
 
+    public function dashboardPages(): Collection
+    {
+        return $this->dashboardPages;
+    }
+
     public function addPermissions(Collection $permissions): void
     {
         $this->permissions = $this->permissions->merge($permissions);
@@ -48,5 +56,10 @@ class AccessManager
     public function addAdministratorRole(BackedEnum $role): void
     {
         $this->administratorRoles->push($role->value);
+    }
+
+    public function addDashboardPage(string $dashboard, array $data = []): void
+    {
+        $this->dashboardPages->put($dashboard, $data);
     }
 }
