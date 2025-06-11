@@ -1,0 +1,9 @@
+{
+    "name": "Skeleton",
+    "alias": "skeleton",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\Skeleton\\Providers\\SkeletonServiceProvider"],
+    "files": []
+}

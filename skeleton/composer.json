@@ -1,0 +1,28 @@
+{
+    "name": "venture/skeleton",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joni Chandra",
+            "email": "jonquihote@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Venture\\Skeleton\\": "app/",
+            "Venture\\Skeleton\\Database\\Factories\\": "database/factories/",
+            "Venture\\Skeleton\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Venture\\Skeleton\\Tests\\": "tests/"
+        }
+    }
+}
