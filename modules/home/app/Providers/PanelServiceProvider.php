@@ -17,6 +17,11 @@ class PanelServiceProvider extends PanelProvider
             ->login()
             ->colors([
                 'primary' => Color::Orange,
+                'gray' => Color::Slate,
+                'success' => Color::Emerald,
+                'danger' => Color::Rose,
+                'warning' => Color::Amber,
+                'info' => Color::Blue,
             ]);
     }
 }

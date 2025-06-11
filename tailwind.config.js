@@ -1,3 +1,5 @@
+import themer from 'tailwindcss-themer';
+import colors from 'tailwindcss/colors';
 import preset from './vendor/filament/filament/tailwind.config.preset.js';
 
 export default {
@@ -8,5 +10,37 @@ export default {
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
         './modules/**/resources/views/**/*.blade.php',
+    ],
+
+    safelist: [
+        //
+
+        'fi-panel-home',
+    ],
+
+    plugins: [
+        themer({
+            defaultTheme: {
+                extend: {
+                    colors: {
+                        secondary: colors.slate,
+                        success: colors.emerald,
+                        danger: colors.rose,
+                        warning: colors.amber,
+                        info: colors.blue,
+                    },
+                },
+            },
+            themes: [
+                {
+                    name: 'fi-panel-home',
+                    extend: {
+                        colors: {
+                            primary: colors.orange,
+                        },
+                    },
+                },
+            ],
+        }),
     ],
 };
