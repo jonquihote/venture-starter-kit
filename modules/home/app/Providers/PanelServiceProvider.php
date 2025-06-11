@@ -14,6 +14,7 @@ class PanelServiceProvider extends PanelProvider
     {
         return InitializeFilamentPanel::run($panel, ModulesEnum::HOME)
             ->default()
+            ->topNavigation()
             ->login()
             ->colors([
                 'primary' => Color::Orange,

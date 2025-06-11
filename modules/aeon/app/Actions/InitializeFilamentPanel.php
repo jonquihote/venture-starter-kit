@@ -27,7 +27,6 @@ class InitializeFilamentPanel extends Action
         return $panel
             ->id($slug)
             ->path($slug)
-            ->topNavigation()
             ->viteTheme('resources/css/app.css')
             ->homeUrl(function () {
                 return route('filament.home.pages.dashboard');
