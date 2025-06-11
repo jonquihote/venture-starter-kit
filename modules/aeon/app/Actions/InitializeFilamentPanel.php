@@ -28,6 +28,9 @@ class InitializeFilamentPanel extends Action
             ->path($slug)
             ->topNavigation()
             ->viteTheme('resources/css/app.css')
+            ->homeUrl(function () {
+                return route('filament.home.pages.dashboard');
+            })
             ->discoverResources(
                 in: base_path("modules/{$slug}/app/Filament/Resources"),
                 for: "Venture\\{$name}\\Filament\\Resources",
