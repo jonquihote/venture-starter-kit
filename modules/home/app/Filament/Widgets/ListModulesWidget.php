@@ -13,7 +13,7 @@ class ListModulesWidget extends Widget
 
     protected function getViewData(): array
     {
-        $dashboards = Access::dashboardPages()
+        $dashboards = Access::entryPages()
             ->filter(function (array $data, $dashboard) {
                 return $dashboard::canAccess();
             })

@@ -18,7 +18,7 @@ class AccessServiceProvider extends ServiceProvider
         Access::addPermissions(PermissionsEnum::all());
         Access::addRoles(RolesEnum::all());
         Access::addAdministratorRole(RolesEnum::ADMINISTRATOR);
-        Access::addDashboardPage(Dashboard::class, [
+        Access::addEntryPage(Dashboard::class, [
             'route' => 'filament.skeleton.pages.dashboard',
             'name' => ModulesEnum::SKELETON->name(),
             'slug' => ModulesEnum::SKELETON->slug(),

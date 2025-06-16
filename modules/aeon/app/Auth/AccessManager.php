@@ -13,14 +13,14 @@ class AccessManager
 
     protected Collection $administratorRoles;
 
-    protected Collection $dashboardPages;
+    protected Collection $entryPages;
 
     public function __construct()
     {
         $this->permissions = new Collection;
         $this->roles = new Collection;
         $this->administratorRoles = new Collection;
-        $this->dashboardPages = new Collection;
+        $this->entryPages = new Collection;
     }
 
     public function permissions(): Collection
@@ -38,9 +38,9 @@ class AccessManager
         return $this->administratorRoles;
     }
 
-    public function dashboardPages(): Collection
+    public function entryPages(): Collection
     {
-        return $this->dashboardPages;
+        return $this->entryPages;
     }
 
     public function addPermissions(Collection $permissions): void
@@ -58,8 +58,8 @@ class AccessManager
         $this->administratorRoles->push($role->value);
     }
 
-    public function addDashboardPage(string $dashboard, array $data = []): void
+    public function addEntryPage(string $page, array $data = []): void
     {
-        $this->dashboardPages->put($dashboard, $data);
+        $this->entryPages->put($page, $data);
     }
 }
