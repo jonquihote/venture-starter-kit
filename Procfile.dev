@@ -1,4 +1,0 @@
-assets: bun run dev
-scheduler: php artisan schedule:work
-worker: php artisan horizon
-logger: php artisan pail --timeout=2592000 -vvv
