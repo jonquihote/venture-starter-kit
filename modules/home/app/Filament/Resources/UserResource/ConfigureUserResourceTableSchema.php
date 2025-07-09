@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Lorisleiva\Actions\Action;
 
-class InitializeTableColumns extends Action
+class ConfigureUserResourceTableSchema extends Action
 {
     protected string $langPre = 'home::filament/resources/user/table';
 

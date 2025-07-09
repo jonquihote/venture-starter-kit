@@ -5,8 +5,8 @@ namespace Venture\Home\Filament\Resources;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
-use Venture\Home\Filament\Resources\UserResource\InitializeFormSchema;
-use Venture\Home\Filament\Resources\UserResource\InitializeTableColumns;
+use Venture\Home\Filament\Resources\UserResource\ConfigureUserResourceFormSchema;
+use Venture\Home\Filament\Resources\UserResource\ConfigureUserResourceTableSchema;
 use Venture\Home\Filament\Resources\UserResource\Pages;
 use Venture\Home\Models\User;
 
@@ -20,12 +20,12 @@ class UserResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return InitializeFormSchema::run($form);
+        return ConfigureUserResourceFormSchema::run($form);
     }
 
     public static function table(Table $table): Table
     {
-        return InitializeTableColumns::run($table);
+        return ConfigureUserResourceTableSchema::run($table);
     }
 
     public static function getPages(): array

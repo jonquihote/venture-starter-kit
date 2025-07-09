@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 use Lorisleiva\Actions\Action;
 use Venture\Aeon\Models\Role;
 
-class InitializeFormSchema extends Action
+class ConfigureUserResourceFormSchema extends Action
 {
     protected string $langPre = 'home::filament/resources/user/form';
 
