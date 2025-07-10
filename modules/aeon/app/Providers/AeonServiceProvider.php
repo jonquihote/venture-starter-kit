@@ -11,6 +11,7 @@ use Venture\Aeon\Console\Commands\BootstrapCommand;
 use Venture\Aeon\Console\Commands\ResetCommand;
 use Venture\Aeon\Console\Commands\SyncIconsCommand;
 use Venture\Aeon\Enums\ModulesEnum;
+use Venture\Aeon\Providers\Horizon\PackageHorizonServiceProvider;
 
 class AeonServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,8 @@ class AeonServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->register(PackageHorizonServiceProvider::class);
     }
 
     /**
