@@ -26,7 +26,8 @@ class ConfigureUserResourceFormSchema extends Action
             TextInput::make('name')
                 ->label("{$this->langPre}.fields.name.label")
                 ->translateLabel()
-                ->required(),
+                ->required()
+                ->columnSpanFull(),
 
             TextInput::make('password')
                 ->label("{$this->langPre}.fields.password.label")
@@ -35,7 +36,8 @@ class ConfigureUserResourceFormSchema extends Action
                 ->revealable()
                 ->confirmed()
                 ->required()
-                ->visibleOn('create'),
+                ->visibleOn('create')
+                ->columnSpanFull(),
 
             TextInput::make('password_confirmation')
                 ->label("{$this->langPre}.fields.password_confirmation.label")
@@ -43,50 +45,77 @@ class ConfigureUserResourceFormSchema extends Action
                 ->password()
                 ->revealable()
                 ->required()
-                ->visibleOn('create'),
+                ->visibleOn('create')
+                ->columnSpanFull(),
+
+            $this->getUsernameRepeaterField(),
+            $this->getEmailRepeaterField(),
         ];
     }
 
-    protected function getUsernameRepeaterField(): array
+    protected function getUsernameRepeaterField(): Repeater
     {
-        return [
-            Repeater::make('usernames')
-                ->hiddenLabel()
-                ->relationship()
-                ->schema([
-                    TextInput::make('value')
-                        ->hiddenLabel()
-                        ->required(),
-                ])
-                ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
-                    $data['type'] = UserCredentialTypesEnum::USERNAME;
+        return Repeater::make('usernames')
+            ->label(__("{$this->langPre}.sections.usernames.label"))
+            ->relationship()
+            ->schema([
+                Grid::make(8)
+                    ->schema([
+                        TextInput::make('value')
+                            ->hiddenLabel()
+                            ->unique(ignoreRecord: true)
+                            ->required()
+                            ->columnSpan(7),
 
-                    return $data;
-                })
-                ->minItems(1),
-        ];
+                        Toggle::make('is_primary')
+                            ->hiddenLabel()
+                            ->fixIndistinctState(),
+                    ])
+                    ->extraAttributes([
+                        'class' => 'grid-vertically-centered-container',
+                    ]),
+            ])
+            ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                $data['type'] = UserCredentialTypesEnum::USERNAME;
+
+                return $data;
+            })
+            ->columnSpan(1)
+            ->minItems(1)
+            ->maxItems(3);
     }
 
-    protected function getEmailRepeaterField(): array
+    protected function getEmailRepeaterField(): Repeater
     {
-        return [
-            Repeater::make('emails')
-                ->hiddenLabel()
-                ->relationship()
-                ->schema([
-                    TextInput::make('value')
-                        ->hiddenLabel()
-                        ->email()
-                        ->unique(ignoreRecord: true)
-                        ->required(),
-                ])
-                ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
-                    $data['type'] = UserCredentialTypesEnum::EMAIL;
+        return Repeater::make('emails')
+            ->label(__("{$this->langPre}.sections.emails.label"))
+            ->relationship()
+            ->schema([
+                Grid::make(8)
+                    ->schema([
+                        TextInput::make('value')
+                            ->hiddenLabel()
+                            ->email()
+                            ->unique(ignoreRecord: true)
+                            ->required()
+                            ->columnSpan(7),
 
-                    return $data;
-                })
-                ->minItems(1),
-        ];
+                        Toggle::make('is_primary')
+                            ->hiddenLabel()
+                            ->fixIndistinctState(),
+                    ])
+                    ->extraAttributes([
+                        'class' => 'grid-vertically-centered-container',
+                    ]),
+            ])
+            ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                $data['type'] = UserCredentialTypesEnum::EMAIL;
+
+                return $data;
+            })
+            ->columnSpan(1)
+            ->minItems(1)
+            ->maxItems(3);
     }
 
     protected function getRolesFields(): array
@@ -130,15 +159,7 @@ class ConfigureUserResourceFormSchema extends Action
     public function handle(Form $form): Form
     {
         return $form->schema([
-            Section::make()->schema($this->getFormFields()),
-            Grid::make()->schema([
-                Section::make(__("{$this->langPre}.sections.usernames.label"))
-                    ->schema($this->getUsernameRepeaterField())
-                    ->columnSpan(1),
-                Section::make(__("{$this->langPre}.sections.emails.label"))
-                    ->schema($this->getEmailRepeaterField())
-                    ->columnSpan(1),
-            ]),
+            Section::make()->schema($this->getFormFields())->columns(2),
             Section::make(__("{$this->langPre}.sections.roles.label"))->schema($this->getRolesFields()),
         ]);
     }

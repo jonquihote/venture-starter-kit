@@ -20,6 +20,9 @@ return new class extends Migration
 
             $table->string('type');
             $table->string('value')->unique();
+
+            $table->boolean('is_primary');
+
             $table->timestamp('verified_at')->nullable();
         });
     }

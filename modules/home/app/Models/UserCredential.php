@@ -20,6 +20,10 @@ class UserCredential extends Model
 
         'type',
         'value',
+
+        'is_primary',
+
+        'verified_at',
     ];
 
     public function getTable(): string

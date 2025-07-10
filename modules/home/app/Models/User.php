@@ -99,7 +99,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function username(): HasOne
     {
-        return $this->credentials()->one()->where('type', UserCredentialTypesEnum::USERNAME);
+        return $this->credentials()->one()
+            ->where('type', UserCredentialTypesEnum::USERNAME)
+            ->where('is_primary', true);
     }
 
     public function emails(): HasMany
@@ -109,6 +111,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function email(): HasOne
     {
-        return $this->credentials()->one()->where('type', UserCredentialTypesEnum::EMAIL);
+        return $this->credentials()->one()
+            ->where('type', UserCredentialTypesEnum::EMAIL)
+            ->where('is_primary', true);
     }
 }

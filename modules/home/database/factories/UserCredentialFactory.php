@@ -20,6 +20,8 @@ class UserCredentialFactory extends Factory
         return [
             'user_id' => User::factory(),
 
+            'is_primary' => true,
+
             'verified_at' => Carbon::now(),
         ];
     }
@@ -37,6 +39,13 @@ class UserCredentialFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'type' => UserCredentialTypesEnum::EMAIL,
             'value' => $email ?? fake()->safeEmail(),
+        ]);
+    }
+
+    public function secondary(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_primary' => false,
         ]);
     }
 
