@@ -2,6 +2,7 @@
 
 namespace Venture\Home\Filament\Resources\UserResource;
 
+use Closure;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
@@ -82,6 +83,17 @@ class ConfigureUserResourceFormSchema extends Action
 
                 return $data;
             })
+            ->rules([
+                function (): Closure {
+                    return function (string $attribute, mixed $value, Closure $fail): void {
+                        $atLeastOneTrue = Collection::make($value)->pluck('is_primary')->contains(true);
+
+                        if (! $atLeastOneTrue) {
+                            $fail(__("{$this->langPre}.sections.usernames.validation-messages.at-least-one-true"));
+                        }
+                    };
+                },
+            ])
             ->columnSpan(1)
             ->minItems(1)
             ->maxItems(3);
@@ -116,6 +128,17 @@ class ConfigureUserResourceFormSchema extends Action
 
                 return $data;
             })
+            ->rules([
+                function (): Closure {
+                    return function (string $attribute, mixed $value, Closure $fail): void {
+                        $atLeastOneTrue = Collection::make($value)->pluck('is_primary')->contains(true);
+
+                        if (! $atLeastOneTrue) {
+                            $fail(__("{$this->langPre}.sections.emails.validation-messages.at-least-one-true"));
+                        }
+                    };
+                },
+            ])
             ->columnSpan(1)
             ->minItems(1)
             ->maxItems(3);
