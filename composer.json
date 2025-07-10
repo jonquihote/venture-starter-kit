@@ -72,7 +72,11 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/horizon",
+                "laravel/pulse",
+                "laravel/telescope"
+            ]
         },
         "merge-plugin": {
             "include": [

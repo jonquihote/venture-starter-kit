@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Concerns;
+namespace Venture\Aeon\Auth\Concerns;
 
 use BackedEnum;
 use Illuminate\Support\Collection;

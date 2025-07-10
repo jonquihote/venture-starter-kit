@@ -2,7 +2,7 @@
 
 namespace Venture\Skeleton\Enums\Auth\Permissions;
 
-use Venture\Aeon\Concerns\InteractsWithPermissionsEnum;
+use Venture\Aeon\Auth\Concerns\InteractsWithPermissionsEnum;
 
 enum PagePermissionsEnum: string
 {

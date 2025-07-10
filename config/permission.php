@@ -1,6 +1,8 @@
 <?php
 
 use Spatie\Permission\DefaultTeamResolver;
+use Venture\Aeon\Models\Spatie\Permission;
+use Venture\Aeon\Models\Spatie\Role;
 
 return [
 
@@ -15,7 +17,7 @@ return [
          * `Spatie\Permission\Contracts\Permission` contract.
          */
 
-        'permission' => Venture\Aeon\Models\Permission::class,
+        'permission' => Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which
@@ -26,7 +28,7 @@ return [
          * `Spatie\Permission\Contracts\Role` contract.
          */
 
-        'role' => Venture\Aeon\Models\Role::class,
+        'role' => Role::class,
 
     ],
 

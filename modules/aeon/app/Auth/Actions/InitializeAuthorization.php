@@ -1,12 +1,12 @@
 <?php
 
-namespace Venture\Aeon\Actions;
+namespace Venture\Aeon\Auth\Actions;
 
 use Illuminate\Console\View\Components\Factory as Component;
 use Illuminate\Support\Collection;
 use Lorisleiva\Actions\Action;
-use Venture\Aeon\Models\Permission;
-use Venture\Aeon\Models\Role;
+use Venture\Aeon\Models\Spatie\Permission;
+use Venture\Aeon\Models\Spatie\Role;
 use Venture\Aeon\Support\Facades\Access;
 
 class InitializeAuthorization extends Action

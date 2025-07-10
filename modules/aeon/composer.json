@@ -9,6 +9,7 @@
     ],
     "require": {
         "laravel/horizon": "^5.33",
+        "laravel/pulse": "^1.4",
         "lorisleiva/laravel-actions": "^2.9",
         "owenvoke/blade-fontawesome": "^2.9",
         "saloonphp/laravel-plugin": "^3.0",

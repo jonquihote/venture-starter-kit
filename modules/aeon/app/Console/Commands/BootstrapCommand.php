@@ -3,7 +3,7 @@
 namespace Venture\Aeon\Console\Commands;
 
 use Illuminate\Console\Command;
-use Venture\Aeon\Actions\InitializeAuthorization;
+use Venture\Aeon\Auth\Actions\InitializeAuthorization;
 
 class BootstrapCommand extends Command
 {
