@@ -7,12 +7,14 @@ return [
         'usernames' => [
 
             'label' => 'Usernames',
+            'add-action-label' => 'Add username',
 
         ],
 
         'emails' => [
 
             'label' => 'Emails',
+            'add-action-label' => 'Add email',
 
         ],
 

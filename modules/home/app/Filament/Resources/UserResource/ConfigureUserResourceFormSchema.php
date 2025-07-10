@@ -57,6 +57,7 @@ class ConfigureUserResourceFormSchema extends Action
     {
         return Repeater::make('usernames')
             ->label(__("{$this->langPre}.sections.usernames.label"))
+            ->addActionLabel(__("{$this->langPre}.sections.usernames.add-action-label"))
             ->relationship()
             ->schema([
                 Grid::make(8)
@@ -89,6 +90,7 @@ class ConfigureUserResourceFormSchema extends Action
     {
         return Repeater::make('emails')
             ->label(__("{$this->langPre}.sections.emails.label"))
+            ->addActionLabel(__("{$this->langPre}.sections.emails.add-action-label"))
             ->relationship()
             ->schema([
                 Grid::make(8)
