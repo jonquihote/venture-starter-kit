@@ -11,9 +11,34 @@
 |
 */
 
-pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+use Filament\Facades\Filament;
+use Illuminate\Support\Collection;
+use Venture\Aeon\Enums\ModulesEnum;
+use Venture\Aeon\Support\Facades\Access;
+use Venture\Home\Models\User;
+
+use function Pest\Laravel\artisan;
+
+pest()
+    ->extend(Tests\TestCase::class)
+    ->use(Illuminate\Foundation\Testing\LazilyRefreshDatabase::class)
+    ->beforeEach(function (): void {
+        artisan('bootstrap');
+
+        $this->user = User::factory()->create();
+        $this->user->syncRoles(Access::administratorRoles());
+    })
+    ->in(__DIR__ . '/../modules/*/tests');
+
+Collection::make(ModulesEnum::cases())
+    ->each(function (ModulesEnum $module): void {
+        pest()
+            ->beforeEach(function () use ($module): void {
+                Filament::setCurrentPanel(Filament::getPanel($module->slug()));
+            })
+            ->group($module->slug())
+            ->in(__DIR__ . "/../modules/{$module->slug()}/tests");
+    });
 
 /*
 |--------------------------------------------------------------------------

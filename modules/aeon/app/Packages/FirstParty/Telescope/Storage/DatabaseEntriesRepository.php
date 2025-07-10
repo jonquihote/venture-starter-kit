@@ -140,7 +140,7 @@ class DatabaseEntriesRepository implements ClearableRepository, Contract, Prunab
 
         $table = $this->table('laravel_telescope_entries');
 
-        $entries->chunk($this->chunkSize)->each(function ($chunked) use ($table) {
+        $entries->chunk($this->chunkSize)->each(function ($chunked) use ($table): void {
             $table->insert($chunked->map(function ($entry) {
                 $entry->content = json_encode($entry->content, JSON_INVALID_UTF8_SUBSTITUTE);
 
@@ -159,7 +159,7 @@ class DatabaseEntriesRepository implements ClearableRepository, Contract, Prunab
      */
     protected function storeExceptions(Collection $exceptions)
     {
-        $exceptions->chunk($this->chunkSize)->each(function ($chunked) {
+        $exceptions->chunk($this->chunkSize)->each(function ($chunked): void {
             $this->table('laravel_telescope_entries')->insert($chunked->map(function ($exception) {
                 $occurrences = $this->countExceptionOccurences($exception);
 
@@ -188,7 +188,7 @@ class DatabaseEntriesRepository implements ClearableRepository, Contract, Prunab
      */
     protected function storeTags(Collection $results)
     {
-        $results->chunk($this->chunkSize)->each(function ($chunked) {
+        $results->chunk($this->chunkSize)->each(function ($chunked): void {
             try {
                 $this->table('laravel_telescope_entries_tags')->insert($chunked->flatMap(function ($tags, $uuid) {
                     return collect($tags)->map(function ($tag) use ($uuid) {
@@ -264,7 +264,7 @@ class DatabaseEntriesRepository implements ClearableRepository, Contract, Prunab
             }
         }
 
-        collect($entry->tagsChanges['removed'])->each(function ($tag) use ($entry) {
+        collect($entry->tagsChanges['removed'])->each(function ($tag) use ($entry): void {
             $this->table('laravel_telescope_entries_tags')->where([
                 'entry_uuid' => $entry->uuid,
                 'tag' => $tag,
