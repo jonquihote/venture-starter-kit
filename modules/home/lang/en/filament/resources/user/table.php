@@ -10,6 +10,12 @@ return [
 
         ],
 
+        'username' => [
+
+            'label' => 'Username',
+
+        ],
+
         'email' => [
 
             'label' => 'Email',

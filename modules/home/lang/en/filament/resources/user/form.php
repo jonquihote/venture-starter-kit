@@ -4,6 +4,18 @@ return [
 
     'sections' => [
 
+        'usernames' => [
+
+            'label' => 'Usernames',
+
+        ],
+
+        'emails' => [
+
+            'label' => 'Emails',
+
+        ],
+
         'roles' => [
 
             'label' => 'Roles',
@@ -17,12 +29,6 @@ return [
         'name' => [
 
             'label' => 'Name',
-
-        ],
-
-        'email' => [
-
-            'label' => 'Email',
 
         ],
 

@@ -12,11 +12,13 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Spatie\Permission\Traits\HasRoles;
 use Venture\Aeon\Notifications\Notifiable;
 use Venture\Home\Database\Factories\UserFactory;
 use Venture\Home\Enums\MigrationsEnum;
+use Venture\Home\Enums\UserCredentialTypesEnum;
 use Venture\Home\Events\Models\UserEvent\UserCreatedEvent;
 use Venture\Home\Events\Models\UserEvent\UserDeletedEvent;
 use Venture\Home\Events\Models\UserEvent\UserUpdatedEvent;
@@ -88,5 +90,25 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function credentials(): HasMany
     {
         return $this->hasMany(UserCredential::class);
+    }
+
+    public function usernames(): HasMany
+    {
+        return $this->credentials()->where('type', UserCredentialTypesEnum::USERNAME);
+    }
+
+    public function username(): HasOne
+    {
+        return $this->credentials()->one()->where('type', UserCredentialTypesEnum::USERNAME);
+    }
+
+    public function emails(): HasMany
+    {
+        return $this->credentials()->where('type', UserCredentialTypesEnum::EMAIL);
+    }
+
+    public function email(): HasOne
+    {
+        return $this->credentials()->one()->where('type', UserCredentialTypesEnum::EMAIL);
     }
 }

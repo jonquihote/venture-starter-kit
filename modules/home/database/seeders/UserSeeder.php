@@ -20,6 +20,10 @@ class UserSeeder extends Seeder
 
         $user->syncRoles(Access::administratorRoles());
 
-        User::factory()->count(10)->create();
+        User::factory()
+            ->has(UserCredential::factory()->username(), 'credentials')
+            ->has(UserCredential::factory()->email(), 'credentials')
+            ->count(10)
+            ->create();
     }
 }

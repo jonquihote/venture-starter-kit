@@ -26,7 +26,13 @@ class ConfigureUserResourceTableSchema extends Action
                 ->searchable()
                 ->sortable(),
 
-            TextColumn::make('email')
+            TextColumn::make('username.value')
+                ->label("{$this->langPre}.columns.username.label")
+                ->translateLabel()
+                ->searchable()
+                ->sortable(),
+
+            TextColumn::make('email.value')
                 ->label("{$this->langPre}.columns.email.label")
                 ->translateLabel()
                 ->searchable()
