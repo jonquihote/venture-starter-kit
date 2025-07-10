@@ -64,6 +64,7 @@ class ConfigureUserResourceFormSchema extends Action
                     ->schema([
                         TextInput::make('value')
                             ->hiddenLabel()
+                            ->alphaNum()
                             ->unique(ignoreRecord: true)
                             ->required()
                             ->columnSpan(7),
