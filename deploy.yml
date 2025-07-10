@@ -1,0 +1,36 @@
+import:
+  - recipe/laravel.php
+
+config:
+  repository: 'ssh://git@github.com:jonquihote/venture-starter-kit.git'
+  application: 'venture'
+  branch: main
+  remote_user: forge
+  base_deploy_path: '/home/forge'
+
+hosts:
+  prod:
+    hostname: laravel.cloud
+    deploy_path: '{{base_deploy_path}}/{{application}}'
+
+tasks:
+  bootstrap:
+    - run: 'cd {{release_or_current_path}} && php artisan bootstrap'
+  filament:optimize:
+    - run: 'cd {{release_or_current_path}} && php artisan filament:optimize'
+  bun:install:
+    - run: 'cd {{release_or_current_path}} && bun install'
+  bun:run:build:
+    - run: 'cd {{release_or_current_path}} && bun run build'
+
+after:
+  deploy:failed: deploy:unlock
+
+before:
+  deploy:publish:
+    - bootstrap
+    - filament:optimize
+    - bun:install
+    - bun:run:build
+    - artisan:queue:restart
+
