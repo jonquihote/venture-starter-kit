@@ -36,6 +36,7 @@ class InitializeFilamentPanel extends Action
                     return route('filament.home.auth.logout');
                 }),
             ])
+            ->databaseNotifications()
             ->discoverResources(
                 in: base_path("modules/{$slug}/app/Filament/Resources"),
                 for: "Venture\\{$name}\\Filament\\Resources",

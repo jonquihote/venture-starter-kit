@@ -3,21 +3,21 @@
 namespace Venture\Home\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Venture\Aeon\Notifications\Notifiable;
 use Venture\Home\Database\Factories\UserFactory;
 use Venture\Home\Enums\MigrationsEnum;
 use Venture\Home\Events\Models\UserEvent\UserCreatedEvent;
 use Venture\Home\Events\Models\UserEvent\UserDeletedEvent;
 use Venture\Home\Events\Models\UserEvent\UserUpdatedEvent;
 
+#[UseFactory(UserFactory::class)]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory;
-
     use HasRoles;
     use Notifiable;
 
