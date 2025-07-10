@@ -13,6 +13,7 @@ use Venture\Aeon\Console\Commands\SyncIconsCommand;
 use Venture\Aeon\Enums\ModulesEnum;
 use Venture\Aeon\Providers\Horizon\PackageHorizonServiceProvider;
 use Venture\Aeon\Providers\Pulse\PackagePulseServiceProvider;
+use Venture\Aeon\Providers\Telescope\PackageTelescopeServiceProvider;
 
 class AeonServiceProvider extends ServiceProvider
 {
@@ -41,6 +42,7 @@ class AeonServiceProvider extends ServiceProvider
 
         $this->app->register(PackageHorizonServiceProvider::class);
         $this->app->register(PackagePulseServiceProvider::class);
+        $this->app->register(PackageTelescopeServiceProvider::class);
     }
 
     /**

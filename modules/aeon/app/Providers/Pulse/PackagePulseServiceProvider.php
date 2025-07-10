@@ -5,7 +5,7 @@ namespace Venture\Aeon\Providers\Pulse;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Pulse\Contracts\Storage;
 use Laravel\Pulse\PulseServiceProvider as BasePulseServiceProvider;
-use Venture\Aeon\Support\Pulse\Storage\DatabaseStorage;
+use Venture\Aeon\Packages\FirstParty\Pulse\Storage\DatabaseStorage;
 
 class PackagePulseServiceProvider extends ServiceProvider
 {
@@ -28,7 +28,7 @@ class PackagePulseServiceProvider extends ServiceProvider
     protected function configureProviders(): void
     {
         $this->app->register(BasePulseServiceProvider::class);
-        //        $this->app->register(PulseServiceProvider::class);
+        $this->app->register(PulseServiceProvider::class);
     }
 
     protected function configureBindings(): void

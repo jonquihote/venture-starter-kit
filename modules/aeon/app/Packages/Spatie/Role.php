@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Models\Spatie;
+namespace Venture\Aeon\Packages\Spatie;
 
 use Spatie\Permission\Models\Role as BaseRole;
 

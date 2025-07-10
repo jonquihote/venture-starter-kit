@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Support\Pulse\Storage;
+namespace Venture\Aeon\Packages\FirstParty\Pulse\Storage;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterval;
@@ -21,8 +21,6 @@ use RuntimeException;
  * @phpstan-type AggregateRow array{bucket: int, period: int, type: string, aggregate: string, key: string, value: int|float, count?: int}
  *
  * @internal
- *
- * @codeCoverageIgnore
  */
 class DatabaseStorage implements Storage
 {

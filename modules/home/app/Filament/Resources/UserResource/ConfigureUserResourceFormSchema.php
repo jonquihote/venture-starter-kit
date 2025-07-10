@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Lorisleiva\Actions\Action;
-use Venture\Aeon\Models\Spatie\Role;
+use Venture\Aeon\Packages\Spatie\Role;
 
 class ConfigureUserResourceFormSchema extends Action
 {
