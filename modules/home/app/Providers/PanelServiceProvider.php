@@ -7,6 +7,7 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Venture\Aeon\Actions\InitializeFilamentPanel;
 use Venture\Aeon\Enums\ModulesEnum;
+use Venture\Home\Filament\Pages\Auth\Login;
 
 class PanelServiceProvider extends PanelProvider
 {
@@ -15,7 +16,7 @@ class PanelServiceProvider extends PanelProvider
         return InitializeFilamentPanel::run($panel, ModulesEnum::HOME)
             ->default()
             ->topNavigation()
-            ->login()
+            ->login(Login::class)
             ->colors([
                 'primary' => Color::Orange,
                 'gray' => Color::Slate,

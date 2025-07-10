@@ -5,9 +5,14 @@ namespace Venture\Home\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Spatie\Permission\Traits\HasRoles;
 use Venture\Aeon\Notifications\Notifiable;
 use Venture\Home\Database\Factories\UserFactory;
@@ -17,8 +22,10 @@ use Venture\Home\Events\Models\UserEvent\UserDeletedEvent;
 use Venture\Home\Events\Models\UserEvent\UserUpdatedEvent;
 
 #[UseFactory(UserFactory::class)]
-class User extends Authenticatable implements FilamentUser
+class User extends Model implements AuthenticatableContract, AuthorizableContract, FilamentUser
 {
+    use Authenticatable;
+    use Authorizable;
     use HasFactory;
     use HasRoles;
     use Notifiable;
@@ -30,7 +37,6 @@ class User extends Authenticatable implements FilamentUser
      */
     protected $fillable = [
         'name',
-        'email',
         'password',
     ];
 
@@ -65,7 +71,6 @@ class User extends Authenticatable implements FilamentUser
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -75,13 +80,13 @@ class User extends Authenticatable implements FilamentUser
         return MigrationsEnum::USERS->table();
     }
 
-    protected static function newFactory()
-    {
-        return UserFactory::new();
-    }
-
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    public function credentials(): HasMany
+    {
+        return $this->hasMany(UserCredential::class);
     }
 }
