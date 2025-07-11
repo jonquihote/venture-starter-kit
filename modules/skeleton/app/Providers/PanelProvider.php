@@ -3,13 +3,13 @@
 namespace Venture\Skeleton\Providers;
 
 use Filament\Panel;
-use Filament\PanelProvider;
+use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Venture\Aeon\Actions\InitializeFilamentPanel;
 use Venture\Aeon\Enums\ModulesEnum;
 
-class PanelServiceProvider extends PanelProvider
+class PanelProvider extends BasePanelProvider
 {
     public function panel(Panel $panel): Panel
     {
