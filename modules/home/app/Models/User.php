@@ -121,7 +121,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $this->credentials()->create([
             'type' => UserCredentialTypesEnum::USERNAME,
             'value' => $username,
-            'is_primary' => false,
+            'is_primary' => true,
         ]);
     }
 
@@ -130,7 +130,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $this->credentials()->create([
             'type' => UserCredentialTypesEnum::EMAIL,
             'value' => $email,
-            'is_primary' => false,
+            'is_primary' => true,
         ]);
     }
 }
