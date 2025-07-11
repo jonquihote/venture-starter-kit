@@ -1,0 +1,28 @@
+{
+    "name": "venture/guide",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joni Chandra",
+            "email": "jonquihote@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Venture\\Guide\\": "app/",
+            "Venture\\Guide\\Database\\Factories\\": "database/factories/",
+            "Venture\\Guide\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Venture\\Guide\\Tests\\": "tests/"
+        }
+    }
+}

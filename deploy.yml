@@ -33,4 +33,3 @@ before:
     - bun:install
     - bun:run:build
     - artisan:queue:restart
-

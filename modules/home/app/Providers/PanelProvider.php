@@ -3,19 +3,18 @@
 namespace Venture\Home\Providers;
 
 use Filament\Panel;
-use Filament\PanelProvider;
+use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
 use Venture\Aeon\Actions\InitializeFilamentPanel;
 use Venture\Aeon\Enums\ModulesEnum;
 use Venture\Home\Filament\Pages\Auth\Login;
 
-class PanelServiceProvider extends PanelProvider
+class PanelProvider extends BasePanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return InitializeFilamentPanel::run($panel, ModulesEnum::HOME)
             ->default()
-            ->topNavigation()
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Orange,

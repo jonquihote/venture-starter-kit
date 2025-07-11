@@ -3,5 +3,6 @@
 return [
     App\Providers\AppServiceProvider::class,
 
-    Venture\Home\Providers\PanelServiceProvider::class,
+    Venture\Home\Providers\PanelProvider::class,
+    Venture\Guide\Providers\PanelProvider::class,
 ];

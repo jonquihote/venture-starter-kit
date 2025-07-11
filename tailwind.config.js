@@ -16,6 +16,7 @@ export default {
         //
 
         'fi-panel-home',
+        'fi-panel-guide',
     ],
 
     plugins: [
@@ -37,6 +38,14 @@ export default {
                     extend: {
                         colors: {
                             primary: colors.orange,
+                        },
+                    },
+                },
+                {
+                    name: 'fi-panel-guide',
+                    extend: {
+                        colors: {
+                            primary: colors.stone,
                         },
                     },
                 },
