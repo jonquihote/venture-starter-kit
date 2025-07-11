@@ -7,7 +7,7 @@ use Venture\Aeon\Auth\Actions\InitializeAuthorization;
 
 class BootstrapCommand extends Command
 {
-    protected $signature = 'bootstrap';
+    protected $signature = 'aeon:bootstrap';
 
     protected $description = 'Bootstrap application';
 

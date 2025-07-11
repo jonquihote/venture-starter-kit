@@ -8,6 +8,7 @@ use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Venture\Aeon\Enums\ModulesEnum;
+use Venture\Home\Console\Commands\MakeUserCommand;
 
 class HomeServiceProvider extends ServiceProvider
 {
@@ -42,7 +43,9 @@ class HomeServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            MakeUserCommand::class,
+        ]);
     }
 
     /**

@@ -115,4 +115,22 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             ->where('type', UserCredentialTypesEnum::EMAIL)
             ->where('is_primary', true);
     }
+
+    public function addUsername(string $username): void
+    {
+        $this->credentials()->create([
+            'type' => UserCredentialTypesEnum::USERNAME,
+            'value' => $username,
+            'is_primary' => false,
+        ]);
+    }
+
+    public function addEmail(string $email): void
+    {
+        $this->credentials()->create([
+            'type' => UserCredentialTypesEnum::EMAIL,
+            'value' => $email,
+            'is_primary' => false,
+        ]);
+    }
 }
