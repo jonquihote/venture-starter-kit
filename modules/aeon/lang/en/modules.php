@@ -8,4 +8,10 @@ return [
 
     ],
 
+    'guide' => [
+
+        'label' => 'Guide',
+
+    ],
+
 ];
