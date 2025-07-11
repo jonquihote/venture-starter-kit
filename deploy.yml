@@ -29,7 +29,8 @@ after:
 before:
   deploy:publish:
     - aeon:bootstrap
-    - filament:optimize
     - bun:install
     - bun:run:build
+    - artisan:optimize
+    - filament:optimize
     - artisan:queue:restart
