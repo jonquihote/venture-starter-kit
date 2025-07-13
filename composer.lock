@@ -9985,76 +9985,6 @@
                 "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v2.1.0"
             },
             "time": "2023-04-15T19:07:00+00:00"
-        },
-        {
-            "name": "willvincent/laravel-unique",
-            "version": "1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/willvincent/laravel-unique.git",
-                "reference": "c0709ca5f1a97fb0ca633e420d8b0be947c24c77"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/willvincent/laravel-unique/zipball/c0709ca5f1a97fb0ca633e420d8b0be947c24c77",
-                "reference": "c0709ca5f1a97fb0ca633e420d8b0be947c24c77",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^10.0||^11.0||^12.0",
-                "php": "^8.2",
-                "spatie/laravel-package-tools": "^1.16"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.14",
-                "nunomaduro/collision": "^8.1.1||^7.10.0",
-                "orchestra/testbench": "^10.0.0||^9.0.0||^8.22.0",
-                "pestphp/pest": "^3.0",
-                "pestphp/pest-plugin-arch": "^3.0",
-                "pestphp/pest-plugin-laravel": "^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "WillVincent\\LaravelUnique\\LaravelUniqueServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "WillVincent\\LaravelUnique\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Will Vincent",
-                    "email": "will@willvincent.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Provides a model trait to automatically append a value to model values that should be unique.",
-            "homepage": "https://github.com/willvincent/laravel-unique",
-            "keywords": [
-                "Will Vincent",
-                "laravel",
-                "laravel-unique"
-            ],
-            "support": {
-                "issues": "https://github.com/willvincent/laravel-unique/issues",
-                "source": "https://github.com/willvincent/laravel-unique/tree/1.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/willvincent",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-14T03:59:04+00:00"
         }
     ],
     "packages-dev": [
@@ -11868,16 +11798,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68"
+                "reference": "b9e61a61e39e02dd90944e9115241c7f7e76bfd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
-                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/b9e61a61e39e02dd90944e9115241c7f7e76bfd8",
+                "reference": "b9e61a61e39e02dd90944e9115241c7f7e76bfd8",
                 "shasum": ""
             },
             "require": {
@@ -11909,9 +11839,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.1.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.2.0"
             },
-            "time": "2025-02-19T13:28:12+00:00"
+            "time": "2025-07-13T07:04:09+00:00"
         },
         {
             "name": "phpstan/phpstan",
