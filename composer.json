@@ -72,7 +72,8 @@
             "dont-discover": [
                 "laravel/horizon",
                 "laravel/pulse",
-                "laravel/telescope"
+                "laravel/telescope",
+                "spatie/laravel-medialibrary"
             ]
         },
         "merge-plugin": {

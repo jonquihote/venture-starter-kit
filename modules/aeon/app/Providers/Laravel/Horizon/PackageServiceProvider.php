@@ -5,7 +5,7 @@ namespace Venture\Aeon\Providers\Laravel\Horizon;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider as BaseHorizonServiceProvider;
 
-class PackageHorizonServiceProvider extends ServiceProvider
+class PackageServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -18,7 +18,7 @@ class PackageHorizonServiceProvider extends ServiceProvider
     protected function configurePackage(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../../config/laravel/horizon.php', 'horizon'
+            __DIR__ . '/../../../../config/laravel/horizon.php', 'horizon'
         );
     }
 

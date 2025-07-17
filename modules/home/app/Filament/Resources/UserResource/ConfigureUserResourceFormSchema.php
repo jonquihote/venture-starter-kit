@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Lorisleiva\Actions\Action;
-use Venture\Aeon\Packages\Spatie\MediaLibrary\Role;
+use Venture\Aeon\Packages\Spatie\Permissions\Role;
 use Venture\Home\Enums\UserCredentialTypesEnum;
 
 class ConfigureUserResourceFormSchema extends Action

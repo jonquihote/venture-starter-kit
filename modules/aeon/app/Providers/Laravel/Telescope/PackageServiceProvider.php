@@ -9,7 +9,7 @@ use Laravel\Telescope\Contracts\PrunableRepository;
 use Laravel\Telescope\TelescopeServiceProvider as BaseTelescopeServiceProvider;
 use Venture\Aeon\Packages\Laravel\Telescope\Storage\DatabaseEntriesRepository;
 
-class PackageTelescopeServiceProvider extends ServiceProvider
+class PackageServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -23,7 +23,7 @@ class PackageTelescopeServiceProvider extends ServiceProvider
     protected function configurePackage(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../../config/laravel/telescope.php', 'telescope'
+            __DIR__ . '/../../../../config/laravel/telescope.php', 'telescope'
         );
     }
 

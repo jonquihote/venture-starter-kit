@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('spatie_tags', function (Blueprint $table) {
+        Schema::create('spatie_tags', function (Blueprint $table): void {
             $table->id();
 
             $table->json('name');
@@ -19,8 +19,8 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('spatie_taggables', function (Blueprint $table) {
-            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
+        Schema::create('spatie_taggables', function (Blueprint $table): void {
+            $table->foreignId('tag_id')->constrained('spatie_tags')->cascadeOnDelete();
 
             $table->morphs('taggable');
 

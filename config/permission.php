@@ -1,8 +1,8 @@
 <?php
 
 use Spatie\Permission\DefaultTeamResolver;
-use Venture\Aeon\Packages\Spatie\MediaLibrary\Permission;
-use Venture\Aeon\Packages\Spatie\MediaLibrary\Role;
+use Venture\Aeon\Packages\Spatie\Permissions\Permission;
+use Venture\Aeon\Packages\Spatie\Permissions\Role;
 
 return [
 

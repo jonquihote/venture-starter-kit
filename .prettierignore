@@ -1,5 +1,6 @@
 composer.lock
 public/js/filament
 public/css/filament
+public/vendor
 resources/icons
-
+storage/app/public

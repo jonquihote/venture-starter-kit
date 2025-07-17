@@ -19,8 +19,9 @@
 /resources/icons
 /storage/*.key
 /storage/pail
-/storage/debugbar
 /storage/coverage
+/storage/debugbar
+/storage/media-library
 /vendor
 Homestead.json
 Homestead.yaml

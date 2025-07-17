@@ -12,9 +12,10 @@ use Venture\Aeon\Console\Commands\BootstrapCommand;
 use Venture\Aeon\Console\Commands\ResetCommand;
 use Venture\Aeon\Console\Commands\SyncIconsCommand;
 use Venture\Aeon\Enums\ModulesEnum;
-use Venture\Aeon\Providers\Laravel\Horizon\PackageHorizonServiceProvider;
-use Venture\Aeon\Providers\Laravel\Pulse\PackagePulseServiceProvider;
-use Venture\Aeon\Providers\Laravel\Telescope\PackageTelescopeServiceProvider;
+use Venture\Aeon\Providers\Laravel\Horizon\PackageServiceProvider as HorizonPackageServiceProvider;
+use Venture\Aeon\Providers\Laravel\Pulse\PackageServiceProvider as PulsePackageServiceProvider;
+use Venture\Aeon\Providers\Laravel\Telescope\PackageServiceProvider as TelescopePackageServiceProvider;
+use Venture\Aeon\Providers\Spatie\MediaLibrary\PackageServiceProvider as MediaLibraryPackageServiceProvider;
 
 class AeonServiceProvider extends ServiceProvider
 {
@@ -41,9 +42,11 @@ class AeonServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
-        $this->app->register(PackageHorizonServiceProvider::class);
-        $this->app->register(PackagePulseServiceProvider::class);
-        $this->app->register(PackageTelescopeServiceProvider::class);
+        $this->app->register(HorizonPackageServiceProvider::class);
+        $this->app->register(PulsePackageServiceProvider::class);
+        $this->app->register(TelescopePackageServiceProvider::class);
+
+        $this->app->register(MediaLibraryPackageServiceProvider::class);
     }
 
     /**
@@ -63,7 +66,7 @@ class AeonServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        $this->app->booted(function () {
+        $this->app->booted(function (): void {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('telescope:prune --hours=48')->daily();
         });

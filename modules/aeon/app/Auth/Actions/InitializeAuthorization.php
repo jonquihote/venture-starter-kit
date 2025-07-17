@@ -5,8 +5,8 @@ namespace Venture\Aeon\Auth\Actions;
 use Illuminate\Console\View\Components\Factory as Component;
 use Illuminate\Support\Collection;
 use Lorisleiva\Actions\Action;
-use Venture\Aeon\Packages\Spatie\MediaLibrary\Permission;
-use Venture\Aeon\Packages\Spatie\MediaLibrary\Role;
+use Venture\Aeon\Packages\Spatie\Permissions\Permission;
+use Venture\Aeon\Packages\Spatie\Permissions\Role;
 use Venture\Aeon\Support\Facades\Access;
 
 class InitializeAuthorization extends Action

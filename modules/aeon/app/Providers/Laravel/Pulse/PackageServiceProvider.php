@@ -7,7 +7,7 @@ use Laravel\Pulse\Contracts\Storage;
 use Laravel\Pulse\PulseServiceProvider as BasePulseServiceProvider;
 use Venture\Aeon\Packages\Laravel\Pulse\Storage\DatabaseStorage;
 
-class PackagePulseServiceProvider extends ServiceProvider
+class PackageServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -21,7 +21,7 @@ class PackagePulseServiceProvider extends ServiceProvider
     protected function configurePackage(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../../config/laravel/pulse.php', 'pulse'
+            __DIR__ . '/../../../../config/laravel/pulse.php', 'pulse'
         );
     }
 
