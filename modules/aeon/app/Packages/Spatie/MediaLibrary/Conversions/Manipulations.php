@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Packages\Spatie\MediaLibrary\MediaCollections\Conversions;
+namespace Venture\Aeon\Packages\Spatie\MediaLibrary\Conversions;
 
 use Illuminate\Support\Str;
 use Spatie\Image\Drivers\ImageDriver;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Packages\Spatie\MediaLibrary\MediaCollections\Conversions;
+namespace Venture\Aeon\Packages\Spatie\MediaLibrary\Conversions;
 
 use Spatie\MediaLibrary\Conversions\Conversion as BaseConversion;
 

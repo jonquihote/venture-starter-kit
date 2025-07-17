@@ -3,7 +3,7 @@
 namespace Venture\Aeon\Packages\Spatie\MediaLibrary\Concerns;
 
 use Spatie\MediaLibrary\InteractsWithMedia as BaseInteractsWithMedia;
-use Venture\Aeon\Packages\Spatie\MediaLibrary\MediaCollections\Conversions\Conversion;
+use Venture\Aeon\Packages\Spatie\MediaLibrary\Conversions\Conversion;
 
 trait InteractsWithMedia
 {
