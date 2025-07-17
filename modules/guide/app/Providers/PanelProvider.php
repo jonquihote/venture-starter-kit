@@ -15,7 +15,7 @@ class PanelProvider extends BasePanelProvider
     {
         return InitializeFilamentPanel::run($panel, ModulesEnum::GUIDE)
             ->colors([
-                'primary' => Color::Purple,
+                'primary' => Color::Stone,
             ])
             ->widgets([
                 Widgets\AccountWidget::class,
