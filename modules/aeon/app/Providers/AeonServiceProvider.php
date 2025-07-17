@@ -15,6 +15,7 @@ use Venture\Aeon\Enums\ModulesEnum;
 use Venture\Aeon\Providers\Laravel\Horizon\PackageServiceProvider as HorizonPackageServiceProvider;
 use Venture\Aeon\Providers\Laravel\Pulse\PackageServiceProvider as PulsePackageServiceProvider;
 use Venture\Aeon\Providers\Laravel\Telescope\PackageServiceProvider as TelescopePackageServiceProvider;
+use Venture\Aeon\Providers\Spatie\LaravelSettings\PackageServiceProvider as LaravelSettingsPackageServiceProvider;
 use Venture\Aeon\Providers\Spatie\MediaLibrary\PackageServiceProvider as MediaLibraryPackageServiceProvider;
 use Venture\Aeon\Providers\Spatie\Tags\PackageServiceProvider as TagsPackageServiceProvider;
 
@@ -49,6 +50,7 @@ class AeonServiceProvider extends ServiceProvider
 
         $this->app->register(MediaLibraryPackageServiceProvider::class);
         $this->app->register(TagsPackageServiceProvider::class);
+        $this->app->register(LaravelSettingsPackageServiceProvider::class);
     }
 
     /**

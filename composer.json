@@ -74,6 +74,7 @@
                 "laravel/pulse",
                 "laravel/telescope",
                 "spatie/laravel-medialibrary",
+                "spatie/laravel-settings",
                 "spatie/laravel-tags"
             ]
         },
