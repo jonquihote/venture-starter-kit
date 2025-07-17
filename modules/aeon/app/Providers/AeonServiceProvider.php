@@ -16,6 +16,7 @@ use Venture\Aeon\Providers\Laravel\Horizon\PackageServiceProvider as HorizonPack
 use Venture\Aeon\Providers\Laravel\Pulse\PackageServiceProvider as PulsePackageServiceProvider;
 use Venture\Aeon\Providers\Laravel\Telescope\PackageServiceProvider as TelescopePackageServiceProvider;
 use Venture\Aeon\Providers\Spatie\MediaLibrary\PackageServiceProvider as MediaLibraryPackageServiceProvider;
+use Venture\Aeon\Providers\Spatie\Tags\PackageServiceProvider as TagsPackageServiceProvider;
 
 class AeonServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,7 @@ class AeonServiceProvider extends ServiceProvider
         $this->app->register(TelescopePackageServiceProvider::class);
 
         $this->app->register(MediaLibraryPackageServiceProvider::class);
+        $this->app->register(TagsPackageServiceProvider::class);
     }
 
     /**

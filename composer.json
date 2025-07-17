@@ -73,7 +73,8 @@
                 "laravel/horizon",
                 "laravel/pulse",
                 "laravel/telescope",
-                "spatie/laravel-medialibrary"
+                "spatie/laravel-medialibrary",
+                "spatie/laravel-tags"
             ]
         },
         "merge-plugin": {
