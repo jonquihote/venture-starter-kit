@@ -31,9 +31,24 @@ class UserPolicy
         return $user->can(UserResourcePermissionsEnum::UPDATE);
     }
 
+    public function deleteAny(User $user): bool
+    {
+        return $user->can(UserResourcePermissionsEnum::DELETE_ANY);
+    }
+
     public function delete(User $user, User $model): bool
     {
         return $user->can(UserResourcePermissionsEnum::DELETE) && ! Auth::user()->is($model);
+    }
+
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can(UserResourcePermissionsEnum::FORCE_DELETE_ANY);
+    }
+
+    public function forceDelete(User $user, User $model): bool
+    {
+        return $user->can(UserResourcePermissionsEnum::FORCE_DELETE);
     }
 
     public function restore(User $user, User $model): bool
@@ -41,8 +56,8 @@ class UserPolicy
         return $user->can(UserResourcePermissionsEnum::RESTORE);
     }
 
-    public function forceDelete(User $user, User $model): bool
+    public function reorder(User $user): bool
     {
-        return $user->can(UserResourcePermissionsEnum::FORCE_DELETE);
+        return $user->can(UserResourcePermissionsEnum::REORDER);
     }
 }

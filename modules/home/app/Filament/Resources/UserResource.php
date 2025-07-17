@@ -18,6 +18,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'fad:sharp-users';
 
+    protected static ?int $navigationSort = 100;
+
     public static function form(Form $form): Form
     {
         return ConfigureUserResourceFormSchema::run($form);

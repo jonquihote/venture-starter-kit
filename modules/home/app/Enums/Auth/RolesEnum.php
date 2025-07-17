@@ -4,6 +4,7 @@ namespace Venture\Home\Enums\Auth;
 
 use Illuminate\Support\Collection;
 use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
+use Venture\Home\Enums\Auth\Permissions\TemporaryFileResourcePermissionsEnum;
 use Venture\Home\Enums\Auth\Permissions\UserResourcePermissionsEnum;
 
 enum RolesEnum: string
@@ -26,7 +27,11 @@ enum RolesEnum: string
         $permissions = match ($this) {
             self::ADMINISTRATOR => [
                 PagePermissionsEnum::all(),
+
                 UserResourcePermissionsEnum::all(),
+                TemporaryFileResourcePermissionsEnum::only(
+                    TemporaryFileResourcePermissionsEnum::VIEW_ANY,
+                ),
             ],
             self::USER => [
                 PagePermissionsEnum::all(),

@@ -13,6 +13,7 @@ class HomeDatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            TemporaryFileSeeder::class,
         ]);
     }
 }
