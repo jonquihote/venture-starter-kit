@@ -10,12 +10,14 @@ config:
 
 hosts:
   prod:
-    hostname: laravel.cloud
+    hostname: forge.laravel.com
     deploy_path: '{{base_deploy_path}}/{{application}}'
 
 tasks:
   aeon:bootstrap:
     - run: 'cd {{release_or_current_path}} && php artisan aeon:bootstrap'
+  aeon:icons:sync:
+    - run: 'cd {{release_or_current_path}} && php artisan aeon:icons:sync'
   filament:optimize:
     - run: 'cd {{release_or_current_path}} && php artisan filament:optimize'
   bun:install:
@@ -31,6 +33,9 @@ before:
     - aeon:bootstrap
     - bun:install
     - bun:run:build
+    - aeon:icons:sync
     - artisan:optimize
     - filament:optimize
     - artisan:queue:restart
+    - artisan:horizon:terminate
+    - artisan:pulse:restart

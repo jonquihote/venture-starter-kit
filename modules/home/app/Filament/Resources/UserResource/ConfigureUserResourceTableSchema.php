@@ -17,7 +17,7 @@ class ConfigureUserResourceTableSchema extends Action
 {
     protected string $langPre = 'home::filament/resources/user/table';
 
-    protected function getTableColumns(): array
+    protected function getColumns(): array
     {
         return [
             TextColumn::make('name')
@@ -48,7 +48,7 @@ class ConfigureUserResourceTableSchema extends Action
     public function handle(Table $table): Table
     {
         return $table
-            ->columns($this->getTableColumns())
+            ->columns($this->getColumns())
             ->filters([
                 //
             ])

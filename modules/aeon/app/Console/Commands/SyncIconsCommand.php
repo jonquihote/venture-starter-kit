@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class SyncIconsCommand extends Command
 {
-    protected $signature = 'icons:sync';
+    protected $signature = 'aeon:icons:sync';
 
     protected $description = 'Sync icons';
 
