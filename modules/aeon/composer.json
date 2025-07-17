@@ -8,6 +8,8 @@
         }
     ],
     "require": {
+        "filament/filament": "^3.3",
+        "filament/spatie-laravel-media-library-plugin": "^3.2",
         "laravel/horizon": "^5.33",
         "laravel/pulse": "^1.4",
         "laravel/telescope": "^5.10",
@@ -16,7 +18,10 @@
         "saloonphp/laravel-plugin": "^3.0",
         "saloonphp/saloon": "^3.0",
         "sentry/sentry-laravel": "^4.15",
+        "spatie/browsershot": "^5.0",
         "spatie/eloquent-sortable": "^4.5",
+        "spatie/image": "^3.8",
+        "spatie/laravel-medialibrary": "^11.13",
         "spatie/laravel-model-states": "^2.11",
         "spatie/laravel-permission": "^6.19"
     },
