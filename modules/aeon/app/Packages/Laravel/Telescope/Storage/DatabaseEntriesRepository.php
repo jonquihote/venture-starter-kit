@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Packages\FirstParty\Telescope\Storage;
+namespace Venture\Aeon\Packages\Laravel\Telescope\Storage;
 
 use DateTimeInterface;
 use Illuminate\Database\Query\Builder;

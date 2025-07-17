@@ -12,9 +12,9 @@ use Venture\Aeon\Console\Commands\BootstrapCommand;
 use Venture\Aeon\Console\Commands\ResetCommand;
 use Venture\Aeon\Console\Commands\SyncIconsCommand;
 use Venture\Aeon\Enums\ModulesEnum;
-use Venture\Aeon\Providers\Horizon\PackageHorizonServiceProvider;
-use Venture\Aeon\Providers\Pulse\PackagePulseServiceProvider;
-use Venture\Aeon\Providers\Telescope\PackageTelescopeServiceProvider;
+use Venture\Aeon\Providers\Laravel\Horizon\PackageHorizonServiceProvider;
+use Venture\Aeon\Providers\Laravel\Pulse\PackagePulseServiceProvider;
+use Venture\Aeon\Providers\Laravel\Telescope\PackageTelescopeServiceProvider;
 
 class AeonServiceProvider extends ServiceProvider
 {

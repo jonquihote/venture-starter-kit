@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Packages\FirstParty\Pulse\Storage;
+namespace Venture\Aeon\Packages\Laravel\Pulse\Storage;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterval;

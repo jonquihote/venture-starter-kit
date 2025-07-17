@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Providers\Telescope;
+namespace Venture\Aeon\Providers\Laravel\Telescope;
 
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;

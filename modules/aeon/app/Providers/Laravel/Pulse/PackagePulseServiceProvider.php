@@ -1,27 +1,27 @@
 <?php
 
-namespace Venture\Aeon\Providers\Pulse;
+namespace Venture\Aeon\Providers\Laravel\Pulse;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Pulse\Contracts\Storage;
 use Laravel\Pulse\PulseServiceProvider as BasePulseServiceProvider;
-use Venture\Aeon\Packages\FirstParty\Pulse\Storage\DatabaseStorage;
+use Venture\Aeon\Packages\Laravel\Pulse\Storage\DatabaseStorage;
 
 class PackagePulseServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->configurePulse();
+        $this->configurePackage();
         $this->configureProviders();
         $this->configureBindings();
     }
 
     public function boot(): void {}
 
-    protected function configurePulse(): void
+    protected function configurePackage(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../../config/package/pulse.php', 'pulse'
+            __DIR__ . '/../../../config/laravel/pulse.php', 'pulse'
         );
     }
 

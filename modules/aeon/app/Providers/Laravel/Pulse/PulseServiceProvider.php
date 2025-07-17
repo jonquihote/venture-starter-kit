@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Providers\Pulse;
+namespace Venture\Aeon\Providers\Laravel\Pulse;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;

@@ -1,29 +1,29 @@
 <?php
 
-namespace Venture\Aeon\Providers\Telescope;
+namespace Venture\Aeon\Providers\Laravel\Telescope;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Telescope\Contracts\ClearableRepository;
 use Laravel\Telescope\Contracts\EntriesRepository;
 use Laravel\Telescope\Contracts\PrunableRepository;
 use Laravel\Telescope\TelescopeServiceProvider as BaseTelescopeServiceProvider;
-use Venture\Aeon\Packages\FirstParty\Telescope\Storage\DatabaseEntriesRepository;
+use Venture\Aeon\Packages\Laravel\Telescope\Storage\DatabaseEntriesRepository;
 
 class PackageTelescopeServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->configureTelescope();
+        $this->configurePackage();
         $this->configureProviders();
         $this->configureBindings();
     }
 
     public function boot(): void {}
 
-    protected function configureTelescope(): void
+    protected function configurePackage(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../../config/package/telescope.php', 'telescope'
+            __DIR__ . '/../../../config/laravel/telescope.php', 'telescope'
         );
     }
 

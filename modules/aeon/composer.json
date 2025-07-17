@@ -9,7 +9,10 @@
     ],
     "require": {
         "filament/filament": "^3.3",
+        "filament/spatie-laravel-google-fonts-plugin": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
+        "filament/spatie-laravel-tags-plugin": "^3.2",
+        "filament/spatie-laravel-translatable-plugin": "^3.2",
         "laravel/horizon": "^5.33",
         "laravel/pulse": "^1.4",
         "laravel/telescope": "^5.10",
@@ -21,9 +24,13 @@
         "spatie/browsershot": "^5.0",
         "spatie/eloquent-sortable": "^4.5",
         "spatie/image": "^3.8",
+        "spatie/laravel-google-fonts": "^1.4",
         "spatie/laravel-medialibrary": "^11.13",
         "spatie/laravel-model-states": "^2.11",
-        "spatie/laravel-permission": "^6.19"
+        "spatie/laravel-permission": "^6.19",
+        "spatie/laravel-settings": "^3.4",
+        "spatie/laravel-tags": "^4.10",
+        "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",

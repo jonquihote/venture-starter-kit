@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Packages\Spatie;
+namespace Venture\Aeon\Packages\Spatie\MediaLibrary;
 
 use Spatie\Permission\Models\Role as BaseRole;
 
