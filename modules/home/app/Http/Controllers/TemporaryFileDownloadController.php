@@ -10,6 +10,9 @@ class TemporaryFileDownloadController extends Controller
 {
     public function __invoke(TemporaryFile $file)
     {
+        $file->downloads_count++;
+        $file->save();
+
         return Response::download($file->path());
     }
 }
