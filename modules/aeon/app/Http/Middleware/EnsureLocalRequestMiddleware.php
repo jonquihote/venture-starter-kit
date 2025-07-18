@@ -10,7 +10,7 @@ class EnsureLocalRequestMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        $allowedIps = ['127.0.0.1', '::1'];
+        $allowedIps = ['127.0.0.1', '::1', $request->server('SERVER_ADDR')];
 
         if (! in_array($request->ip(), $allowedIps)) {
             abort(Response::HTTP_FORBIDDEN);
