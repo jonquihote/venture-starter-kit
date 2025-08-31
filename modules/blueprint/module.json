@@ -1,0 +1,9 @@
+{
+    "name": "Blueprint",
+    "alias": "blueprint",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\Blueprint\\Providers\\BlueprintServiceProvider"],
+    "files": []
+}

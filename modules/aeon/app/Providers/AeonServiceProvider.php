@@ -8,20 +8,27 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Venture\Aeon\Console\Commands\BootstrapCommand;
-use Venture\Aeon\Console\Commands\ResetCommand;
-use Venture\Aeon\Console\Commands\SyncIconsCommand;
-use Venture\Aeon\Enums\ModulesEnum;
-use Venture\Aeon\Providers\Laravel\Horizon\PackageServiceProvider as HorizonPackageServiceProvider;
-use Venture\Aeon\Providers\Laravel\Pulse\PackageServiceProvider as PulsePackageServiceProvider;
-use Venture\Aeon\Providers\Laravel\Telescope\PackageServiceProvider as TelescopePackageServiceProvider;
-use Venture\Aeon\Providers\Spatie\LaravelSettings\PackageServiceProvider as LaravelSettingsPackageServiceProvider;
-use Venture\Aeon\Providers\Spatie\MediaLibrary\PackageServiceProvider as MediaLibraryPackageServiceProvider;
-use Venture\Aeon\Providers\Spatie\Tags\PackageServiceProvider as TagsPackageServiceProvider;
+use Venture\Aeon\Console\Commands\BootstrapAuthorizationCommand;
+use Venture\Aeon\Console\Commands\ResetApplicationCommand;
+use Venture\Aeon\Packages\Filament\Filament\Providers\FilamentDataProcessingServiceProvider;
+use Venture\Aeon\Packages\FirstParty\Horizon\Providers\HorizonServiceProvider;
+use Venture\Aeon\Packages\FirstParty\Pulse\Providers\PulseServiceProvider;
+use Venture\Aeon\Packages\FirstParty\Reverb\Providers\ReverbServiceProvider;
+use Venture\Aeon\Packages\FirstParty\Scout\Providers\ScoutServiceProvider;
+use Venture\Aeon\Packages\FirstParty\Telescope\Providers\TelescopeServiceProvider;
+use Venture\Aeon\Packages\Spatie\Activitylog\Providers\ActivityLogServiceProvider;
+use Venture\Aeon\Packages\Spatie\MediaLibrary\Providers\MediaLibraryServiceProvider;
+use Venture\Aeon\Packages\Spatie\Permission\Providers\PermissionServiceProvider;
+use Venture\Aeon\Packages\Spatie\Settings\Providers\SettingsServiceProvider;
+use Venture\Aeon\Packages\Spatie\Tags\Providers\TagsServiceProvider;
 
 class AeonServiceProvider extends ServiceProvider
 {
     use PathNamespace;
+
+    protected string $name = 'Aeon';
+
+    protected string $nameLower = 'aeon';
 
     /**
      * Boot the application events.
@@ -33,7 +40,7 @@ class AeonServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path(ModulesEnum::AEON->name(), 'database/migrations'));
+        $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
     }
 
     /**
@@ -41,16 +48,24 @@ class AeonServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(AccessServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(AuthorizationServiceProvider::class);
 
-        $this->app->register(HorizonPackageServiceProvider::class);
-        $this->app->register(PulsePackageServiceProvider::class);
-        $this->app->register(TelescopePackageServiceProvider::class);
+        $this->app->register(HorizonServiceProvider::class);
+        $this->app->register(PulseServiceProvider::class);
+        $this->app->register(ReverbServiceProvider::class);
+        $this->app->register(ScoutServiceProvider::class);
+        $this->app->register(TelescopeServiceProvider::class);
 
-        $this->app->register(MediaLibraryPackageServiceProvider::class);
-        $this->app->register(TagsPackageServiceProvider::class);
-        $this->app->register(LaravelSettingsPackageServiceProvider::class);
+        $this->app->register(ActivityLogServiceProvider::class);
+        $this->app->register(MediaLibraryServiceProvider::class);
+        $this->app->register(PermissionServiceProvider::class);
+        $this->app->register(SettingsServiceProvider::class);
+        $this->app->register(TagsServiceProvider::class);
+
+        $this->app->register(FilamentDataProcessingServiceProvider::class);
     }
 
     /**
@@ -59,9 +74,8 @@ class AeonServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
-            ResetCommand::class,
-            BootstrapCommand::class,
-            SyncIconsCommand::class,
+            ResetApplicationCommand::class,
+            BootstrapAuthorizationCommand::class,
         ]);
     }
 
@@ -72,7 +86,9 @@ class AeonServiceProvider extends ServiceProvider
     {
         $this->app->booted(function (): void {
             $schedule = $this->app->make(Schedule::class);
-            $schedule->command('telescope:prune --hours=48')->daily();
+
+            $schedule->command('inspire')->everyMinute();
+            $schedule->command('telescope:prune --hours=168')->daily();
         });
     }
 
@@ -81,14 +97,14 @@ class AeonServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $langPath = resource_path('lang/modules/' . ModulesEnum::AEON->slug());
+        $langPath = resource_path('lang/modules/' . $this->nameLower);
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, ModulesEnum::AEON->slug());
+            $this->loadTranslationsFrom($langPath, $this->nameLower);
             $this->loadJsonTranslationsFrom($langPath);
         } else {
-            $this->loadTranslationsFrom(module_path(ModulesEnum::AEON->name(), 'lang'), ModulesEnum::AEON->slug());
-            $this->loadJsonTranslationsFrom(module_path(ModulesEnum::AEON->name(), 'lang'));
+            $this->loadTranslationsFrom(module_path($this->name, 'lang'), $this->nameLower);
+            $this->loadJsonTranslationsFrom(module_path($this->name, 'lang'));
         }
     }
 
@@ -97,7 +113,7 @@ class AeonServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $configPath = module_path(ModulesEnum::AEON->name(), config('modules.paths.generator.config.path'));
+        $configPath = module_path($this->name, config('modules.paths.generator.config.path'));
 
         if (is_dir($configPath)) {
             $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($configPath));
@@ -106,7 +122,7 @@ class AeonServiceProvider extends ServiceProvider
                 if ($file->isFile() && $file->getExtension() === 'php') {
                     $config = str_replace($configPath . DIRECTORY_SEPARATOR, '', $file->getPathname());
                     $config_key = str_replace([DIRECTORY_SEPARATOR, '.php'], ['.', ''], $config);
-                    $segments = explode('.', ModulesEnum::AEON->slug() . '.' . $config_key);
+                    $segments = explode('.', $this->nameLower . '.' . $config_key);
 
                     // Remove duplicated adjacent segments
                     $normalized = [];
@@ -116,7 +132,7 @@ class AeonServiceProvider extends ServiceProvider
                         }
                     }
 
-                    $key = ($config === 'config.php') ? ModulesEnum::AEON->slug() : implode('.', $normalized);
+                    $key = ($config === 'config.php') ? $this->nameLower : implode('.', $normalized);
 
                     $this->publishes([$file->getPathname() => config_path($config)], 'config');
                     $this->merge_config_from($file->getPathname(), $key);
@@ -141,14 +157,14 @@ class AeonServiceProvider extends ServiceProvider
      */
     public function registerViews(): void
     {
-        $viewPath = resource_path('views/modules/' . ModulesEnum::AEON->slug());
-        $sourcePath = module_path(ModulesEnum::AEON->name(), 'resources/views');
+        $viewPath = resource_path('views/modules/' . $this->nameLower);
+        $sourcePath = module_path($this->name, 'resources/views');
 
-        $this->publishes([$sourcePath => $viewPath], ['views', ModulesEnum::AEON->slug() . '-module-views']);
+        $this->publishes([$sourcePath => $viewPath], ['views', $this->nameLower . '-module-views']);
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), ModulesEnum::AEON->slug());
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->nameLower);
 
-        Blade::componentNamespace(config('modules.namespace') . '\\' . ModulesEnum::AEON->name() . '\\View\\Components', ModulesEnum::AEON->slug());
+        Blade::componentNamespace(config('modules.namespace') . '\\' . $this->name . '\\View\\Components', $this->nameLower);
     }
 
     /**
@@ -163,8 +179,8 @@ class AeonServiceProvider extends ServiceProvider
     {
         $paths = [];
         foreach (config('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . ModulesEnum::AEON->slug())) {
-                $paths[] = $path . '/modules/' . ModulesEnum::AEON->slug();
+            if (is_dir($path . '/modules/' . $this->nameLower)) {
+                $paths[] = $path . '/modules/' . $this->nameLower;
             }
         }
 

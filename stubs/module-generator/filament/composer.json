@@ -1,0 +1,28 @@
+{
+    "name": "venture/{module}",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joni Chandra",
+            "email": "jon@quihote.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Venture\\{Module}\\": "app/",
+            "Venture\\{Module}\\Database\\Factories\\": "database/factories/",
+            "Venture\\{Module}\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Venture\\{Module}\\Tests\\": "tests/"
+        }
+    }
+}

@@ -2,11 +2,13 @@
 
 namespace Venture\Home\Enums\Auth\Permissions;
 
-use Venture\Aeon\Auth\Concerns\InteractsWithPermissionsEnum;
+use Venture\Aeon\Concerns\Auth\InteractsWithPermissions;
 
 enum PagePermissionsEnum: string
 {
-    use InteractsWithPermissionsEnum;
+    use InteractsWithPermissions;
 
-    case DASHBOARD = 'home::authorization/permissions/pages.dashboard';
+    case Dashboard = 'home::authorization/pages.dashboard';
+
+    case ManageTenancySettings = 'home::authorization/pages.manage-tenancy-settings';
 }

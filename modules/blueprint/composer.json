@@ -1,0 +1,28 @@
+{
+    "name": "venture/blueprint",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joni Chandra",
+            "email": "jon@quihote.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Venture\\Blueprint\\": "app/",
+            "Venture\\Blueprint\\Database\\Factories\\": "database/factories/",
+            "Venture\\Blueprint\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Venture\\Blueprint\\Tests\\": "tests/"
+        }
+    }
+}

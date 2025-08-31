@@ -1,0 +1,9 @@
+{
+    "name": "{Module}",
+    "alias": "{module}",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\{Module}\\Providers\\{Module}ServiceProvider"],
+    "files": []
+}

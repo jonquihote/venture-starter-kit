@@ -2,27 +2,33 @@
 
 namespace Venture\Home\Providers;
 
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
-use Venture\Aeon\Actions\InitializeFilamentPanel;
-use Venture\Aeon\Enums\ModulesEnum;
+use Venture\Home\Actions\MakePanel;
+use Venture\Home\Concerns\InteractsWithModule;
 use Venture\Home\Filament\Pages\Auth\Login;
 
 class PanelProvider extends BasePanelProvider
 {
+    use InteractsWithModule;
+
     public function panel(Panel $panel): Panel
     {
-        return InitializeFilamentPanel::run($panel, ModulesEnum::HOME)
+        $name = $this->getModuleName();
+        $slug = $this->getModuleSlug();
+
+        return MakePanel::run($panel, $name, $slug)
             ->default()
             ->login(Login::class)
             ->colors([
-                'primary' => Color::Orange,
-                'gray' => Color::Slate,
-                'success' => Color::Emerald,
-                'danger' => Color::Rose,
-                'warning' => Color::Amber,
-                'info' => Color::Blue,
+                'primary' => Color::Amber,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label(fn (): string => __('home::filament/navigation/groups.settings'))
+                    ->icon('lucide-settings'),
             ]);
     }
 }

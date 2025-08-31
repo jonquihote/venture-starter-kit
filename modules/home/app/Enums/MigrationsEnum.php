@@ -4,16 +4,18 @@ namespace Venture\Home\Enums;
 
 enum MigrationsEnum
 {
-    case USERS;
-    case USER_CREDENTIALS;
-    case TEMPORARY_FILES;
+    case Accounts;
+    case AccountCredentials;
+    case Teams;
+    case Memberships;
 
     public function table(): string
     {
         return match ($this) {
-            self::USERS => 'home_users',
-            self::USER_CREDENTIALS => 'home_user_credentials',
-            self::TEMPORARY_FILES => 'home_temporary_files',
+            self::Accounts => 'home_accounts',
+            self::AccountCredentials => 'home_account_credentials',
+            self::Teams => 'home_teams',
+            self::Memberships => 'home_memberships',
         };
     }
 }

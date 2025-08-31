@@ -2,11 +2,9 @@
 
 use Venture\Home\Filament\Pages\Dashboard;
 
-use function Pest\Laravel\actingAs;
+use function Pest\Livewire\livewire;
 
-it('can render dashboard', function (): void {
-    $response = actingAs($this->user)
-        ->get(Dashboard::getUrl());
-
-    $response->assertOk();
+test('dashboard page renders successfully', function (): void {
+    livewire(Dashboard::class)
+        ->assertOk();
 });

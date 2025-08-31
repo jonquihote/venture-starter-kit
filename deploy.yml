@@ -2,22 +2,21 @@ import:
   - recipe/laravel.php
 
 config:
-  repository: 'ssh://git@github.com:jonquihote/venture-starter-kit.git'
-  application: 'venture'
+  repository: 'git@github.com:jonquihote/venture-starter-kit.git'
+  application: 'www.venture.com'
   branch: main
   remote_user: forge
   base_deploy_path: '/home/forge'
+  keep_releases: 5
 
 hosts:
   prod:
-    hostname: forge.laravel.com
+    hostname: venture
     deploy_path: '{{base_deploy_path}}/{{application}}'
 
 tasks:
-  aeon:bootstrap:
-    - run: 'cd {{release_or_current_path}} && php artisan aeon:bootstrap'
-  aeon:icons:sync:
-    - run: 'cd {{release_or_current_path}} && php artisan aeon:icons:sync'
+  aeon:bootstrap:authorization:
+    - run: 'cd {{release_or_current_path}} && php artisan aeon:bootstrap:authorization'
   filament:optimize:
     - run: 'cd {{release_or_current_path}} && php artisan filament:optimize'
   bun:install:
@@ -30,12 +29,11 @@ after:
 
 before:
   deploy:publish:
-    - aeon:bootstrap
+    - aeon:bootstrap:authorization
     - bun:install
     - bun:run:build
-    - aeon:icons:sync
     - artisan:optimize
     - filament:optimize
-    - artisan:queue:restart
     - artisan:horizon:terminate
     - artisan:pulse:restart
+    - artisan:reverb:restart

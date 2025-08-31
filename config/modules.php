@@ -258,7 +258,7 @@ return [
         'vendor' => env('MODULE_VENDOR', 'venture'),
         'author' => [
             'name' => env('MODULE_AUTHOR_NAME', 'Joni Chandra'),
-            'email' => env('MODULE_AUTHOR_EMAIL', 'jonquihote@gmail.com'),
+            'email' => env('MODULE_AUTHOR_EMAIL', 'jon@quihote.com'),
         ],
         'composer-output' => false,
     ],

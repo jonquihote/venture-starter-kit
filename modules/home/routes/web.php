@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Venture\Home\Http\Controllers\TemporaryFileDownloadController;
 
 Route::group([
     'middleware' => ['auth'],
@@ -11,9 +10,6 @@ Route::group([
     ], function (): void {
         //
     });
-
-    Route::get('temporary-files/{file}/download', TemporaryFileDownloadController::class)
-        ->name('temporary-files.download');
 });
 
 Route::group([

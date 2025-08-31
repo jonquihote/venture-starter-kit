@@ -1,5 +1,15 @@
 <?php
 
+use Filament\Facades\Filament;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Venture\Aeon\Facades\Access;
+use Venture\Home\Models\Account;
+use Venture\Home\Models\AccountCredential;
+
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\artisan;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,33 +21,47 @@
 |
 */
 
-use Filament\Facades\Filament;
-use Illuminate\Support\Collection;
-use Venture\Aeon\Enums\ModulesEnum;
-use Venture\Aeon\Support\Facades\Access;
-use Venture\Home\Models\User;
-
-use function Pest\Laravel\artisan;
-
 pest()
     ->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\LazilyRefreshDatabase::class)
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->beforeEach(function (): void {
-        artisan('bootstrap');
-
-        $this->user = User::factory()->create();
-        $this->user->syncRoles(Access::administratorRoles());
+        artisan('aeon:bootstrap:authorization');
     })
-    ->in(__DIR__ . '/../modules/*/tests');
+    ->in(
+        __DIR__ . '/../modules/*/tests',
+        __DIR__ . '/../modules/*/tests-api',
+    );
 
-Collection::make(ModulesEnum::cases())
-    ->each(function (ModulesEnum $module): void {
+Collection::make(json_decode(file_get_contents(__DIR__ . '/../modules_statuses.json'), true))
+    ->filter()
+    ->keys()
+    ->reject(function (string $value): bool {
+        return in_array($value, [
+            'Aeon',
+        ]);
+    })
+    ->values()
+    ->each(function (string $module): void {
+        $slug = Str::slug($module);
+
         pest()
-            ->beforeEach(function () use ($module): void {
-                Filament::setCurrentPanel(Filament::getPanel($module->slug()));
+            ->beforeEach(function () use ($slug): void {
+                Filament::setCurrentPanel(Filament::getPanel($slug));
+
+                $this->account = Account::factory()
+                    ->has(AccountCredential::factory()->username(), 'credentials')
+                    ->has(AccountCredential::factory()->email(), 'credentials')
+                    ->create();
+
+                $this->account->syncRoles(Access::administratorRoles());
+
+                actingAs($this->account);
             })
-            ->group($module->slug())
-            ->in(__DIR__ . "/../modules/{$module->slug()}/tests");
+            ->group($slug)
+            ->in(
+                __DIR__ . "/../modules/{$slug}/tests",
+                __DIR__ . "/../modules/{$slug}/tests-api",
+            );
     });
 
 /*

@@ -7,11 +7,12 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Venture\Aeon\Enums\ModulesEnum;
-use Venture\Home\Console\Commands\MakeUserCommand;
+use Venture\Home\Concerns\InteractsWithModule;
+use Venture\Home\Console\Commands\MakeAccountCommand;
 
 class HomeServiceProvider extends ServiceProvider
 {
+    use InteractsWithModule;
     use PathNamespace;
 
     /**
@@ -24,7 +25,7 @@ class HomeServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path(ModulesEnum::HOME->name(), 'database/migrations'));
+        $this->loadMigrationsFrom(module_path($this->getModuleName(), 'database/migrations'));
     }
 
     /**
@@ -32,10 +33,13 @@ class HomeServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(AuthServiceProvider::class);
         $this->app->register(AccessServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->register(PanelProvider::class);
+        $this->app->register(FilamentIconServiceProvider::class);
+        $this->app->register(FilamentViewServiceProvider::class);
     }
 
     /**
@@ -44,7 +48,7 @@ class HomeServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
-            MakeUserCommand::class,
+            MakeAccountCommand::class,
         ]);
     }
 
@@ -64,14 +68,14 @@ class HomeServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $langPath = resource_path('lang/modules/' . ModulesEnum::HOME->slug());
+        $langPath = resource_path('lang/modules/' . $this->getModuleSlug());
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, ModulesEnum::HOME->slug());
+            $this->loadTranslationsFrom($langPath, $this->getModuleSlug());
             $this->loadJsonTranslationsFrom($langPath);
         } else {
-            $this->loadTranslationsFrom(module_path(ModulesEnum::HOME->name(), 'lang'), ModulesEnum::HOME->slug());
-            $this->loadJsonTranslationsFrom(module_path(ModulesEnum::HOME->name(), 'lang'));
+            $this->loadTranslationsFrom(module_path($this->getModuleName(), 'lang'), $this->getModuleSlug());
+            $this->loadJsonTranslationsFrom(module_path($this->getModuleName(), 'lang'));
         }
     }
 
@@ -80,7 +84,7 @@ class HomeServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $configPath = module_path(ModulesEnum::HOME->name(), config('modules.paths.generator.config.path'));
+        $configPath = module_path($this->getModuleName(), config('modules.paths.generator.config.path'));
 
         if (is_dir($configPath)) {
             $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($configPath));
@@ -89,7 +93,7 @@ class HomeServiceProvider extends ServiceProvider
                 if ($file->isFile() && $file->getExtension() === 'php') {
                     $config = str_replace($configPath . DIRECTORY_SEPARATOR, '', $file->getPathname());
                     $config_key = str_replace([DIRECTORY_SEPARATOR, '.php'], ['.', ''], $config);
-                    $segments = explode('.', ModulesEnum::HOME->slug() . '.' . $config_key);
+                    $segments = explode('.', $this->getModuleSlug() . '.' . $config_key);
 
                     // Remove duplicated adjacent segments
                     $normalized = [];
@@ -99,7 +103,7 @@ class HomeServiceProvider extends ServiceProvider
                         }
                     }
 
-                    $key = ($config === 'config.php') ? ModulesEnum::HOME->slug() : implode('.', $normalized);
+                    $key = ($config === 'config.php') ? $this->getModuleSlug() : implode('.', $normalized);
 
                     $this->publishes([$file->getPathname() => config_path($config)], 'config');
                     $this->merge_config_from($file->getPathname(), $key);
@@ -124,14 +128,14 @@ class HomeServiceProvider extends ServiceProvider
      */
     public function registerViews(): void
     {
-        $viewPath = resource_path('views/modules/' . ModulesEnum::HOME->slug());
-        $sourcePath = module_path(ModulesEnum::HOME->name(), 'resources/views');
+        $viewPath = resource_path('views/modules/' . $this->getModuleSlug());
+        $sourcePath = module_path($this->getModuleName(), 'resources/views');
 
-        $this->publishes([$sourcePath => $viewPath], ['views', ModulesEnum::HOME->slug() . '-module-views']);
+        $this->publishes([$sourcePath => $viewPath], ['views', $this->getModuleSlug() . '-module-views']);
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), ModulesEnum::HOME->slug());
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->getModuleSlug());
 
-        Blade::componentNamespace(config('modules.namespace') . '\\' . ModulesEnum::HOME->name() . '\\View\\Components', ModulesEnum::HOME->slug());
+        Blade::componentNamespace(config('modules.namespace') . '\\' . $this->getModuleName() . '\\View\\Components', $this->getModuleSlug());
     }
 
     /**
@@ -146,8 +150,8 @@ class HomeServiceProvider extends ServiceProvider
     {
         $paths = [];
         foreach (config('view.paths') as $path) {
-            if (is_dir($path . '/modules/' . ModulesEnum::HOME->slug())) {
-                $paths[] = $path . '/modules/' . ModulesEnum::HOME->slug();
+            if (is_dir($path . '/modules/' . $this->getModuleSlug())) {
+                $paths[] = $path . '/modules/' . $this->getModuleSlug();
             }
         }
 

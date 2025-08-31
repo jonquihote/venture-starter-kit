@@ -12,8 +12,9 @@ class HomeDatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserSeeder::class,
-            TemporaryFileSeeder::class,
+            AccountSeeder::class,
+            TeamSeeder::class,
+            MembershipSeeder::class,
         ]);
     }
 }

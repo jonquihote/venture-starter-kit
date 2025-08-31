@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "jonquihote/venture-starter-kit",
+    "name": "jonquihote/venture",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "The over bloated starter kit for new Laravel application.",
     "keywords": [
         "laravel",
         "framework"
@@ -12,18 +12,20 @@
         "php": "^8.4",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "nwidart/laravel-modules": "^12.0"
+        "nwidart/laravel-modules": "^12.0",
+        "sprout/sprout": "^1.1"
     },
     "require-dev": {
+        "dcblogdev/laravel-module-generator": "^2.0",
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.13",
+        "laravel/pint": "^1.18",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.2",
-        "pestphp/pest-plugin-livewire": "^3.0"
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-livewire": "^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -38,10 +40,13 @@
         }
     },
     "scripts": {
-        "format": [
+        "cs": [
+            "rector",
             "pint",
-            "rector"
+            "bun run format"
         ],
+        "pint": "pint --config pint-strict-imports.json",
+        "rector": "rector",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
@@ -60,11 +65,20 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"bun run dev\" \"php artisan schedule:work\" \"php artisan horizon\" \"php artisan pail --timeout=0 -vvv\" --names=assets,scheduler,worker,logger"
+            "bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74,#bef264,#67e8f9\" \"bun run dev\" \"sleep 1; php artisan horizon\" \"sleep 1; php artisan schedule:work\" \"sleep 1; php artisan pail --timeout=0\" \"sleep 1; php artisan pulse:check\" \"sleep 1; php artisan reverb:start --debug\" --names=assets,worker,scheduler,logger,pulse,reverb --kill-others"
+        ],
+        "dev:ssr": [
+            "bun run build:ssr",
+            "Composer\\Config::disableProcessTimeout",
+            "bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74,#bef264,#67e8f9\" \"php artisan inertia:start-ssr\" \"sleep 1; php artisan horizon\" \"sleep 1; php artisan schedule:work\" \"sleep 1; php artisan pail --timeout=0\" \"sleep 1; php artisan pulse:check\" \"sleep 1; php artisan reverb:start --debug\" --names=assets,worker,scheduler,logger,pulse,reverb --kill-others"
         ],
         "test": [
             "@php artisan config:clear --ansi",
-            "@php artisan test"
+            "@php artisan test --parallel --testsuite Base"
+        ],
+        "test:api": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test --parallel --testsuite API"
         ]
     },
     "extra": {
@@ -72,8 +86,12 @@
             "dont-discover": [
                 "laravel/horizon",
                 "laravel/pulse",
+                "laravel/reverb",
+                "laravel/scout",
                 "laravel/telescope",
+                "spatie/laravel-activitylog",
                 "spatie/laravel-medialibrary",
+                "spatie/laravel-permission",
                 "spatie/laravel-settings",
                 "spatie/laravel-tags"
             ]

@@ -3,14 +3,13 @@
 namespace Venture\Home\Enums\Auth;
 
 use Illuminate\Support\Collection;
+use Venture\Home\Enums\Auth\Permissions\AccountPermissionsEnum;
 use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
-use Venture\Home\Enums\Auth\Permissions\TemporaryFileResourcePermissionsEnum;
-use Venture\Home\Enums\Auth\Permissions\UserResourcePermissionsEnum;
 
 enum RolesEnum: string
 {
-    case ADMINISTRATOR = 'home::authorization/roles.administrator';
-    case USER = 'home::authorization/roles.user';
+    case Administrator = 'home::authorization/roles.administrator';
+    case User = 'home::authorization/roles.user';
 
     public static function all(): Collection
     {
@@ -25,15 +24,12 @@ enum RolesEnum: string
     public function permissions(): Collection
     {
         $permissions = match ($this) {
-            self::ADMINISTRATOR => [
+            self::Administrator => [
                 PagePermissionsEnum::all(),
 
-                UserResourcePermissionsEnum::all(),
-                TemporaryFileResourcePermissionsEnum::only(
-                    TemporaryFileResourcePermissionsEnum::VIEW_ANY,
-                ),
+                AccountPermissionsEnum::all(),
             ],
-            self::USER => [
+            self::User => [
                 PagePermissionsEnum::all(),
             ],
         };
