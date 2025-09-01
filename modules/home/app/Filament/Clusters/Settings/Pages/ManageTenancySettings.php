@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Home\Filament\Pages;
+namespace Venture\Home\Filament\Clusters\Settings\Pages;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
@@ -8,9 +8,8 @@ use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
-use UnitEnum;
 use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
-use Venture\Home\Enums\NavigationGroupsEnum;
+use Venture\Home\Filament\Clusters\Settings\SettingsCluster;
 use Venture\Home\Models\Team;
 use Venture\Home\Settings\TenancySettings;
 
@@ -18,9 +17,9 @@ class ManageTenancySettings extends SettingsPage
 {
     protected static string $settings = TenancySettings::class;
 
-    protected static ?string $slug = 'settings/manage/tenancy';
+    protected static ?string $slug = 'tenancy';
 
-    protected static string | UnitEnum | null $navigationGroup = NavigationGroupsEnum::Settings;
+    protected static ?string $cluster = SettingsCluster::class;
 
     public function form(Schema $schema): Schema
     {

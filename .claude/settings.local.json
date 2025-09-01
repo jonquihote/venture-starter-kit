@@ -28,6 +28,7 @@
             "mcp__playwright__browser_hover",
             "mcp__playwright__browser_wait_for",
             "mcp__playwright__browser_console_messages",
+            "mcp__sequential-thinking__sequentialthinking",
             "Bash(bun run:*)",
             "Bash(composer test:*)",
             "Bash(composer pint:*)",
