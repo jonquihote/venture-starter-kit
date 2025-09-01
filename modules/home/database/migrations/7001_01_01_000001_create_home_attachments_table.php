@@ -14,7 +14,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->integer('downloads_count');
         });

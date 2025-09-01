@@ -20,6 +20,10 @@ class AttachmentsTable
 
                 TextColumn::make('file_name')
                     ->label(__('home::filament/resources/attachment/table.columns.file_name.label')),
+
+                TextColumn::make('downloads_count')
+                    ->label(__('home::filament/resources/attachment/table.columns.downloads_count.label'))
+                    ->numeric(),
             ])
             ->filters([
                 //
