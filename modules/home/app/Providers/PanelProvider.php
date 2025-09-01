@@ -2,7 +2,6 @@
 
 namespace Venture\Home\Providers;
 
-use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
@@ -24,11 +23,6 @@ class PanelProvider extends BasePanelProvider
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
-            ])
-            ->navigationGroups([
-                NavigationGroup::make()
-                    ->label(fn (): string => __('home::filament/navigation/groups.settings'))
-                    ->icon('lucide-settings'),
             ]);
     }
 }

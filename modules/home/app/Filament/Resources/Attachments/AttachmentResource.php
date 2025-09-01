@@ -17,6 +17,8 @@ class AttachmentResource extends Resource
 
     protected static string | BackedEnum | null $navigationIcon = 'lucide-files';
 
+    protected static ?int $navigationSort = 100;
+
     protected static bool $isScopedToTenant = false;
 
     public static function form(Schema $schema): Schema

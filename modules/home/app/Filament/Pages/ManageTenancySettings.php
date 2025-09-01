@@ -10,6 +10,7 @@ use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
 use UnitEnum;
 use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
+use Venture\Home\Enums\NavigationGroupsEnum;
 use Venture\Home\Models\Team;
 use Venture\Home\Settings\TenancySettings;
 
@@ -18,6 +19,8 @@ class ManageTenancySettings extends SettingsPage
     protected static string $settings = TenancySettings::class;
 
     protected static ?string $slug = 'settings/manage/tenancy';
+
+    protected static string | UnitEnum | null $navigationGroup = NavigationGroupsEnum::Settings;
 
     public function form(Schema $schema): Schema
     {
@@ -53,11 +56,6 @@ class ManageTenancySettings extends SettingsPage
     public static function canAccess(): bool
     {
         return Auth::user()->can(PagePermissionsEnum::ManageTenancySettings);
-    }
-
-    public static function getNavigationGroup(): string | UnitEnum | null
-    {
-        return __('home::filament/navigation/groups.settings');
     }
 
     public static function getNavigationLabel(): string
