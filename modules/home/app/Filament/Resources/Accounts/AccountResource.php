@@ -10,6 +10,7 @@ use Venture\Home\Filament\Resources\Accounts\Pages\CreateAccount;
 use Venture\Home\Filament\Resources\Accounts\Pages\EditAccount;
 use Venture\Home\Filament\Resources\Accounts\Pages\ListAccounts;
 use Venture\Home\Filament\Resources\Accounts\Pages\ViewAccount;
+use Venture\Home\Filament\Resources\Accounts\RelationManagers\MembershipsRelationManager;
 use Venture\Home\Filament\Resources\Accounts\Schemas\AccountForm;
 use Venture\Home\Filament\Resources\Accounts\Schemas\AccountInfolist;
 use Venture\Home\Filament\Resources\Accounts\Tables\AccountsTable;
@@ -41,7 +42,7 @@ class AccountResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            MembershipsRelationManager::class,
         ];
     }
 

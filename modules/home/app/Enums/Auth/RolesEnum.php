@@ -37,7 +37,9 @@ enum RolesEnum: string
 
                 AccountPermissionsEnum::all(),
                 TeamPermissionsEnum::all(),
-                MembershipPermissionsEnum::all(),
+                MembershipPermissionsEnum::except(
+                    MembershipPermissionsEnum::Update,
+                ),
             ],
             self::User => [
                 PagePermissionsEnum::all(),
