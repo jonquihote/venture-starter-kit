@@ -23,21 +23,6 @@ class AccountResource extends Resource
 
     protected static bool $isScopedToTenant = false;
 
-    public static function getNavigationLabel(): string
-    {
-        return __('home::filament/resources/account.navigation.label');
-    }
-
-    public static function getModelLabel(): string
-    {
-        return __('home::filament/resources/account.labels.single');
-    }
-
-    public static function getPluralModelLabel(): string
-    {
-        return __('home::filament/resources/account.labels.plural');
-    }
-
     public static function form(Schema $schema): Schema
     {
         return AccountForm::configure($schema);
@@ -68,5 +53,20 @@ class AccountResource extends Resource
             'view' => ViewAccount::route('/{record}'),
             'edit' => EditAccount::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('home::filament/resources/account.navigation.label');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('home::filament/resources/account.labels.single');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('home::filament/resources/account.labels.plural');
     }
 }

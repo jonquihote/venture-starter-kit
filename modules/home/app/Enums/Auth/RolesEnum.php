@@ -4,6 +4,7 @@ namespace Venture\Home\Enums\Auth;
 
 use Illuminate\Support\Collection;
 use Venture\Home\Enums\Auth\Permissions\AccountPermissionsEnum;
+use Venture\Home\Enums\Auth\Permissions\AttachmentPermissionsEnum;
 use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
 
 enum RolesEnum: string
@@ -27,6 +28,10 @@ enum RolesEnum: string
             self::Administrator => [
                 PagePermissionsEnum::all(),
 
+                AttachmentPermissionsEnum::only(
+                    AttachmentPermissionsEnum::ViewAny,
+                    AttachmentPermissionsEnum::CustomDownload,
+                ),
                 AccountPermissionsEnum::all(),
             ],
             self::User => [
