@@ -9,10 +9,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 use Laravel\Reverb\Application;
 use Venture\Aeon\Data\ApplicationData;
-use Venture\Aeon\Services\AuthorizationManager;
+use Venture\Aeon\Services\AccessManager;
 
 /**
- * Access Facade for AuthorizationManager
+ * Access Facade for AccessManager
  *
  * Provides a static interface for managing roles and permissions
  * across the application modules.
@@ -26,7 +26,7 @@ use Venture\Aeon\Services\AuthorizationManager;
  * @method static void addAdministratorRole(BackedEnum $role)
  * @method static void addApplication(ApplicationData $application)
  *
- * @see AuthorizationManager
+ * @see AccessManager
  */
 class Access extends Facade
 {
@@ -35,6 +35,6 @@ class Access extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return AuthorizationManager::class;
+        return AccessManager::class;
     }
 }

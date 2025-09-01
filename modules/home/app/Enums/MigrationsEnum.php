@@ -9,6 +9,8 @@ enum MigrationsEnum
     case AccountCredentials;
     case Teams;
     case Memberships;
+    case Engines;
+    case Subscriptions;
 
     public function table(): string
     {
@@ -18,6 +20,8 @@ enum MigrationsEnum
             self::AccountCredentials => 'home_account_credentials',
             self::Teams => 'home_teams',
             self::Memberships => 'home_memberships',
+            self::Engines => 'home_engines',
+            self::Subscriptions => 'home_subscriptions',
         };
     }
 }

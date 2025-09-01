@@ -9,11 +9,11 @@ use Illuminate\Support\Collection;
 use Venture\Aeon\Data\ApplicationData;
 
 /**
- * AuthorizationManager serves as a centralized registry for roles and permissions
+ * AccessManager serves as a centralized registry for roles and permissions
  * across modules. It provides a simple API for modules to register their authorization
  * components into the system.
  */
-class AuthorizationManager
+class AccessManager
 {
     protected Collection $permissions;
 
