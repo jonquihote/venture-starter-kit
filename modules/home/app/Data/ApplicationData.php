@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Data;
+namespace Venture\Home\Data;
 
 use Spatie\LaravelData\Data;
 

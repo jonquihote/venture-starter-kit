@@ -8,11 +8,11 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Venture\Aeon\Facades\Access;
 
-class BootstrapAuthorizationCommand extends Command
+class InitializeAccessCommand extends Command
 {
-    protected $signature = 'aeon:bootstrap:authorization';
+    protected $signature = 'aeon:init:access';
 
-    protected $description = 'Bootstrap authorization';
+    protected $description = 'Initialize Roles & Permissions';
 
     public function handle(): void
     {

@@ -27,7 +27,7 @@ pest()
     ->extend(TestCase::class)
     ->use(RefreshDatabase::class)
     ->beforeEach(function (): void {
-        artisan('aeon:bootstrap:authorization');
+        artisan('aeon:init:access');
     })
     ->in(
         __DIR__ . '/../modules/*/tests',

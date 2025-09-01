@@ -33,6 +33,7 @@ class HomeServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(EngineSingletonServiceProvider::class);
         $this->app->register(AccessServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);

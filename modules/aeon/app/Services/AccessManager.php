@@ -6,7 +6,6 @@ namespace Venture\Aeon\Services;
 
 use BackedEnum;
 use Illuminate\Support\Collection;
-use Venture\Aeon\Data\ApplicationData;
 
 /**
  * AccessManager serves as a centralized registry for roles and permissions
@@ -21,14 +20,11 @@ class AccessManager
 
     protected Collection $administratorRoles;
 
-    protected Collection $applications;
-
     public function __construct()
     {
         $this->permissions = new Collection;
         $this->roles = new Collection;
         $this->administratorRoles = new Collection;
-        $this->applications = new Collection;
     }
 
     /**
@@ -56,14 +52,6 @@ class AccessManager
     }
 
     /**
-     * Get all applications.
-     */
-    public function applications(): Collection
-    {
-        return $this->applications;
-    }
-
-    /**
      * Add multiple permissions to the registry.
      */
     public function addPermissions(Collection $permissions): void
@@ -85,13 +73,5 @@ class AccessManager
     public function addAdministratorRole(BackedEnum $role): void
     {
         $this->administratorRoles->push($role);
-    }
-
-    /**
-     * Register an application's entry page.
-     */
-    public function addApplication(ApplicationData $application): void
-    {
-        $this->applications->push($application);
     }
 }

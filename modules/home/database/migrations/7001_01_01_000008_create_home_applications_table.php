@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create(MigrationsEnum::Engines->table(), function (Blueprint $table): void {
+        Schema::create(MigrationsEnum::Applications->table(), function (Blueprint $table): void {
             $table->id();
             $table->timestamps();
 
@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists(MigrationsEnum::Engines->table());
+        Schema::dropIfExists(MigrationsEnum::Applications->table());
     }
 };

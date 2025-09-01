@@ -15,8 +15,8 @@ hosts:
     deploy_path: '{{base_deploy_path}}/{{application}}'
 
 tasks:
-  aeon:bootstrap:authorization:
-    - run: 'cd {{release_or_current_path}} && php artisan aeon:bootstrap:authorization'
+  aeon:init:access:
+    - run: 'cd {{release_or_current_path}} && php artisan aeon:init:access'
   filament:optimize:
     - run: 'cd {{release_or_current_path}} && php artisan filament:optimize'
   bun:install:
@@ -29,7 +29,7 @@ after:
 
 before:
   deploy:publish:
-    - aeon:bootstrap:authorization
+    - aeon:init:access
     - bun:install
     - bun:run:build
     - artisan:optimize

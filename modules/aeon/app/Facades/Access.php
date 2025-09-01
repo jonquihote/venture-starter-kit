@@ -7,8 +7,6 @@ namespace Venture\Aeon\Facades;
 use BackedEnum;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
-use Laravel\Reverb\Application;
-use Venture\Aeon\Data\ApplicationData;
 use Venture\Aeon\Services\AccessManager;
 
 /**
@@ -20,11 +18,9 @@ use Venture\Aeon\Services\AccessManager;
  * @method static Collection permissions()
  * @method static Collection roles()
  * @method static Collection administratorRoles()
- * @method static Collection applications()
  * @method static void addPermissions(Collection $permissions)
  * @method static void addRoles(Collection $roles)
  * @method static void addAdministratorRole(BackedEnum $role)
- * @method static void addApplication(ApplicationData $application)
  *
  * @see AccessManager
  */

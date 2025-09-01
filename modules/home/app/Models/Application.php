@@ -7,7 +7,7 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Venture\Home\Enums\MigrationsEnum;
 
-class Engine extends Model
+class Application extends Model
 {
     use HasSlug;
 
@@ -19,7 +19,7 @@ class Engine extends Model
 
     public function getTable(): string
     {
-        return MigrationsEnum::Engines->table();
+        return MigrationsEnum::Applications->table();
     }
 
     public function getSlugOptions(): SlugOptions

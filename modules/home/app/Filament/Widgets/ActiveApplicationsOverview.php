@@ -3,7 +3,7 @@
 namespace Venture\Home\Filament\Widgets;
 
 use Filament\Widgets\Widget;
-use Venture\Aeon\Facades\Access;
+use Venture\Home\Facades\Engine;
 
 class ActiveApplicationsOverview extends Widget
 {
@@ -14,7 +14,7 @@ class ActiveApplicationsOverview extends Widget
     protected function getViewData(): array
     {
         return [
-            'applications' => Access::applications(),
+            'applications' => Engine::applications(),
         ];
     }
 }
