@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Hash;
 use Venture\Home\Enums\AccountCredentialTypesEnum;
-use Venture\Home\Filament\Resources\Accounts\Pages\CreateAccount;
+use Venture\Home\Filament\Clusters\Administration\Resources\Accounts\Pages\CreateAccount;
 use Venture\Home\Models\Account;
 use Venture\Home\Models\AccountCredential;
 

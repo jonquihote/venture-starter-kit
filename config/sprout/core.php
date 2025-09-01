@@ -1,5 +1,12 @@
 <?php
 
+use Sprout\Listeners\CleanupServiceOverrides;
+use Sprout\Listeners\PerformIdentityResolverSetup;
+use Sprout\Listeners\RefreshTenantAwareDependencies;
+use Sprout\Listeners\SetCurrentTenantContext;
+use Sprout\Listeners\SetupServiceOverrides;
+use Sprout\Support\ResolutionHook;
+
 return [
 
     /*
@@ -15,8 +22,8 @@ return [
 
     'hooks' => [
         // \Sprout\Support\ResolutionHook::Booting,
-        \Sprout\Support\ResolutionHook::Routing,
-        \Sprout\Support\ResolutionHook::Middleware,
+        ResolutionHook::Routing,
+        ResolutionHook::Middleware,
     ],
 
     /*
@@ -31,15 +38,15 @@ return [
 
     'bootstrappers' => [
         // Set the current tenant within the Laravel context
-        \Sprout\Listeners\SetCurrentTenantContext::class,
+        SetCurrentTenantContext::class,
         // Calls the setup method on the current identity resolver
-        \Sprout\Listeners\PerformIdentityResolverSetup::class,
+        PerformIdentityResolverSetup::class,
         // Performs any clean-up from the previous tenancy
-        \Sprout\Listeners\CleanupServiceOverrides::class,
+        CleanupServiceOverrides::class,
         // Sets up service overrides for the current tenancy
-        \Sprout\Listeners\SetupServiceOverrides::class,
+        SetupServiceOverrides::class,
         // Refresh anything that's tenant-aware
-        \Sprout\Listeners\RefreshTenantAwareDependencies::class,
+        RefreshTenantAwareDependencies::class,
     ],
 
 ];

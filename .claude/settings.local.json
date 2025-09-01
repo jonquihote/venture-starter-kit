@@ -31,6 +31,7 @@
             "Bash(bun run:*)",
             "Bash(composer test:*)",
             "Bash(composer pint:*)",
+            "Bash(composer rector:*)",
             "Bash(php artisan test:*)",
             "Bash(php artisan tinker:*)",
             "Bash(php artisan:*)",
@@ -41,8 +42,7 @@
             "Bash(find:*)",
             "WebFetch(domain:lucide.dev)",
             "WebFetch(domain:github.com)",
-            "WebSearch",
-            "Bash(vendor/bin/pint:*)"
+            "WebSearch"
         ]
     },
     "enabledMcpjsonServers": ["laravel-boost"]

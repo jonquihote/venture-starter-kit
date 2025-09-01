@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Hash;
-use Venture\Home\Filament\Resources\Accounts\Pages\ListAccounts;
-use Venture\Home\Filament\Resources\Accounts\Pages\ViewAccount;
+use Venture\Home\Filament\Clusters\Administration\Resources\Accounts\Pages\ListAccounts;
+use Venture\Home\Filament\Clusters\Administration\Resources\Accounts\Pages\ViewAccount;
 use Venture\Home\Models\Account;
 use Venture\Home\Models\AccountCredential;
 

@@ -2,13 +2,20 @@
 
 declare(strict_types=1);
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Venture\Aeon\Facades\Access;
 use Venture\Home\Enums\AccountCredentialTypesEnum;
 use Venture\Home\Models\Account;
 use Venture\Home\Models\AccountCredential;
+use Venture\Home\Rules\ValidName;
+use Venture\Home\Rules\ValidUsername;
 
 use function Pest\Laravel\assertDatabaseHas;
 
@@ -119,7 +126,7 @@ describe('MakeAccountCommand Database Operations', function (): void {
     test('trims and squishes name input correctly', function (): void {
         // Test the Str::squish functionality
         $account = Account::create([
-            'name' => \Illuminate\Support\Str::squish('  John   Doe  '),
+            'name' => Str::squish('  John   Doe  '),
             'password' => 'password',
         ]);
 
@@ -130,7 +137,7 @@ describe('MakeAccountCommand Database Operations', function (): void {
 
     test('handles database transaction correctly', function (): void {
         // Test transaction behavior by creating account and credentials together
-        \Illuminate\Support\Facades\DB::transaction(function (): void {
+        DB::transaction(function (): void {
             $account = Account::create([
                 'name' => 'Transaction Test',
                 'password' => 'password',
@@ -167,12 +174,12 @@ describe('MakeAccountCommand Validation Rules', function (): void {
         ]);
 
         // Test that uniqueness validation would work
-        $rule = \Illuminate\Validation\Rule::unique(AccountCredential::class, 'value')
-            ->where(function (\Illuminate\Database\Query\Builder $query) {
+        $rule = Rule::unique(AccountCredential::class, 'value')
+            ->where(function (Builder $query) {
                 return $query->where('type', AccountCredentialTypesEnum::Username);
             });
 
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $validator = Validator::make(
             ['username' => 'existing.user'],
             ['username' => [$rule]]
         );
@@ -189,12 +196,12 @@ describe('MakeAccountCommand Validation Rules', function (): void {
             'is_primary' => true,
         ]);
 
-        $rule = \Illuminate\Validation\Rule::unique(AccountCredential::class, 'value')
-            ->where(function (\Illuminate\Database\Query\Builder $query) {
+        $rule = Rule::unique(AccountCredential::class, 'value')
+            ->where(function (Builder $query) {
                 return $query->where('type', AccountCredentialTypesEnum::Email);
             });
 
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $validator = Validator::make(
             ['email' => 'existing@example.com'],
             ['email' => ['email', $rule]]
         );
@@ -204,9 +211,9 @@ describe('MakeAccountCommand Validation Rules', function (): void {
     });
 
     test('validates name with ValidName rule', function (): void {
-        $rule = new \Venture\Home\Rules\ValidName;
+        $rule = new ValidName;
 
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $validator = Validator::make(
             ['name' => 'Invalid123Name'], // Numbers not allowed
             ['name' => ['required', $rule]]
         );
@@ -216,10 +223,10 @@ describe('MakeAccountCommand Validation Rules', function (): void {
     });
 
     test('validates username with ValidUsername rule', function (): void {
-        $rule = new \Venture\Home\Rules\ValidUsername;
+        $rule = new ValidUsername;
 
         // Test username that doesn't start with letter
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $validator = Validator::make(
             ['username' => '123invalid'],
             ['username' => ['required', 'min:4', 'max:16', $rule]]
         );
@@ -229,7 +236,7 @@ describe('MakeAccountCommand Validation Rules', function (): void {
     });
 
     test('validates username length constraints', function (): void {
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $validator = Validator::make(
             ['username' => 'abc'], // Too short
             ['username' => ['required', 'min:4', 'max:16']]
         );
@@ -237,7 +244,7 @@ describe('MakeAccountCommand Validation Rules', function (): void {
         expect($validator->fails())->toBeTrue()
             ->and($validator->errors()->has('username'))->toBeTrue();
 
-        $validator2 = \Illuminate\Support\Facades\Validator::make(
+        $validator2 = Validator::make(
             ['username' => 'thisusernameistoolongtobevalid'], // Too long
             ['username' => ['required', 'min:4', 'max:16']]
         );
@@ -247,7 +254,7 @@ describe('MakeAccountCommand Validation Rules', function (): void {
     });
 
     test('validates email format correctly', function (): void {
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $validator = Validator::make(
             ['email' => 'invalid-email'], // Invalid format
             ['email' => ['required', 'email']]
         );
@@ -257,7 +264,7 @@ describe('MakeAccountCommand Validation Rules', function (): void {
     });
 
     test('validates required fields', function (): void {
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $validator = Validator::make(
             ['name' => ''], // Empty name
             ['name' => ['required']]
         );
@@ -268,10 +275,10 @@ describe('MakeAccountCommand Validation Rules', function (): void {
 
     test('accepts valid inputs', function (): void {
         // Test all validation rules with valid data
-        $rule = new \Venture\Home\Rules\ValidName;
-        $usernameRule = new \Venture\Home\Rules\ValidUsername;
+        $rule = new ValidName;
+        $usernameRule = new ValidUsername;
 
-        $validator = \Illuminate\Support\Facades\Validator::make([
+        $validator = Validator::make([
             'name' => 'John Doe',
             'username' => 'john.doe',
             'email' => 'john@example.com',
@@ -295,13 +302,13 @@ describe('MakeAccountCommand Error Handling', function (): void {
     test('handles role assignment errors within transaction', function (): void {
         // Mock Access to throw an exception during role assignment
         Access::shouldReceive('administratorRoles')
-            ->andThrow(new \Exception('Role service unavailable'));
+            ->andThrow(new Exception('Role service unavailable'));
 
         $initialAccountCount = Account::count();
         $initialCredentialCount = AccountCredential::count();
 
         expect(function (): void {
-            \Illuminate\Support\Facades\DB::transaction(function (): void {
+            DB::transaction(function (): void {
                 $account = Account::create([
                     'name' => 'Admin User',
                     'password' => 'password',
@@ -313,7 +320,7 @@ describe('MakeAccountCommand Error Handling', function (): void {
                 // This should throw the exception
                 $account->syncRoles(Access::administratorRoles());
             });
-        })->toThrow(\Exception::class, 'Role service unavailable');
+        })->toThrow(Exception::class, 'Role service unavailable');
 
         // Verify transaction rollback prevented any data from being saved
         expect(Account::count())->toBe($initialAccountCount);
@@ -342,8 +349,8 @@ describe('MakeAccountCommand Edge Cases', function (): void {
         ]);
 
         // Test that ValidName rule accepts unicode characters
-        $rule = new \Venture\Home\Rules\ValidName;
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $rule = new ValidName;
+        $validator = Validator::make(
             ['name' => 'José María'],
             ['name' => ['required', $rule]]
         );
@@ -393,8 +400,8 @@ describe('MakeAccountCommand Edge Cases', function (): void {
         ]);
 
         // Test that ValidUsername rule accepts this pattern
-        $rule = new \Venture\Home\Rules\ValidUsername;
-        $validator = \Illuminate\Support\Facades\Validator::make(
+        $rule = new ValidUsername;
+        $validator = Validator::make(
             ['username' => 'user_name.123'],
             ['username' => ['required', 'min:4', 'max:16', $rule]]
         );
@@ -477,12 +484,12 @@ describe('MakeAccountCommand Edge Cases', function (): void {
     });
 
     test('validates ValidName rule behavior', function (): void {
-        $rule = new \Venture\Home\Rules\ValidName;
+        $rule = new ValidName;
 
         // Test valid names (according to ValidName rule: letters, marks, and spaces only)
         $validNames = ['John Doe', 'María García', 'José Martín'];
         foreach ($validNames as $name) {
-            $validator = \Illuminate\Support\Facades\Validator::make(
+            $validator = Validator::make(
                 ['name' => $name],
                 ['name' => ['required', $rule]]
             );
@@ -492,7 +499,7 @@ describe('MakeAccountCommand Edge Cases', function (): void {
         // Test invalid names (numbers, symbols, underscores not allowed)
         $invalidNames = ['John123', 'test@example.com', '123456', 'User_Name', 'Jean-Pierre'];
         foreach ($invalidNames as $name) {
-            $validator = \Illuminate\Support\Facades\Validator::make(
+            $validator = Validator::make(
                 ['name' => $name],
                 ['name' => ['required', $rule]]
             );
@@ -501,12 +508,12 @@ describe('MakeAccountCommand Edge Cases', function (): void {
     });
 
     test('validates ValidUsername rule behavior', function (): void {
-        $rule = new \Venture\Home\Rules\ValidUsername;
+        $rule = new ValidUsername;
 
         // Test valid usernames
         $validUsernames = ['john', 'user123', 'test_user', 'user.name', 'a1b2c3d4'];
         foreach ($validUsernames as $username) {
-            $validator = \Illuminate\Support\Facades\Validator::make(
+            $validator = Validator::make(
                 ['username' => $username],
                 ['username' => ['required', 'min:4', 'max:16', $rule]]
             );
@@ -516,7 +523,7 @@ describe('MakeAccountCommand Edge Cases', function (): void {
         // Test invalid usernames
         $invalidUsernames = ['123user', 'user-name', 'user@name', 'user..name', 'user_', 'User', 'user$'];
         foreach ($invalidUsernames as $username) {
-            $validator = \Illuminate\Support\Facades\Validator::make(
+            $validator = Validator::make(
                 ['username' => $username],
                 ['username' => ['required', 'min:4', 'max:16', $rule]]
             );

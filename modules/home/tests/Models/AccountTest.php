@@ -296,7 +296,7 @@ describe('Scout Integration', function (): void {
         // No credentials created - should handle null relationships
         expect(function () use ($account): void {
             $account->toSearchableArray();
-        })->toThrow(\Exception::class); // This should throw error due to null credentials
+        })->toThrow(Exception::class); // This should throw error due to null credentials
     });
 });
 
@@ -313,7 +313,7 @@ describe('Activity Logging', function (): void {
 
     test('tapActivity sets correct description', function (): void {
         $account = Account::factory()->create();
-        $activity = new \Venture\Aeon\Packages\Spatie\Activitylog\Models\Activity;
+        $activity = new Venture\Aeon\Packages\Spatie\Activitylog\Models\Activity;
         $eventName = 'updated';
 
         $account->tapActivity($activity, $eventName);

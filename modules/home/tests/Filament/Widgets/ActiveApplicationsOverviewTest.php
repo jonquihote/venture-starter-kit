@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Filament\Widgets\Widget;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Venture\Aeon\Data\ApplicationData;
@@ -301,7 +302,7 @@ describe('ActiveApplicationsOverview Widget', function (): void {
         $widget = new ActiveApplicationsOverview;
 
         expect($widget)
-            ->toBeInstanceOf(\Filament\Widgets\Widget::class);
+            ->toBeInstanceOf(Widget::class);
     });
 
     test('widget uses Access facade for data retrieval', function (): void {

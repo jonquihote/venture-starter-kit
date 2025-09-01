@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Venture\Home\Filament\Resources\Accounts\Pages\ViewAccount;
+use Venture\Home\Filament\Clusters\Administration\Resources\Accounts\Pages\ViewAccount;
 use Venture\Home\Models\Account;
 use Venture\Home\Models\AccountCredential;
 

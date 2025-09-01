@@ -1,8 +1,10 @@
 <?php
 
 use Filament\Facades\Filament;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 use Venture\Aeon\Facades\Access;
 use Venture\Home\Models\Account;
 use Venture\Home\Models\AccountCredential;
@@ -22,8 +24,8 @@ use function Pest\Laravel\artisan;
 */
 
 pest()
-    ->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->extend(TestCase::class)
+    ->use(RefreshDatabase::class)
     ->beforeEach(function (): void {
         artisan('aeon:bootstrap:authorization');
     })
