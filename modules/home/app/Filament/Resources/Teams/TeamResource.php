@@ -1,0 +1,73 @@
+<?php
+
+namespace Venture\Home\Filament\Resources\Teams;
+
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables\Table;
+use Venture\Home\Filament\Resources\Teams\Pages\CreateTeam;
+use Venture\Home\Filament\Resources\Teams\Pages\EditTeam;
+use Venture\Home\Filament\Resources\Teams\Pages\ListTeams;
+use Venture\Home\Filament\Resources\Teams\Pages\ViewTeam;
+use Venture\Home\Filament\Resources\Teams\RelationManagers\MembershipsRelationManager;
+use Venture\Home\Filament\Resources\Teams\Schemas\TeamForm;
+use Venture\Home\Filament\Resources\Teams\Schemas\TeamInfolist;
+use Venture\Home\Filament\Resources\Teams\Tables\TeamsTable;
+use Venture\Home\Models\Team;
+
+class TeamResource extends Resource
+{
+    protected static ?string $model = Team::class;
+
+    protected static string | BackedEnum | null $navigationIcon = 'lucide-combine';
+
+    protected static bool $isScopedToTenant = false;
+
+    public static function form(Schema $schema): Schema
+    {
+        return TeamForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return TeamInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return TeamsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            MembershipsRelationManager::class,
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListTeams::route('/'),
+            'create' => CreateTeam::route('/create'),
+            'view' => ViewTeam::route('/{record}'),
+            'edit' => EditTeam::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('home::filament/resources/team.navigation.label');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('home::filament/resources/team.labels.single');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('home::filament/resources/team.labels.plural');
+    }
+}

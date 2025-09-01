@@ -27,8 +27,7 @@ class AccountsTable
             })
             ->columns([
                 TextColumn::make('name')
-                    ->label(__('home::filament/resources/account/table.columns.name.label'))
-                    ->sortable(),
+                    ->label(__('home::filament/resources/account/table.columns.name.label')),
 
                 TextColumn::make('username.value')
                     ->label(__('home::filament/resources/account/table.columns.username.label')),
