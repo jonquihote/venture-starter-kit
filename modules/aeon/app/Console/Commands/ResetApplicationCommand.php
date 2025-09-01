@@ -19,6 +19,7 @@ class ResetApplicationCommand extends Command
 
         $this->call('migrate:fresh');
         $this->call('aeon:init:access');
+        $this->call('home:init:engine');
         $this->call('db:seed');
 
         return self::SUCCESS;

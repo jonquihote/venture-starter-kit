@@ -17,6 +17,8 @@ hosts:
 tasks:
   aeon:init:access:
     - run: 'cd {{release_or_current_path}} && php artisan aeon:init:access'
+  home:init:engine:
+    - run: 'cd {{release_or_current_path}} && php artisan home:init:engine'
   filament:optimize:
     - run: 'cd {{release_or_current_path}} && php artisan filament:optimize'
   bun:install:

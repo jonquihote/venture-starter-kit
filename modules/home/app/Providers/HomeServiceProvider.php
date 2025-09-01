@@ -8,6 +8,7 @@ use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Venture\Home\Concerns\InteractsWithModule;
+use Venture\Home\Console\Commands\InitializeEngineCommand;
 use Venture\Home\Console\Commands\MakeAccountCommand;
 
 class HomeServiceProvider extends ServiceProvider
@@ -49,6 +50,7 @@ class HomeServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
+            InitializeEngineCommand::class,
             MakeAccountCommand::class,
         ]);
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Venture\Blueprint\Providers;
+namespace Venture\{Module}\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Venture\Blueprint\Concerns\InteractsWithModule;
-use Venture\Blueprint\Filament\Pages\Dashboard;
+use Venture\{Module}\Concerns\InteractsWithModule;
+use Venture\{Module}\Filament\Pages\Dashboard;
 use Venture\Home\Data\ApplicationData;
 use Venture\Home\Facades\Engine;
 

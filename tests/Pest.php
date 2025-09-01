@@ -28,6 +28,7 @@ pest()
     ->use(RefreshDatabase::class)
     ->beforeEach(function (): void {
         artisan('aeon:init:access');
+        artisan('home:init:engine');
     })
     ->in(
         __DIR__ . '/../modules/*/tests',

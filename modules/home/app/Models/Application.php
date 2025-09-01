@@ -14,7 +14,8 @@ class Application extends Model
     protected $fillable = [
         'name',
         'slug',
-        'description',
+        'page',
+        'icon',
     ];
 
     public function getTable(): string
