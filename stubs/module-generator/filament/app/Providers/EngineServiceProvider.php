@@ -18,6 +18,7 @@ class EngineServiceProvider extends ServiceProvider
             $this->getModuleName(),
             Dashboard::class,
             $this->getModuleIcon(),
+            is_subscribed_by_default: true,
         ));
     }
 

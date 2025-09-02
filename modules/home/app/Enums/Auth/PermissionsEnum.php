@@ -4,9 +4,11 @@ namespace Venture\Home\Enums\Auth;
 
 use Illuminate\Support\Collection;
 use Venture\Home\Enums\Auth\Permissions\AccountPermissionsEnum;
+use Venture\Home\Enums\Auth\Permissions\ApplicationPermissionsEnum;
 use Venture\Home\Enums\Auth\Permissions\AttachmentPermissionsEnum;
 use Venture\Home\Enums\Auth\Permissions\MembershipPermissionsEnum;
 use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
+use Venture\Home\Enums\Auth\Permissions\SubscriptionPermissionsEnum;
 use Venture\Home\Enums\Auth\Permissions\TeamPermissionsEnum;
 
 enum PermissionsEnum
@@ -19,6 +21,8 @@ enum PermissionsEnum
             AccountPermissionsEnum::all(),
             TeamPermissionsEnum::all(),
             MembershipPermissionsEnum::all(),
+            ApplicationPermissionsEnum::all(),
+            SubscriptionPermissionsEnum::all(),
         ])->flatten(1)->map->value;
     }
 }

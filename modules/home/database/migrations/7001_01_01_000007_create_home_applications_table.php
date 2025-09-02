@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug');
             $table->string('icon');
             $table->string('page');
+
+            $table->boolean('is_subscribed_by_default');
         });
     }
 

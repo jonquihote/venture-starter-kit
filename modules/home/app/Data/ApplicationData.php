@@ -10,5 +10,6 @@ class ApplicationData extends Data
         public string $name,
         public string $page,
         public string $icon,
+        public bool $is_subscribed_by_default,
     ) {}
 }

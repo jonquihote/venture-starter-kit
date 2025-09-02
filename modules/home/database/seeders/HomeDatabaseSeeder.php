@@ -15,6 +15,8 @@ class HomeDatabaseSeeder extends Seeder
             AttachmentSeeder::class,
             AccountSeeder::class,
             TeamSeeder::class,
+            ApplicationSeeder::class,
+            SubscriptionSeeder::class,
             MembershipSeeder::class,
         ]);
     }

@@ -22,6 +22,8 @@ class InitializeEngineCommand extends Command
                 'name' => $application->name,
                 'page' => $application->page,
                 'icon' => $application->icon,
+
+                'is_subscribed_by_default' => $application->is_subscribed_by_default,
             ]);
 
             $this->components->task($application->name);

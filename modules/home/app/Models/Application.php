@@ -16,6 +16,8 @@ class Application extends Model
         'slug',
         'page',
         'icon',
+
+        'is_subscribed_by_default',
     ];
 
     public function getTable(): string

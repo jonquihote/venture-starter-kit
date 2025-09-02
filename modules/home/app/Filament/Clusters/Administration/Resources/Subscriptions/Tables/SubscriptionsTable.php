@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Home\Filament\Clusters\Administration\Resources\Memberships\Tables;
+namespace Venture\Home\Filament\Clusters\Administration\Resources\Subscriptions\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -10,18 +10,18 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class MembershipsTable
+class SubscriptionsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('account.name')
-                    ->label(__('home::filament/resources/membership/table.columns.account.label'))
+                TextColumn::make('team.name')
+                    ->label(__('home::filament/resources/subscription/table.columns.team.label'))
                     ->searchable(),
 
-                TextColumn::make('team.name')
-                    ->label(__('home::filament/resources/membership/table.columns.team.label'))
+                TextColumn::make('application.name')
+                    ->label(__('home::filament/resources/subscription/table.columns.application.label'))
                     ->searchable(),
             ])
             ->filters([

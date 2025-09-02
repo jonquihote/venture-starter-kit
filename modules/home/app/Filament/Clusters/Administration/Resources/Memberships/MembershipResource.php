@@ -21,7 +21,7 @@ class MembershipResource extends Resource
 
     protected static string | BackedEnum | null $navigationIcon = 'lucide-book-user';
 
-    protected static ?int $navigationSort = 300;
+    protected static ?int $navigationSort = 500;
 
     protected static bool $isScopedToTenant = false;
 
