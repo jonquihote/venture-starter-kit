@@ -3,6 +3,7 @@
 namespace Venture\Home\Models\Account\Listeners;
 
 use Illuminate\Events\Dispatcher;
+use Venture\Home\Enums\Auth\RolesEnum;
 use Venture\Home\Models\Account\Events\AccountCreated;
 use Venture\Home\Models\Account\Events\AccountCreating;
 use Venture\Home\Models\Account\Events\AccountDeleted;
@@ -28,7 +29,7 @@ class AccountEventSubscriber
 
     public function handleAccountCreated(AccountCreated $event): void
     {
-        //
+        $event->account->assignRole(RolesEnum::User);
     }
 
     public function handleAccountUpdating(AccountUpdating $event): void

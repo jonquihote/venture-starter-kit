@@ -29,6 +29,8 @@
             "mcp__playwright__browser_wait_for",
             "mcp__playwright__browser_console_messages",
             "mcp__sequential-thinking__sequentialthinking",
+            "mcp__serena__list_dir",
+            "mcp__serena__read_file",
             "Bash(bun run:*)",
             "Bash(composer test:*)",
             "Bash(composer pint:*)",

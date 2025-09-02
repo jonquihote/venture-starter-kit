@@ -25,6 +25,8 @@ class AccountResource extends Resource
 
     protected static string | BackedEnum | null $navigationIcon = 'lucide-users-round';
 
+    protected static ?int $navigationSort = 100;
+
     protected static bool $isScopedToTenant = false;
 
     public static function form(Schema $schema): Schema

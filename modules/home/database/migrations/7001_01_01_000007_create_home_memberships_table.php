@@ -22,6 +22,10 @@ return new class extends Migration
                 ->constrained(MigrationsEnum::Teams->table())
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+
+            $table->json('roles')->nullable();
+
+            $table->unique(['account_id', 'team_id']);
         });
     }
 

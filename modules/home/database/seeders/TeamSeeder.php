@@ -10,14 +10,45 @@ class TeamSeeder extends Seeder
 {
     public function run(): void
     {
-        $account = Account::query()
+        $zeus = Account::query()
             ->whereUsername('zeus')
             ->first();
 
         Team::factory()
             ->create([
                 'name' => 'The Olympus',
-                'owner_id' => $account->id,
+                'owner_id' => $zeus->id,
+            ]);
+
+        // Create Thousand Sunny team owned by Luffy
+        $luffy = Account::query()
+            ->whereUsername('luffy')
+            ->first();
+
+        Team::factory()
+            ->create([
+                'name' => 'Thousand Sunny',
+                'owner_id' => $luffy->id,
+            ]);
+
+        $tanjiro = Account::query()
+            ->whereUsername('tanjiro')
+            ->first();
+
+        Team::factory()
+            ->create([
+                'name' => 'Mount Sagiri',
+                'owner_id' => $tanjiro->id,
+            ]);
+
+        $jinWoo = Account::query()
+            ->whereUsername('jin.woo')
+            ->first();
+
+        Team::factory()
+            ->create([
+                'name' => 'Double Dungeon',
+                'owner_id' => $jinWoo->id,
             ]);
     }
 }

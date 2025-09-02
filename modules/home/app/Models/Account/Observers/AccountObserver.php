@@ -2,7 +2,6 @@
 
 namespace Venture\Home\Models\Account\Observers;
 
-use Venture\Home\Enums\Auth\RolesEnum;
 use Venture\Home\Models\Account;
 
 class AccountObserver
@@ -19,7 +18,7 @@ class AccountObserver
 
     public function created(Account $account): void
     {
-        $account->assignRole(RolesEnum::User);
+        //
     }
 
     public function updating(Account $account): void

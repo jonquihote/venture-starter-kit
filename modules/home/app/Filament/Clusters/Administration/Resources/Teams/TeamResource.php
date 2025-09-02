@@ -25,6 +25,8 @@ class TeamResource extends Resource
 
     protected static string | BackedEnum | null $navigationIcon = 'lucide-combine';
 
+    protected static ?int $navigationSort = 200;
+
     protected static bool $isScopedToTenant = false;
 
     public static function form(Schema $schema): Schema
