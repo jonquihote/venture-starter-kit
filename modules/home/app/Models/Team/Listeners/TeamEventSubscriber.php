@@ -3,6 +3,8 @@
 namespace Venture\Home\Models\Team\Listeners;
 
 use Illuminate\Events\Dispatcher;
+use Venture\Home\Models\Application;
+use Venture\Home\Models\Subscription;
 use Venture\Home\Models\Team\Events\TeamCreated;
 use Venture\Home\Models\Team\Events\TeamCreating;
 use Venture\Home\Models\Team\Events\TeamDeleted;
@@ -28,7 +30,14 @@ class TeamEventSubscriber
 
     public function handleTeamCreated(TeamCreated $event): void
     {
-        //
+        Application::query()
+            ->where('is_subscribed_by_default', true)
+            ->each(function (Application $application) use ($event): void {
+                Subscription::create([
+                    'team_id' => $event->team->id,
+                    'application_id' => $application->id,
+                ]);
+            });
     }
 
     public function handleTeamUpdating(TeamUpdating $event): void
