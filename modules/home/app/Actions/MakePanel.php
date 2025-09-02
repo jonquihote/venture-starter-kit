@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Lorisleiva\Actions\Action;
 use Venture\Home\Http\Middleware\EnsureSingleTeamMode;
+use Venture\Home\Http\Middleware\EnsureTeamHasSubscription;
 use Venture\Home\Http\Middleware\UpdateCurrentTeam;
 use Venture\Home\Models\Team;
 use Venture\Home\Settings\TenancySettings;
@@ -92,6 +93,9 @@ class MakePanel extends Action
             ->tenantMiddleware([
                 UpdateCurrentTeam::class,
                 EnsureSingleTeamMode::class,
+                EnsureTeamHasSubscription::with([
+                    'slug' => $slug,
+                ]),
             ], isPersistent: true);
     }
 }

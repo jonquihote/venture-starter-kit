@@ -49,7 +49,8 @@
         "spatie/laravel-sluggable": "^3.7",
         "spatie/laravel-tags": "^4.10",
         "spatie/laravel-translatable": "^6.11",
-        "tightenco/ziggy": "^2.4"
+        "tightenco/ziggy": "^2.4",
+        "timacdonald/has-parameters": "^1.5"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^2.0",
