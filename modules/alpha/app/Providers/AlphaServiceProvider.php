@@ -1,15 +1,15 @@
 <?php
 
-namespace Venture\{Module}\Providers;
+namespace Venture\Alpha\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Venture\{Module}\Concerns\InteractsWithModule;
+use Venture\Alpha\Concerns\InteractsWithModule;
 
-class {Module}ServiceProvider extends ServiceProvider
+class AlphaServiceProvider extends ServiceProvider
 {
     use InteractsWithModule;
     use PathNamespace;

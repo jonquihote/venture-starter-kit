@@ -1,0 +1,9 @@
+{
+    "name": "Alpha",
+    "alias": "alpha",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\Alpha\\Providers\\AlphaServiceProvider"],
+    "files": []
+}
