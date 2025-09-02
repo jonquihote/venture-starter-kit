@@ -27,7 +27,7 @@ pest()
     ->extend(TestCase::class)
     ->use(RefreshDatabase::class)
     ->beforeEach(function (): void {
-        artisan('aeon:init:access');
+        artisan('aeon:init:engine');
         artisan('home:init:engine');
     })
     ->in(

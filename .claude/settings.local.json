@@ -35,6 +35,7 @@
             "Bash(composer test:*)",
             "Bash(composer pint:*)",
             "Bash(composer rector:*)",
+            "Bash(composer show:*)",
             "Bash(php artisan test:*)",
             "Bash(php artisan tinker:*)",
             "Bash(php artisan:*)",
@@ -45,6 +46,7 @@
             "Bash(find:*)",
             "WebFetch(domain:lucide.dev)",
             "WebFetch(domain:github.com)",
+            "WebFetch(domain:spatie.be)",
             "WebSearch"
         ]
     },

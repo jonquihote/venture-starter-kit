@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Venture\Aeon\Console\Commands\InitializeAccessCommand;
+use Venture\Aeon\Console\Commands\InitializeEngineCommand;
 use Venture\Aeon\Console\Commands\ResetApplicationCommand;
 use Venture\Aeon\Packages\Filament\Filament\Providers\FilamentDataProcessingServiceProvider;
 use Venture\Aeon\Packages\FirstParty\Horizon\Providers\HorizonServiceProvider;
@@ -75,7 +75,7 @@ class AeonServiceProvider extends ServiceProvider
     {
         $this->commands([
             ResetApplicationCommand::class,
-            InitializeAccessCommand::class,
+            InitializeEngineCommand::class,
         ]);
     }
 

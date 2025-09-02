@@ -3,6 +3,8 @@
 namespace Venture\Home\Models\Subscription\Listeners;
 
 use Illuminate\Events\Dispatcher;
+use Venture\Home\Actions\AssignTeamOwnerRole;
+use Venture\Home\Actions\InitializeTeamAccess;
 use Venture\Home\Models\Subscription\Events\SubscriptionCreated;
 use Venture\Home\Models\Subscription\Events\SubscriptionCreating;
 use Venture\Home\Models\Subscription\Events\SubscriptionDeleted;
@@ -28,7 +30,8 @@ class SubscriptionEventSubscriber
 
     public function handleSubscriptionCreated(SubscriptionCreated $event): void
     {
-        //
+        InitializeTeamAccess::run($event->subscription);
+        AssignTeamOwnerRole::run($event->subscription);
     }
 
     public function handleSubscriptionUpdating(SubscriptionUpdating $event): void

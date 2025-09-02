@@ -8,7 +8,5 @@ enum PagePermissionsEnum: string
 {
     use InteractsWithPermissions;
 
-    case Dashboard = 'home::authorization/pages.dashboard';
-
     case ManageTenancySettings = 'home::authorization/pages.manage-tenancy-settings';
 }

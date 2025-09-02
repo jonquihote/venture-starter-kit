@@ -4,8 +4,6 @@ namespace Venture\Home\Filament\Pages;
 
 use BackedEnum;
 use Filament\Pages\Dashboard as BaseDashboard;
-use Illuminate\Support\Facades\Auth;
-use Venture\Home\Enums\Auth\Permissions\PagePermissionsEnum;
 
 class Dashboard extends BaseDashboard
 {
@@ -19,10 +17,5 @@ class Dashboard extends BaseDashboard
     public function getTitle(): string
     {
         return __('home::filament/pages/dashboard.title');
-    }
-
-    public static function canAccess(): bool
-    {
-        return Auth::user()->can(PagePermissionsEnum::Dashboard);
     }
 }

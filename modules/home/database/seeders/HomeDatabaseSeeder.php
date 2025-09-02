@@ -18,6 +18,8 @@ class HomeDatabaseSeeder extends Seeder
             ApplicationSeeder::class,
             SubscriptionSeeder::class,
             MembershipSeeder::class,
+
+            AdministratorSeeder::class,
         ]);
     }
 }
