@@ -15,10 +15,10 @@ hosts:
     deploy_path: '{{base_deploy_path}}/{{application}}'
 
 tasks:
-  aeon:init:engine:
-    - run: 'cd {{release_or_current_path}} && php artisan aeon:init:engine'
-  home:init:engine:
-    - run: 'cd {{release_or_current_path}} && php artisan home:init:engine'
+  aeon:init:access:
+    - run: 'cd {{release_or_current_path}} && php artisan aeon:init:access'
+  alpha:init:engine:
+    - run: 'cd {{release_or_current_path}} && php artisan alpha:init:engine'
   filament:optimize:
     - run: 'cd {{release_or_current_path}} && php artisan filament:optimize'
   bun:install:
@@ -31,7 +31,8 @@ after:
 
 before:
   deploy:publish:
-    - aeon:init:engine
+    - aeon:init:access
+    - alpha:init:engine
     - bun:install
     - bun:run:build
     - artisan:optimize

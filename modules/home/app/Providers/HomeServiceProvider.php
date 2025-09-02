@@ -8,8 +8,6 @@ use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Venture\Home\Concerns\InteractsWithModule;
-use Venture\Home\Console\Commands\InitializeEngineCommand;
-use Venture\Home\Console\Commands\MakeAccountCommand;
 
 class HomeServiceProvider extends ServiceProvider
 {
@@ -34,14 +32,10 @@ class HomeServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(EngineSingletonServiceProvider::class);
-        $this->app->register(AccessServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
         $this->app->register(PanelProvider::class);
-        $this->app->register(FilamentIconServiceProvider::class);
-        $this->app->register(FilamentViewServiceProvider::class);
     }
 
     /**
@@ -50,8 +44,7 @@ class HomeServiceProvider extends ServiceProvider
     protected function registerCommands(): void
     {
         $this->commands([
-            InitializeEngineCommand::class,
-            MakeAccountCommand::class,
+            //
         ]);
     }
 

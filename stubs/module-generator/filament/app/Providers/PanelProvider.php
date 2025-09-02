@@ -7,7 +7,7 @@ use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
-use Venture\Home\Actions\MakePanel;
+use Venture\Alpha\Actions\MakePanel;
 use Venture\{Module}\Concerns\InteractsWithModule;
 
 class PanelProvider extends BasePanelProvider

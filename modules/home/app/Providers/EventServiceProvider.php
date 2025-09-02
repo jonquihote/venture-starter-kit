@@ -3,11 +3,6 @@
 namespace Venture\Home\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Venture\Home\Models\Account\Listeners\AccountEventSubscriber;
-use Venture\Home\Models\Application\Listeners\ApplicationEventSubscriber;
-use Venture\Home\Models\Membership\Listeners\MembershipEventSubscriber;
-use Venture\Home\Models\Subscription\Listeners\SubscriptionEventSubscriber;
-use Venture\Home\Models\Team\Listeners\TeamEventSubscriber;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -24,11 +19,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array<int, string>
      */
     protected $subscribe = [
-        AccountEventSubscriber::class,
-        TeamEventSubscriber::class,
-        ApplicationEventSubscriber::class,
-        SubscriptionEventSubscriber::class,
-        MembershipEventSubscriber::class,
+        //
     ];
 
     /**

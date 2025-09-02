@@ -12,7 +12,14 @@ class AlphaDatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            //
+            AttachmentSeeder::class,
+            AccountSeeder::class,
+            TeamSeeder::class,
+            ApplicationSeeder::class,
+            SubscriptionSeeder::class,
+            MembershipSeeder::class,
+
+            AdministratorSeeder::class,
         ]);
     }
 }

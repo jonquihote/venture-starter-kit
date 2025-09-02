@@ -9,4 +9,6 @@ enum PagePermissionsEnum: string
     use InteractsWithPermissions;
 
     case Dashboard = 'alpha::authorization/pages.dashboard';
+
+    case ManageTenancySettings = 'alpha::authorization/pages.manage-tenancy-settings';
 }

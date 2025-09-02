@@ -18,8 +18,8 @@ class ResetApplicationCommand extends Command
         File::deleteDirectories(storage_path('app/public'));
 
         $this->call('migrate:fresh');
-        $this->call('aeon:init:engine');
-        $this->call('home:init:engine');
+        $this->call('aeon:init:access');
+        $this->call('alpha:init:engine');
         $this->call('db:seed');
 
         return self::SUCCESS;

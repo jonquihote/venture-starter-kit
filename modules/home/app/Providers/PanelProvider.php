@@ -5,9 +5,8 @@ namespace Venture\Home\Providers;
 use Filament\Panel;
 use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
-use Venture\Home\Actions\MakePanel;
+use Venture\Alpha\Actions\MakePanel;
 use Venture\Home\Concerns\InteractsWithModule;
-use Venture\Home\Filament\Pages\Auth\Login;
 
 class PanelProvider extends BasePanelProvider
 {
@@ -19,8 +18,6 @@ class PanelProvider extends BasePanelProvider
         $slug = $this->getModuleSlug();
 
         return MakePanel::run($panel, $name, $slug)
-            ->default()
-            ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
             ]);

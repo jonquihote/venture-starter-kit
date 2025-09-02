@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Venture\Home\Database\Seeders\HomeDatabaseSeeder;
+use Venture\Alpha\Database\Seeders\AlphaDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            HomeDatabaseSeeder::class,
+            AlphaDatabaseSeeder::class,
         ]);
     }
 }

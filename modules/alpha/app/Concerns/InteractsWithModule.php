@@ -16,6 +16,6 @@ trait InteractsWithModule
 
     public function getModuleIcon(): string
     {
-        return 'lucide-app-window';
+        return 'lucide-building';
     }
 }

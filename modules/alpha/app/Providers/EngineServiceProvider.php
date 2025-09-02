@@ -4,9 +4,9 @@ namespace Venture\Alpha\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Venture\Alpha\Concerns\InteractsWithModule;
+use Venture\Alpha\Data\ApplicationData;
+use Venture\Alpha\Facades\Engine;
 use Venture\Alpha\Filament\Pages\Dashboard;
-use Venture\Home\Data\ApplicationData;
-use Venture\Home\Facades\Engine;
 
 class EngineServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class EngineServiceProvider extends ServiceProvider
             $this->getModuleName(),
             Dashboard::class,
             $this->getModuleIcon(),
-            is_subscribed_by_default: true,
+            is_subscribed_by_default: false,
         ));
     }
 

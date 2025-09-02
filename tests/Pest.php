@@ -6,8 +6,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Venture\Aeon\Facades\Access;
-use Venture\Home\Models\Account;
-use Venture\Home\Models\AccountCredential;
+use Venture\Alpha\Models\Account;
+use Venture\Alpha\Models\AccountCredential;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\artisan;
@@ -27,8 +27,8 @@ pest()
     ->extend(TestCase::class)
     ->use(RefreshDatabase::class)
     ->beforeEach(function (): void {
-        artisan('aeon:init:engine');
-        artisan('home:init:engine');
+        artisan('aeon:init:access');
+        artisan('alpha:init:engine');
     })
     ->in(
         __DIR__ . '/../modules/*/tests',

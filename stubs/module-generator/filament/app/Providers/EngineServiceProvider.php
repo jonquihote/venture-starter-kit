@@ -5,8 +5,8 @@ namespace Venture\{Module}\Providers;
 use Illuminate\Support\ServiceProvider;
 use Venture\{Module}\Concerns\InteractsWithModule;
 use Venture\{Module}\Filament\Pages\Dashboard;
-use Venture\Home\Data\ApplicationData;
-use Venture\Home\Facades\Engine;
+use Venture\Alpha\Data\ApplicationData;
+use Venture\Alpha\Facades\Engine;
 
 class EngineServiceProvider extends ServiceProvider
 {

@@ -7,8 +7,9 @@ use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
+use Venture\Alpha\Actions\MakePanel;
 use Venture\Alpha\Concerns\InteractsWithModule;
-use Venture\Home\Actions\MakePanel;
+use Venture\Alpha\Filament\Pages\Auth\Login;
 
 class PanelProvider extends BasePanelProvider
 {
@@ -20,8 +21,9 @@ class PanelProvider extends BasePanelProvider
         $slug = $this->getModuleSlug();
 
         return MakePanel::run($panel, $name, $slug)
+            ->login(Login::class)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Indigo,
             ])
             ->widgets([
                 AccountWidget::class,

@@ -1,6 +1,6 @@
 <?php
 
-use Venture\Home\Models\Account;
+use Venture\Alpha\Models\Account;
 
 return [
 

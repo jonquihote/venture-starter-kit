@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Venture\Home\Http\Controllers\AttachmentDownloadController;
 
 Route::group([
     'middleware' => ['auth'],
@@ -11,9 +10,6 @@ Route::group([
     ], function (): void {
         //
     });
-
-    Route::get('attachments/{attachment:slug}/download', AttachmentDownloadController::class)
-        ->name('attachments.download');
 });
 
 Route::group([

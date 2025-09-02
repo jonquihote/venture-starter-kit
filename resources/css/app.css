@@ -191,6 +191,20 @@
         --primary-950: oklch(0.279 0.077 45.635) !important;
     }
 
+    .fi-panel-alpha {
+        --primary-50: oklch(0.962 0.018 272.314) !important;
+        --primary-100: oklch(0.93 0.034 272.788) !important;
+        --primary-200: oklch(0.87 0.065 274.039) !important;
+        --primary-300: oklch(0.785 0.115 274.713) !important;
+        --primary-400: oklch(0.673 0.182 276.935) !important;
+        --primary-500: oklch(0.585 0.233 277.117) !important;
+        --primary-600: oklch(0.511 0.262 276.966) !important;
+        --primary-700: oklch(0.457 0.24 277.023) !important;
+        --primary-800: oklch(0.398 0.195 277.366) !important;
+        --primary-900: oklch(0.359 0.144 278.697) !important;
+        --primary-950: oklch(0.257 0.09 281.288) !important;
+    }
+
     .fi-panel-blueprint {
         --primary-50: oklch(0.97 0.014 254.604) !important;
         --primary-100: oklch(0.932 0.032 255.585) !important;
@@ -212,12 +226,16 @@
     }
 
     /* Application tile colors */
+    .alpha-application-tile {
+        @apply bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-800 dark:hover:bg-indigo-700;
+    }
+
     .blueprint-application-tile {
         @apply bg-blue-700 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-700;
     }
 
     /* Empty placeholder slots */
     .application-placeholder {
-        @apply border-2 border-dashed border-gray-300 transition-colors duration-200 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500;
+        @apply !border-2 border-dashed !border-gray-300 transition-colors duration-200 hover:!border-gray-400 dark:border-gray-600 dark:hover:border-gray-500;
     }
 }

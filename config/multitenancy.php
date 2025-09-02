@@ -1,7 +1,7 @@
 <?php
 
 use Sprout\TenancyOptions;
-use Venture\Home\Models\Team;
+use Venture\Alpha\Models\Team;
 
 return [
 

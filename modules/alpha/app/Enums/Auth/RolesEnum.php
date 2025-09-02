@@ -3,7 +3,13 @@
 namespace Venture\Alpha\Enums\Auth;
 
 use Illuminate\Support\Collection;
+use Venture\Alpha\Enums\Auth\Permissions\AccountPermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\ApplicationPermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\AttachmentPermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\MembershipPermissionsEnum;
 use Venture\Alpha\Enums\Auth\Permissions\PagePermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\SubscriptionPermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\TeamPermissionsEnum;
 
 enum RolesEnum: string
 {
@@ -25,6 +31,23 @@ enum RolesEnum: string
         $permissions = match ($this) {
             self::Administrator => [
                 PagePermissionsEnum::all(),
+
+                AttachmentPermissionsEnum::only(
+                    AttachmentPermissionsEnum::ViewAny,
+                    AttachmentPermissionsEnum::CustomDownload,
+                ),
+
+                AccountPermissionsEnum::all(),
+                TeamPermissionsEnum::all(),
+                MembershipPermissionsEnum::except(
+                    MembershipPermissionsEnum::Update,
+                ),
+                ApplicationPermissionsEnum::only(
+                    ApplicationPermissionsEnum::ViewAny,
+                ),
+                SubscriptionPermissionsEnum::except(
+                    SubscriptionPermissionsEnum::Update,
+                ),
             ],
             self::User => [
                 PagePermissionsEnum::all(),

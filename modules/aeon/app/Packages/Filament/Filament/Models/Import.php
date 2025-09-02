@@ -5,7 +5,7 @@ namespace Venture\Aeon\Packages\Filament\Filament\Models;
 use Filament\Actions\Imports\Models\Import as BaseImport;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Venture\Home\Models\Account;
+use Venture\Alpha\Models\Account;
 
 class Import extends BaseImport
 {
