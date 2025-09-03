@@ -1,0 +1,9 @@
+{
+    "name": "Omega",
+    "alias": "omega",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\Omega\\Providers\\OmegaServiceProvider"],
+    "files": []
+}

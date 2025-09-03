@@ -17,6 +17,7 @@
             "mcp__laravel-boost__tinker",
             "mcp__laravel-boost__list-routes",
             "mcp__laravel-boost__database-connections",
+            "mcp__magic__logo_search",
             "mcp__playwright__browser_navigate",
             "mcp__playwright__browser_evaluate",
             "mcp__playwright__browser_type",

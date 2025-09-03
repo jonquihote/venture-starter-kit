@@ -1,0 +1,28 @@
+{
+    "name": "venture/omega",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joni Chandra",
+            "email": "jon@quihote.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Venture\\Omega\\": "app/",
+            "Venture\\Omega\\Database\\Factories\\": "database/factories/",
+            "Venture\\Omega\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Venture\\Omega\\Tests\\": "tests/"
+        }
+    }
+}
