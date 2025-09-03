@@ -3,7 +3,7 @@
 namespace Venture\Omega\Enums\Auth;
 
 use Illuminate\Support\Collection;
-use Venture\Alpha\Enums\Auth\Permissions\InvitationPermissionsEnum;
+use Venture\Omega\Enums\Auth\Permissions\InvitationPermissionsEnum;
 use Venture\Omega\Enums\Auth\Permissions\PagePermissionsEnum;
 
 enum RolesEnum: string

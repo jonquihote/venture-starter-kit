@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Alpha\Enums\Auth\Permissions;
+namespace Venture\Omega\Enums\Auth\Permissions;
 
 use Venture\Aeon\Concerns\Auth\InteractsWithPermissions;
 
