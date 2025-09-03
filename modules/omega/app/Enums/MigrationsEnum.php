@@ -4,12 +4,12 @@ namespace Venture\Omega\Enums;
 
 enum MigrationsEnum
 {
-    case Users;
+    case Invitations;
 
     public function table(): string
     {
         return match ($this) {
-            self::Users => 'omega_users',
+            self::Invitations => 'omega_invitations',
         };
     }
 }

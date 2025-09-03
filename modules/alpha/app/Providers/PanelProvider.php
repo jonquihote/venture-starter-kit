@@ -21,6 +21,7 @@ class PanelProvider extends BasePanelProvider
         $slug = $this->getModuleSlug();
 
         return MakePanel::run($panel, $name, $slug)
+            ->default()
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Indigo,

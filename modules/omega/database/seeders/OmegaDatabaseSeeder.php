@@ -12,7 +12,7 @@ class OmegaDatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            //
+            InvitationSeeder::class,
         ]);
     }
 }
