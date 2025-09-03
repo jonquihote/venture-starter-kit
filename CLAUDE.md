@@ -106,7 +106,6 @@ The application uses `nwidart/laravel-modules` for organizing code into self-con
 ```
 modules/
 ├── aeon/          # Core system utilities and Laravel packages integration
-│   ├── Actions/MakePanel.php       # Filament panel factory
 │   ├── Console/Commands/           # Reset & utility commands
 │   ├── Packages/FirstParty/        # Pre-configured Laravel packages
 │   │   ├── Horizon/               # Queue monitoring
@@ -124,13 +123,14 @@ modules/
 │   ├── Concerns/InteractsWithModule.php
 │   ├── DOC_STYLEGUIDE.md          # Documentation style guide
 │   └── Providers/PanelProvider.php
-└── home/          # Main application module with account management
-    ├── Models/
-    │   ├── Account.php            # Main account model
-    │   └── AccountCredential.php  # Account credentials
+├── alpha/         # Advanced Filament panel factory and tenancy support
+│   ├── Actions/MakePanel.php      # Filament panel factory with tenancy
+│   └── Models/Team.php            # Multi-tenancy team model
+├── omega/         # Invitation system and team management
+└── home/          # Main application module with dashboard
     ├── Filament/
-    │   ├── Pages/Auth/Login.php   # Custom login page
-    │   └── Resources/Accounts/    # Account CRUD interface
+    │   ├── Pages/Dashboard.php    # Main dashboard page
+    │   └── Widgets/               # Dashboard widgets
     └── Providers/PanelProvider.php
 ```
 
@@ -146,7 +146,7 @@ modules/
 
 ### Key Patterns
 
-1. **Panel Creation**: Use `MakePanel::run()` for consistent Filament panel setup
+1. **Panel Creation**: Use `MakePanel::handle()` from alpha module for consistent Filament panel setup with tenancy
 2. **Module Traits**: `InteractsWithModule` provides module context utilities
 3. **Authentication**: Dual system - Laravel auth + Filament admin panels
 4. **Component Architecture**: Compound components (Card, CardHeader, CardContent)
@@ -156,6 +156,8 @@ modules/
 7. **Module Composition**: Modules can extend composer.json via merge-plugin for dependencies
 8. **Git Standards**: Conventional commits enforced via Husky and commitlint
 9. **Package Management**: Bun as primary frontend package manager, with npm fallback
+10. **Multi-tenancy**: Team-based tenancy with invitation system (alpha/omega modules)
+11. **Advanced Patterns**: Laravel Actions integration, Saloon API clients, comprehensive Spatie package suite
 
 ## Development Environment
 
@@ -164,7 +166,7 @@ modules/
 - **PHP**: ^8.4
 - **Node**: v22+
 - **Package Manager**: bun (primary), npm (fallback)
-- **Database**: SQLite (default), PostgreSQL (testing)
+- **Database**: SQLite (default), PostgreSQL (testing - see phpunit.xml.dist)
 
 ### Environment Setup
 
@@ -216,7 +218,9 @@ This project enforces conventional commits via Husky and commitlint:
 - **Frontend**: Vue 3, Inertia v2, TypeScript, Reka UI components
 - **Testing**: Pest v4
 - **Tooling**: Vite, Tailwind v4, Rector, Pint, Concurrently
-- **Packages**: Horizon, Pulse, Reverb, Scout, Telescope (pre-configured)
+- **Core Packages**: Horizon, Pulse, Reverb, Scout, Telescope, Laravel Boost MCP
+- **Spatie Packages**: Activity Log, Media Library, Permissions, Settings, Tags, Data, Model States
+- **Additional Tools**: Saloon (API client), Sentry (monitoring), Browsershot (PDF generation)
 - **Module System**: nwidart/laravel-modules with dcblogdev/laravel-module-generator
 
 ===
