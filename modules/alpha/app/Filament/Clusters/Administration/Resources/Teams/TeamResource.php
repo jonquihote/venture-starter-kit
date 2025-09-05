@@ -16,6 +16,7 @@ use Venture\Alpha\Filament\Clusters\Administration\Resources\Teams\Schemas\TeamF
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Teams\Schemas\TeamInfolist;
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Teams\Tables\TeamsTable;
 use Venture\Alpha\Models\Team;
+use Venture\Alpha\Settings\TenancySettings;
 
 class TeamResource extends Resource
 {
@@ -28,6 +29,11 @@ class TeamResource extends Resource
     protected static ?int $navigationSort = 200;
 
     protected static bool $isScopedToTenant = false;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return ! app(TenancySettings::class)->isSingleTeamMode();
+    }
 
     public static function form(Schema $schema): Schema
     {

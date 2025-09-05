@@ -12,6 +12,7 @@ use Venture\Alpha\Filament\Clusters\Administration\Resources\Applications\Schema
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Applications\Schemas\ApplicationInfolist;
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Applications\Tables\ApplicationsTable;
 use Venture\Alpha\Models\Application;
+use Venture\Alpha\Settings\TenancySettings;
 
 class ApplicationResource extends Resource
 {
@@ -24,6 +25,11 @@ class ApplicationResource extends Resource
     protected static ?int $navigationSort = 300;
 
     protected static bool $isScopedToTenant = false;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return ! app(TenancySettings::class)->isSingleTeamMode();
+    }
 
     public static function getModelLabel(): string
     {

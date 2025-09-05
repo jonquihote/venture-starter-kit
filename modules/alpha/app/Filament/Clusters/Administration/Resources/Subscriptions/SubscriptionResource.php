@@ -12,6 +12,7 @@ use Venture\Alpha\Filament\Clusters\Administration\Resources\Subscriptions\Schem
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Subscriptions\Schemas\SubscriptionInfolist;
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Subscriptions\Tables\SubscriptionsTable;
 use Venture\Alpha\Models\Subscription;
+use Venture\Alpha\Settings\TenancySettings;
 
 class SubscriptionResource extends Resource
 {
@@ -24,6 +25,11 @@ class SubscriptionResource extends Resource
     protected static ?int $navigationSort = 400;
 
     protected static bool $isScopedToTenant = false;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return ! app(TenancySettings::class)->isSingleTeamMode();
+    }
 
     public static function getModelLabel(): string
     {

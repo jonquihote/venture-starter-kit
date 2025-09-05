@@ -12,6 +12,7 @@ use Venture\Alpha\Filament\Clusters\Administration\Resources\Memberships\Schemas
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Memberships\Schemas\MembershipInfolist;
 use Venture\Alpha\Filament\Clusters\Administration\Resources\Memberships\Tables\MembershipsTable;
 use Venture\Alpha\Models\Membership;
+use Venture\Alpha\Settings\TenancySettings;
 
 class MembershipResource extends Resource
 {
@@ -24,6 +25,11 @@ class MembershipResource extends Resource
     protected static ?int $navigationSort = 500;
 
     protected static bool $isScopedToTenant = false;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return ! app(TenancySettings::class)->isSingleTeamMode();
+    }
 
     public static function getModelLabel(): string
     {
