@@ -53,6 +53,12 @@ trait InteractsWithTeams
 
     public function canAccessTenant(Model $tenant): bool
     {
+        $settings = app(TenancySettings::class);
+
+        if ($settings->isSingleTeamMode() && $settings->defaultTeam()) {
+            return $settings->defaultTeam() && $settings->defaultTeam()->is($tenant);
+        }
+
         return $this->teams()->whereKey($tenant)->exists() ||
                $this->ownedTeams()->whereKey($tenant)->exists();
     }

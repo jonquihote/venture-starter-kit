@@ -13,6 +13,8 @@ use Venture\Alpha\Models\Application\Events\ApplicationSaved;
 use Venture\Alpha\Models\Application\Events\ApplicationSaving;
 use Venture\Alpha\Models\Application\Events\ApplicationUpdated;
 use Venture\Alpha\Models\Application\Events\ApplicationUpdating;
+use Venture\Alpha\Models\Subscription;
+use Venture\Alpha\Settings\TenancySettings;
 
 class ApplicationEventSubscriber
 {
@@ -28,7 +30,14 @@ class ApplicationEventSubscriber
 
     public function handleApplicationCreated(ApplicationCreated $event): void
     {
-        //
+        $settings = app(TenancySettings::class);
+
+        if ($settings->isSingleTeamMode() && $settings->defaultTeam()) {
+            Subscription::firstOrCreate([
+                'application_id' => $event->application->getKey(),
+                'team_id' => $settings->defaultTeam()->getKey(),
+            ]);
+        }
     }
 
     public function handleApplicationUpdating(ApplicationUpdating $event): void

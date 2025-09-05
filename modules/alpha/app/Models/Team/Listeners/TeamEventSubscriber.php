@@ -15,6 +15,7 @@ use Venture\Alpha\Models\Team\Events\TeamSaved;
 use Venture\Alpha\Models\Team\Events\TeamSaving;
 use Venture\Alpha\Models\Team\Events\TeamUpdated;
 use Venture\Alpha\Models\Team\Events\TeamUpdating;
+use Venture\Alpha\Settings\TenancySettings;
 
 class TeamEventSubscriber
 {
@@ -25,7 +26,11 @@ class TeamEventSubscriber
 
     public function handleTeamCreating(TeamCreating $event): void
     {
-        //
+        $settings = app(TenancySettings::class);
+
+        if ($settings->isSingleTeamMode()) {
+            throw new \InvalidArgumentException('Cannot create new teams when Single Team Mode is active.');
+        }
     }
 
     public function handleTeamCreated(TeamCreated $event): void
@@ -62,7 +67,12 @@ class TeamEventSubscriber
 
     public function handleTeamDeleting(TeamDeleting $event): void
     {
-        //
+        $settings = app(TenancySettings::class);
+
+        // Prevent ALL team deletion in Single Team Mode
+        if ($settings->isSingleTeamMode()) {
+            throw new \InvalidArgumentException('Cannot delete teams when Single Team Mode is active.');
+        }
     }
 
     public function handleTeamDeleted(TeamDeleted $event): void

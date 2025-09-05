@@ -13,6 +13,8 @@ use Venture\Alpha\Models\Account\Events\AccountSaved;
 use Venture\Alpha\Models\Account\Events\AccountSaving;
 use Venture\Alpha\Models\Account\Events\AccountUpdated;
 use Venture\Alpha\Models\Account\Events\AccountUpdating;
+use Venture\Alpha\Models\Membership;
+use Venture\Alpha\Settings\TenancySettings;
 
 class AccountEventSubscriber
 {
@@ -28,7 +30,14 @@ class AccountEventSubscriber
 
     public function handleAccountCreated(AccountCreated $event): void
     {
-        //
+        $settings = app(TenancySettings::class);
+
+        if ($settings->isSingleTeamMode() && $settings->defaultTeam()) {
+            Membership::firstOrCreate([
+                'account_id' => $event->account->getKey(),
+                'team_id' => $settings->defaultTeam()->getKey(),
+            ]);
+        }
     }
 
     public function handleAccountUpdating(AccountUpdating $event): void

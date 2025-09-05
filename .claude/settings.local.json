@@ -36,6 +36,7 @@
             "mcp__serena__find_file",
             "mcp__serena__search_for_pattern",
             "mcp__serena__replace_symbol_body",
+            "mcp__serena__find_symbol",
             "Bash(bun run:*)",
             "Bash(composer test:*)",
             "Bash(composer pint:*)",
