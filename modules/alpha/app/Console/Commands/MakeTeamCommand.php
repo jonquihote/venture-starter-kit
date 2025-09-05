@@ -26,7 +26,6 @@ class MakeTeamCommand extends Command
         $data = form()
             ->text(
                 label: 'Team Name',
-                placeholder: 'Acme Corporation',
                 validate: [
                     'name' => [
                         'required',
@@ -39,22 +38,22 @@ class MakeTeamCommand extends Command
                 }
             )
             ->add(
-                fn () => search(
-                    label: 'Search for the team owner',
-                    placeholder: 'Start typing an account name...',
-                    options: fn (string $value) => strlen($value) > 0
-                        ? Account::where('name', 'like', "%{$value}%")
-                            ->pluck('name', 'id')
-                            ->all()
-                        : [],
-                    hint: 'The owner will have full control of this team.'
-                ),
+                function () {
+                    return search(
+                        label: 'Search for the team owner',
+                        options: function (string $value) {
+                            return Account::query()
+                                ->whereLike('name', "%{$value}%", caseSensitive: false)
+                                ->get()
+                                ->pluck('name', 'id');
+                        },
+                    );
+                },
                 name: 'owner_id'
             )
             ->confirm(
-                label: 'Enable single team mode?',
+                label: 'Enable Single Team Mode?',
                 default: false,
-                hint: 'Single team mode restricts the application to one team.',
                 name: 'single_team_mode'
             )
             ->submit();

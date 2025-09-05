@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Aeon\Enum;
+namespace Venture\Aeon\Enums;
 
 enum MigrationsEnum
 {

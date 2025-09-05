@@ -4,7 +4,7 @@ namespace Venture\Aeon\Packages\FirstParty\Pulse\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Venture\Aeon\Enum\Auth\Permissions\PagePermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\PagePermissionsEnum;
 
 class PulseApplicationServiceProvider extends ServiceProvider
 {

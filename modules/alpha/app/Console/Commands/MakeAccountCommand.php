@@ -29,7 +29,7 @@ class MakeAccountCommand extends Command
         $data = form()
             ->text(
                 label: 'Name',
-                placeholder: 'John Doe',
+                placeholder: 'Jack Sparrow',
                 validate: [
                     'name' => [
                         'required',
@@ -43,7 +43,7 @@ class MakeAccountCommand extends Command
             )
             ->text(
                 label: 'Username',
-                placeholder: 'john.doe',
+                placeholder: 'jack.sparrow',
                 validate: [
                     'username' => [
                         'required',
@@ -60,7 +60,7 @@ class MakeAccountCommand extends Command
             )
             ->text(
                 label: 'E-Mail Address',
-                placeholder: 'john.doe@example.com',
+                placeholder: 'jack.sparrow@example.com',
                 validate: [
                     'email' => [
                         'required',

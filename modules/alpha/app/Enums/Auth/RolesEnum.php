@@ -13,6 +13,7 @@ use Venture\Alpha\Enums\Auth\Permissions\TeamPermissionsEnum;
 
 enum RolesEnum: string
 {
+    case SuperAdministrator = 'alpha::authorization/roles.super-administrator';
     case Administrator = 'alpha::authorization/roles.administrator';
     case User = 'alpha::authorization/roles.user';
 
@@ -29,8 +30,30 @@ enum RolesEnum: string
     public function permissions(): Collection
     {
         $permissions = match ($this) {
-            self::Administrator => [
+            self::SuperAdministrator => [
                 PagePermissionsEnum::all(),
+
+                AttachmentPermissionsEnum::only(
+                    AttachmentPermissionsEnum::ViewAny,
+                    AttachmentPermissionsEnum::CustomDownload,
+                ),
+
+                AccountPermissionsEnum::all(),
+                TeamPermissionsEnum::all(),
+                MembershipPermissionsEnum::except(
+                    MembershipPermissionsEnum::Update,
+                ),
+                ApplicationPermissionsEnum::only(
+                    ApplicationPermissionsEnum::ViewAny,
+                ),
+                SubscriptionPermissionsEnum::except(
+                    SubscriptionPermissionsEnum::Update,
+                ),
+            ],
+            self::Administrator => [
+                PagePermissionsEnum::only(
+                    PagePermissionsEnum::Dashboard,
+                ),
 
                 AttachmentPermissionsEnum::only(
                     AttachmentPermissionsEnum::ViewAny,

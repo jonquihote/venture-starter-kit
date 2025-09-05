@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider as BaseTelescopeApplicationServiceProvider;
-use Venture\Aeon\Enum\Auth\Permissions\PagePermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\PagePermissionsEnum;
 
 class TelescopeApplicationServiceProvider extends BaseTelescopeApplicationServiceProvider
 {

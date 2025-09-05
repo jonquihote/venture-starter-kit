@@ -5,7 +5,7 @@ namespace Venture\Aeon\Packages\FirstParty\Horizon\Providers;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Horizon\Horizon;
 use Laravel\Horizon\HorizonApplicationServiceProvider as BaseHorizonApplicationServiceProvider;
-use Venture\Aeon\Enum\Auth\Permissions\PagePermissionsEnum;
+use Venture\Alpha\Enums\Auth\Permissions\PagePermissionsEnum;
 
 class HorizonApplicationServiceProvider extends BaseHorizonApplicationServiceProvider
 {
