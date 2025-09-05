@@ -57,6 +57,8 @@ class TelescopeApplicationServiceProvider extends BaseTelescopeApplicationServic
     protected function gate(): void
     {
         Gate::define('viewTelescope', function ($account = null): bool {
+            setPermissionsTeamId($account->current_team_id);
+
             return optional($account)->can(PagePermissionsEnum::TelescopeDashboard) ?? false;
         });
     }

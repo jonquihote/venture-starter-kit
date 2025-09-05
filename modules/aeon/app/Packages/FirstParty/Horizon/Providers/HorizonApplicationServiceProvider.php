@@ -29,6 +29,8 @@ class HorizonApplicationServiceProvider extends BaseHorizonApplicationServicePro
     protected function gate(): void
     {
         Gate::define('viewHorizon', function ($account = null): bool {
+            setPermissionsTeamId($account->current_team_id);
+
             return optional($account)->can(PagePermissionsEnum::HorizonDashboard) ?? false;
         });
     }

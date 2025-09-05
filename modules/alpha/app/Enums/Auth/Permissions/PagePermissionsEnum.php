@@ -12,7 +12,7 @@ enum PagePermissionsEnum: string
 
     case ManageTenancySettings = 'alpha::authorization/pages.manage-tenancy-settings';
 
+    case HorizonDashboard = 'alpha::authorization/pages.horizon-dashboard';
     case PulseDashboard = 'alpha::authorization/pages.pulse-dashboard';
     case TelescopeDashboard = 'alpha::authorization/pages.telescope-dashboard';
-    case HorizonDashboard = 'alpha::authorization/pages.horizon-dashboard';
 }
