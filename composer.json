@@ -12,8 +12,7 @@
         "php": "^8.4",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "nwidart/laravel-modules": "^12.0",
-        "sprout/sprout": "^1.1"
+        "nwidart/laravel-modules": "^12.0"
     },
     "require-dev": {
         "dcblogdev/laravel-module-generator": "^2.0",

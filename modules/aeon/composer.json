@@ -32,6 +32,7 @@
         "lorisleiva/laravel-actions": "^2.9",
         "mallardduck/blade-lucide-icons": "^1.23",
         "meilisearch/meilisearch-php": "^1.15",
+        "ryangjchandler/orbit": "^1.4",
         "saloonphp/laravel-plugin": "^3.0",
         "saloonphp/saloon": "^3.0",
         "sentry/sentry-laravel": "^4.15",
