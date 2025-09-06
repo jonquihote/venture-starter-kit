@@ -7,17 +7,19 @@ use Illuminate\Database\Seeder;
 use Venture\Aeon\Facades\Access;
 use Venture\Alpha\Enums\Auth\RolesEnum;
 use Venture\Alpha\Models\Account;
+use Venture\Alpha\Settings\TenancySettings;
 
 class AdministratorSeeder extends Seeder
 {
     public function run(): void
     {
-        $account = Account::query()
-            ->whereUsername('zeus')
-            ->whereEmail('zeus@example.com')
-            ->first();
+        $this->initializeSuperAdministrator();
+        $this->initializeSingleTeamMode();
+    }
 
-        $team = $account->ownedTeams()->first();
+    protected function initializeSuperAdministrator(): void
+    {
+        [$account, $team] = $this->getDefaultAccountAndTeam();
 
         setPermissionsTeamId($team);
 
@@ -28,5 +30,28 @@ class AdministratorSeeder extends Seeder
             ->push(RolesEnum::SuperAdministrator);
 
         $account->syncRoles($roles);
+    }
+
+    protected function initializeSingleTeamMode(): void
+    {
+        [$_, $team] = $this->getDefaultAccountAndTeam();
+
+        $settings = app(TenancySettings::class);
+
+        $settings->is_single_team_mode = true;
+        $settings->default_team_id = $team->getKey();
+        $settings->save();
+    }
+
+    public function getDefaultAccountAndTeam(): array
+    {
+        $account = Account::query()
+            ->whereUsername('zeus')
+            ->whereEmail('zeus@example.com')
+            ->first();
+
+        $team = $account->ownedTeams()->first();
+
+        return [$account, $team];
     }
 }

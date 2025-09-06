@@ -44,6 +44,7 @@ class AlphaServiceProvider extends ServiceProvider
         $this->app->register(PanelProvider::class);
         $this->app->register(FilamentIconServiceProvider::class);
         $this->app->register(FilamentViewServiceProvider::class);
+        $this->app->register(FilamentAssetServiceProvider::class);
     }
 
     /**

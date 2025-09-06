@@ -3,6 +3,7 @@
 namespace Venture\Alpha\Models\Team\Listeners;
 
 use Illuminate\Events\Dispatcher;
+use InvalidArgumentException;
 use Venture\Alpha\Models\Application;
 use Venture\Alpha\Models\Subscription;
 use Venture\Alpha\Models\Team\Events\TeamCreated;
@@ -29,7 +30,7 @@ class TeamEventSubscriber
         $settings = app(TenancySettings::class);
 
         if ($settings->isSingleTeamMode()) {
-            throw new \InvalidArgumentException('Cannot create new teams when Single Team Mode is active.');
+            throw new InvalidArgumentException('Cannot create new teams when Single Team Mode is active.');
         }
     }
 
@@ -71,7 +72,7 @@ class TeamEventSubscriber
 
         // Prevent ALL team deletion in Single Team Mode
         if ($settings->isSingleTeamMode()) {
-            throw new \InvalidArgumentException('Cannot delete teams when Single Team Mode is active.');
+            throw new InvalidArgumentException('Cannot delete teams when Single Team Mode is active.');
         }
     }
 

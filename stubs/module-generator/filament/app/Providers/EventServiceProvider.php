@@ -14,6 +14,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [];
 
     /**
+     * The subscribers to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        //
+    ];
+
+    /**
      * Indicates if events should be discovered.
      *
      * @var bool

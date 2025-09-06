@@ -9,14 +9,12 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
-use Filament\Support\Assets\Js;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Lorisleiva\Actions\Action;
 use Venture\Alpha\Http\Middleware\EnsureTeamAccess;
@@ -36,9 +34,6 @@ class MakePanel extends Action
             ->path($slug)
             ->spa(hasPrefetching: true)
             ->viteTheme('resources/css/app.css')
-            ->assets([
-                Js::make('livewire-echo', Vite::asset('resources/js/livewire-echo.ts'))->module(),
-            ])
             ->homeUrl(function () {
                 return route('filament.home.pages.dashboard', [Filament::getTenant()]);
             })

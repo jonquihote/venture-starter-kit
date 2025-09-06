@@ -27,7 +27,7 @@ export default defineConfig({
     server: {
         cors: true,
         watch: {
-            ignored: ['**/coverage/**'],
+            ignored: ['**/coverage/**', '**/resources/orbit/**'],
         },
     },
 })

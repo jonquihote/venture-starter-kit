@@ -4,6 +4,7 @@ namespace Venture\Blueprint\Enums\Auth;
 
 use Illuminate\Support\Collection;
 use Venture\Blueprint\Enums\Auth\Permissions\PagePermissionsEnum;
+use Venture\Blueprint\Enums\Auth\Permissions\PostPermissionsEnum;
 
 enum RolesEnum: string
 {
@@ -25,6 +26,7 @@ enum RolesEnum: string
         $permissions = match ($this) {
             self::Administrator => [
                 PagePermissionsEnum::all(),
+                PostPermissionsEnum::all(),
             ],
             self::User => [
                 PagePermissionsEnum::all(),
