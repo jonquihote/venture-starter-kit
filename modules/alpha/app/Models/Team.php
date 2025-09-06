@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Sprout\Contracts\Tenant;
-use Sprout\Database\Eloquent\Concerns\IsTenant;
 use Venture\Alpha\Database\Factories\TeamFactory;
 use Venture\Alpha\Enums\MigrationsEnum;
 use Venture\Alpha\Models\Team\Events\TeamCreated;
@@ -29,11 +27,10 @@ use Venture\Alpha\Models\Team\Observers\TeamObserver;
 
 #[UseFactory(TeamFactory::class)]
 #[ObservedBy([TeamObserver::class])]
-class Team extends Model implements Tenant
+class Team extends Model
 {
     use HasFactory;
     use HasSlug;
-    use IsTenant;
 
     protected $fillable = [
         'owner_id',
