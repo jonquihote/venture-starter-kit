@@ -12,10 +12,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-sans:
-        'Inter Variable', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -86,10 +85,9 @@
 @layer utilities {
     body,
     html {
-        --font-sans:
-            'Inter Variable', ui-sans-serif, system-ui, sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-            'Noto Color Emoji';
+        --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
     }
 }
 
@@ -206,17 +204,17 @@
     }
 
     .fi-panel-blueprint {
-        --primary-50: oklch(0.97 0.014 254.604) !important;
-        --primary-100: oklch(0.932 0.032 255.585) !important;
-        --primary-200: oklch(0.882 0.059 254.128) !important;
-        --primary-300: oklch(0.809 0.105 251.813) !important;
-        --primary-400: oklch(0.707 0.165 254.624) !important;
-        --primary-500: oklch(0.623 0.214 259.815) !important;
-        --primary-600: oklch(0.546 0.245 262.881) !important;
-        --primary-700: oklch(0.488 0.243 264.376) !important;
-        --primary-800: oklch(0.424 0.199 265.638) !important;
-        --primary-900: oklch(0.379 0.146 265.522) !important;
-        --primary-950: oklch(0.282 0.091 267.935) !important;
+        --color-primary-50: oklch(0.986 0.031 120.757) !important;
+        --color-primary-100: oklch(0.967 0.067 122.328) !important;
+        --color-primary-200: oklch(0.938 0.127 124.321) !important;
+        --color-primary-300: oklch(0.897 0.196 126.665) !important;
+        --color-primary-400: oklch(0.841 0.238 128.85) !important;
+        --color-primary-500: oklch(0.768 0.233 130.85) !important;
+        --color-primary-600: oklch(0.648 0.2 131.684) !important;
+        --color-primary-700: oklch(0.532 0.157 131.589) !important;
+        --color-primary-800: oklch(0.453 0.124 130.933) !important;
+        --color-primary-900: oklch(0.405 0.101 131.063) !important;
+        --color-primary-950: oklch(0.274 0.072 132.109) !important;
     }
 
     .fi-panel-omega {
@@ -245,7 +243,7 @@
     }
 
     .blueprint-application-tile {
-        @apply bg-blue-700 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-700;
+        @apply bg-lime-700 hover:bg-lime-600 dark:bg-lime-800 dark:hover:bg-lime-700;
     }
 
     .omega-application-tile {

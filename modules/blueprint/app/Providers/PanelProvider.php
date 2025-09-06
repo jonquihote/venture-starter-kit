@@ -21,7 +21,7 @@ class PanelProvider extends BasePanelProvider
 
         return MakePanel::run($panel, $name, $slug)
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Lime,
             ])
             ->widgets([
                 AccountWidget::class,
