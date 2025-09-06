@@ -2,8 +2,6 @@
 
 return [
 
-    'super-administrator' => 'Super Administrator',
-
     'administrator' => 'Administrator',
 
     'user' => 'User',
