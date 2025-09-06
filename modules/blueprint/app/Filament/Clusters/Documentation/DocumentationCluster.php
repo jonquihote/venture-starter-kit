@@ -8,4 +8,6 @@ use Filament\Clusters\Cluster;
 class DocumentationCluster extends Cluster
 {
     protected static string | BackedEnum | null $navigationIcon = 'lucide-book-user';
+
+    protected static ?int $navigationSort = 200;
 }

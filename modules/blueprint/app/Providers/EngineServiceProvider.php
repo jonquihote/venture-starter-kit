@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Venture\Alpha\Data\ApplicationData;
 use Venture\Alpha\Facades\Engine;
 use Venture\Blueprint\Concerns\InteractsWithModule;
-use Venture\Blueprint\Filament\Pages\Dashboard;
+use Venture\Blueprint\Filament\Pages\Home;
 
 class EngineServiceProvider extends ServiceProvider
 {
@@ -16,7 +16,7 @@ class EngineServiceProvider extends ServiceProvider
     {
         Engine::addApplication(new ApplicationData(
             $this->getModuleName(),
-            Dashboard::class,
+            Home::class,
             $this->getModuleIcon(),
             is_subscribed_by_default: true,
         ));

@@ -8,5 +8,5 @@ enum PagePermissionsEnum: string
 {
     use InteractsWithPermissions;
 
-    case Dashboard = 'blueprint::authorization/pages.dashboard';
+    case Home = 'blueprint::authorization/pages.home';
 }
