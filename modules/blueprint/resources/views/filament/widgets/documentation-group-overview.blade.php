@@ -7,7 +7,8 @@
             ])
         >
             @foreach ($groups as $group)
-                <div
+                <a
+                    href="{{ $group['url'] }}"
                     @class([
                         'flex flex-col items-center',                                    // Flexbox
                         'rounded-xl border border-gray-200 dark:border-gray-700',       // Border & Background
@@ -15,6 +16,8 @@
                         'hover:shadow-md',                                              // Hover Effects
                         'transition-all duration-200',                                  // Transitions
                         'group',                                                        // Group
+                        'cursor-pointer',                                               // Cursor
+                        'no-underline',                                                 // Remove link styling
                     ])
                 >
                     {{-- Icon Section --}}
@@ -50,7 +53,7 @@
                             {{ $group['name'] }}
                         </h3>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </x-filament::section>

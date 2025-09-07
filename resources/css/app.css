@@ -208,17 +208,17 @@
     }
 
     .fi-panel-blueprint {
-        --color-primary-50: oklch(0.986 0.031 120.757) !important;
-        --color-primary-100: oklch(0.967 0.067 122.328) !important;
-        --color-primary-200: oklch(0.938 0.127 124.321) !important;
-        --color-primary-300: oklch(0.897 0.196 126.665) !important;
-        --color-primary-400: oklch(0.841 0.238 128.85) !important;
-        --color-primary-500: oklch(0.768 0.233 130.85) !important;
-        --color-primary-600: oklch(0.648 0.2 131.684) !important;
-        --color-primary-700: oklch(0.532 0.157 131.589) !important;
-        --color-primary-800: oklch(0.453 0.124 130.933) !important;
-        --color-primary-900: oklch(0.405 0.101 131.063) !important;
-        --color-primary-950: oklch(0.274 0.072 132.109) !important;
+        --primary-50: oklch(0.986 0.031 120.757) !important;
+        --primary-100: oklch(0.967 0.067 122.328) !important;
+        --primary-200: oklch(0.938 0.127 124.321) !important;
+        --primary-300: oklch(0.897 0.196 126.665) !important;
+        --primary-400: oklch(0.841 0.238 128.85) !important;
+        --primary-500: oklch(0.768 0.233 130.85) !important;
+        --primary-600: oklch(0.648 0.2 131.684) !important;
+        --primary-700: oklch(0.532 0.157 131.589) !important;
+        --primary-800: oklch(0.453 0.124 130.933) !important;
+        --primary-900: oklch(0.405 0.101 131.063) !important;
+        --primary-950: oklch(0.274 0.072 132.109) !important;
     }
 
     .fi-panel-omega {
