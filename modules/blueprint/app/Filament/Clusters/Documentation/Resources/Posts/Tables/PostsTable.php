@@ -6,9 +6,11 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Venture\Blueprint\Enums\DocumentationGroupsEnum;
 
 class PostsTable
 {
@@ -44,7 +46,9 @@ class PostsTable
                     ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('documentation_group')
+                    ->label(__('blueprint::filament/resources/posts/table.filters.documentation_group.label'))
+                    ->options(DocumentationGroupsEnum::class),
             ])
             ->recordActions([
                 EditAction::make(),

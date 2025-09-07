@@ -22,4 +22,12 @@ return [
 
     ],
 
+    'filters' => [
+
+        'documentation_group' => [
+            'label' => 'Documentation Group',
+        ],
+
+    ],
+
 ];
