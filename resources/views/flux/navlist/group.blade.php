@@ -15,20 +15,20 @@
         type="button"
         class="group/disclosure-button mb-[2px] flex h-10 w-full items-center rounded-lg text-zinc-500 hover:bg-zinc-800/5 hover:text-zinc-800 lg:h-8 dark:text-white/80 dark:hover:bg-white/[7%] dark:hover:text-white"
     >
-        <div class="ps-3 pe-4">
+        <div class="pe-4 ps-3">
             <flux:icon.chevron-down
-                class="hidden size-3! group-data-open/disclosure-button:block"
+                class="size-3! group-data-open/disclosure-button:block hidden"
             />
             <flux:icon.chevron-right
-                class="block size-3! group-data-open/disclosure-button:hidden"
+                class="size-3! group-data-open/disclosure-button:hidden block"
             />
         </div>
 
-        <span class="text-sm leading-none font-medium">{{ $heading }}</span>
+        <span class="text-sm font-medium leading-none">{{ $heading }}</span>
     </button>
 
     <div
-        class="relative hidden space-y-[2px] ps-7 data-open:block"
+        class="data-open:block relative hidden space-y-[2px] ps-7"
         @if ($expanded === true) data-open @endif
     >
         <div

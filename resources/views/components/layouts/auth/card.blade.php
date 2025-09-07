@@ -7,10 +7,10 @@
         @include('partials.head')
     </head>
     <body
-        class="min-h-screen bg-neutral-100 antialiased dark:bg-linear-to-b dark:from-neutral-950 dark:to-neutral-900"
+        class="dark:bg-linear-to-b min-h-screen bg-neutral-100 antialiased dark:from-neutral-950 dark:to-neutral-900"
     >
         <div
-            class="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10"
+            class="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10"
         >
             <div class="flex w-full max-w-md flex-col gap-6">
                 <a
@@ -33,7 +33,7 @@
 
                 <div class="flex flex-col gap-6">
                     <div
-                        class="rounded-xl border bg-white text-stone-800 shadow-xs dark:border-stone-800 dark:bg-stone-950"
+                        class="shadow-xs rounded-xl border bg-white text-stone-800 dark:border-stone-800 dark:bg-stone-950"
                     >
                         <div class="px-10 py-8">{{ $slot }}</div>
                     </div>

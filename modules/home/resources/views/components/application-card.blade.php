@@ -68,7 +68,7 @@
         <span
             @class([
                 // Typography
-                'text-sm leading-none font-semibold tracking-wider uppercase',
+                'text-sm font-semibold uppercase leading-none tracking-wider',
 
                 // Colors - Light Mode
                 'text-gray-700 group-hover:text-gray-900',

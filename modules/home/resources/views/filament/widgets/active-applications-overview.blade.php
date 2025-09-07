@@ -71,7 +71,7 @@
                         <span
                             @class([
                                 // Typography
-                                'text-sm leading-none font-medium tracking-wider uppercase',
+                                'text-sm font-medium uppercase leading-none tracking-wider',
 
                                 // Colors
                                 'text-gray-400 dark:text-gray-500',
