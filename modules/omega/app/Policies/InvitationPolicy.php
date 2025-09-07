@@ -2,8 +2,8 @@
 
 namespace Venture\Omega\Policies;
 
-use Venture\Alpha\Enums\Auth\Permissions\InvitationPermissionsEnum;
 use Venture\Alpha\Models\Account;
+use Venture\Omega\Enums\Auth\Permissions\InvitationPermissionsEnum;
 use Venture\Omega\Models\Invitation;
 
 class InvitationPolicy

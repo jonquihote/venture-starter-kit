@@ -714,11 +714,11 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const mobileNavSelect = document.getElementById('mobile-nav')
 
             if (mobileNavSelect) {
-                mobileNavSelect.addEventListener('change', function(event) {
+                mobileNavSelect.addEventListener('change', function (event) {
                     const selectedValue = event.target.value
 
                     if (selectedValue) {

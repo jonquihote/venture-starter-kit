@@ -5,12 +5,14 @@ namespace Venture\Omega\Models;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use InvitationFactory;
+use Venture\Alpha\Concerns\BelongsToTeam;
+use Venture\Omega\Database\Factories\InvitationFactory;
 use Venture\Omega\Enums\MigrationsEnum;
 
 #[UseFactory(InvitationFactory::class)]
 class Invitation extends Model
 {
+    use BelongsToTeam;
     use HasFactory;
 
     public function getTable(): string

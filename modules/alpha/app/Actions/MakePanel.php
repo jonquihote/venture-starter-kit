@@ -39,7 +39,11 @@ class MakePanel extends Action
             })
             ->userMenuItems([
                 'logout' => function (FilamentAction $action) {
-                    return $action->label('Log out');
+                    return $action
+                        ->label('Log out')
+                        ->url(function () {
+                            return route('filament.alpha.auth.logout');
+                        });
                 },
             ])
             ->tenantMenu(function (TenancySettings $settings, Panel $panel) {
