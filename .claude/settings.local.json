@@ -59,6 +59,7 @@
             "WebFetch(domain:github.com)",
             "WebFetch(domain:spatie.be)",
             "WebFetch(domain:filamentphp.com)",
+            "WebFetch(domain:diataxis.fr)",
             "WebSearch"
         ]
     },
