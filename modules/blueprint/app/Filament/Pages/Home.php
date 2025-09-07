@@ -16,6 +16,8 @@ class Home extends Page
 
     protected static ?int $navigationSort = 100;
 
+    protected static ?string $title = '';
+
     public Post $post;
 
     public function mount(): void
@@ -28,11 +30,6 @@ class Home extends Page
     public static function getNavigationLabel(): string
     {
         return __('blueprint::filament/pages/home.navigation.label');
-    }
-
-    public function getTitle(): string
-    {
-        return __('blueprint::filament/pages/home.title');
     }
 
     public static function canAccess(): bool
