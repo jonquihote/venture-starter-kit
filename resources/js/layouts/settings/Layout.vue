@@ -36,7 +36,7 @@ const currentPath = page.props.ziggy?.location
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">
             <aside class="w-full max-w-xl lg:w-48">
-                <nav class="flex flex-col space-x-0 space-y-1">
+                <nav class="flex flex-col space-y-1 space-x-0">
                     <Button
                         v-for="item in sidebarNavItems"
                         :key="item.href"

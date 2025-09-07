@@ -19,7 +19,7 @@
 
             <a
                 href="{{ route('dashboard') }}"
-                class="me-5 ms-2 flex items-center space-x-2 lg:ms-0 rtl:space-x-reverse"
+                class="ms-2 me-5 flex items-center space-x-2 lg:ms-0 rtl:space-x-reverse"
                 wire:navigate
             >
                 <x-app-logo />
@@ -38,7 +38,7 @@
 
             <flux:spacer />
 
-            <flux:navbar class="py-0! me-1.5 space-x-0.5 rtl:space-x-reverse">
+            <flux:navbar class="me-1.5 space-x-0.5 py-0! rtl:space-x-reverse">
                 <flux:tooltip
                     :content="__('Search')"
                     position="bottom"
