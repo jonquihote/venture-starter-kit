@@ -5,10 +5,9 @@ namespace Venture\Blueprint\Providers;
 use Filament\Panel;
 use Filament\PanelProvider as BasePanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Venture\Alpha\Actions\MakePanel;
 use Venture\Blueprint\Concerns\InteractsWithModule;
+use Venture\Blueprint\Filament\Widgets\DocumentationGroupOverview;
 
 class PanelProvider extends BasePanelProvider
 {
@@ -24,8 +23,7 @@ class PanelProvider extends BasePanelProvider
                 'primary' => Color::Lime,
             ])
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                DocumentationGroupOverview::class,
             ]);
     }
 }

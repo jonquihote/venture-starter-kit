@@ -4,6 +4,7 @@ namespace Venture\Home\Filament\Widgets;
 
 use Filament\Facades\Filament;
 use Filament\Widgets\Widget;
+use Illuminate\Support\Collection;
 use Venture\Alpha\Models\Application;
 
 class ActiveApplicationsOverview extends Widget
@@ -14,7 +15,14 @@ class ActiveApplicationsOverview extends Widget
 
     protected function getViewData(): array
     {
-        $applications = Filament::getTenant()
+        return [
+            'applications' => $this->getActiveApplications(),
+        ];
+    }
+
+    protected function getActiveApplications(): Collection
+    {
+        return Filament::getTenant()
             ->subscriptions
             ->map
             ->application
@@ -24,9 +32,5 @@ class ActiveApplicationsOverview extends Widget
                 return $page::canAccess();
             })
             ->sortBy('name');
-
-        return [
-            'applications' => $applications,
-        ];
     }
 }
