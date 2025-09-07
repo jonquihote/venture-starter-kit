@@ -15,6 +15,7 @@ class FilamentAssetServiceProvider extends ServiceProvider
     {
         FilamentAsset::register([
             Js::make('livewire-echo', Vite::asset('resources/js/livewire-echo.ts'))->module(),
+            Js::make('tailwindplus-elements', 'https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1')->module(),
             Js::make('mermaid', 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')->module(),
         ]);
     }
