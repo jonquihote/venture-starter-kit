@@ -24,6 +24,9 @@ class PostsTable
                     ->iconColor('success')
                     ->searchable(),
 
+                TextColumn::make('documentation_group')
+                    ->label(__('blueprint::filament/resources/posts/table.columns.documentation_group.label')),
+
                 TextColumn::make('updated_at')
                     ->label(__('blueprint::filament/resources/posts/table.columns.updated_at.label'))
                     ->dateTime('d M y')

@@ -2,9 +2,10 @@
 
 namespace Venture\Blueprint\Enums;
 
+use Filament\Support\Contracts\HasLabel;
 use Illuminate\Support\Str;
 
-enum DocumentationGroupsEnum: string
+enum DocumentationGroupsEnum: string implements HasLabel
 {
     case Claude = 'Claude';
     case Aeon = 'Aeon';
@@ -34,5 +35,10 @@ enum DocumentationGroupsEnum: string
     public function slug(): string
     {
         return Str::slug($this->value);
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->value;
     }
 }

@@ -1,7 +1,8 @@
 ---
-slug: home
+slug: aeon-home
 title: Home
 is_home_page: true
+documentation_group: Aeon
 created_at: 2025-09-01T00:00:00+00:00
 updated_at: 2025-09-01T00:00:00+00:00
 ---

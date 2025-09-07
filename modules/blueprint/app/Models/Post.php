@@ -5,10 +5,13 @@ namespace Venture\Blueprint\Models;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Orbit\Concerns\Orbital;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Venture\Blueprint\Concerns\InteractsWithModule;
+use Venture\Blueprint\Enums\DocumentationGroupsEnum;
 use Venture\Blueprint\Models\Post\Events\PostCreated;
 use Venture\Blueprint\Models\Post\Events\PostCreating;
 use Venture\Blueprint\Models\Post\Events\PostDeleted;
@@ -37,6 +40,7 @@ class Post extends Model
         'slug',
         'content',
         'is_home_page',
+        'documentation_group',
     ];
 
     protected $dispatchesEvents = [
@@ -57,12 +61,23 @@ class Post extends Model
         $table->string('slug')->primary();
         $table->string('title');
         $table->text('content');
-        $table->boolean('is_home_page')->default(false);
+        $table->boolean('is_home_page');
+        $table->string('documentation_group');
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'documentation_group' => DocumentationGroupsEnum::class,
+        ];
     }
 
     public static function getOrbitalPath(): string
     {
-        return module_path('Blueprint', 'resources/orbit') . DIRECTORY_SEPARATOR . static::getOrbitalName();
+        return Collection::make([
+            module_path('Blueprint', 'resources/orbit'),
+            static::getOrbitalName(),
+        ])->implode(DIRECTORY_SEPARATOR);
     }
 
     public function getKeyName(): string
@@ -73,8 +88,12 @@ class Post extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug')
-            ->doNotGenerateSlugsOnUpdate();
+            ->generateSlugsFrom(function (Model $model) {
+                $group = $model->documentation_group->slug();
+                $title = Str::slug($model->title);
+
+                return "{$group}-{$title}";
+            })
+            ->saveSlugsTo('slug');
     }
 }

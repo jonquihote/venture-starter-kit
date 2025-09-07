@@ -20,6 +20,10 @@ return [
             'label' => 'Mark as home page',
         ],
 
+        'documentation_group' => [
+            'label' => 'Documentation Group',
+        ],
+
     ],
 
 ];

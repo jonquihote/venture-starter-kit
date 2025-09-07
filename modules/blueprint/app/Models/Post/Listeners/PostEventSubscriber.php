@@ -47,6 +47,7 @@ class PostEventSubscriber
         // If this post is being set as the home page, unset any other home page
         if ($event->post->is_home_page) {
             Post::where('slug', '!=', $event->post->slug)
+                ->where('documentation_group', $event->post->documentation_group)
                 ->where('is_home_page', true)
                 ->update(['is_home_page' => false]);
         }
