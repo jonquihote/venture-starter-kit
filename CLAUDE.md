@@ -2,226 +2,163 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Development Commands
 
-This is a Laravel 12 + Vue 3 + Filament monolithic application using a modular architecture pattern. It combines
-Inertia.js for SPA-like functionality with Livewire/Volt for dynamic components, serving as a comprehensive starter kit
-for modern web applications.
-
-## Quick Start
-
-1. Copy `.env.example` to `.env`
-2. Generate application key: `php artisan key:generate`
-3. Install dependencies: `composer install && bun install`
-4. Run migrations: `php artisan migrate`
-5. Start development: `composer dev`
-
-## Core Development Commands
-
-### Frontend Development
+**Primary Development:**
 
 ```bash
-# Start development server with all services (uses bun as primary package manager)
-# Runs: Horizon, Scheduler, Pail, Vite Dev, Pulse, Reverb concurrently
-composer dev
-
-# Start development with SSR support
-composer dev:ssr
-
-# Build assets for production
-bun run build
-
-# Build with SSR support
-bun run build:ssr
+composer dev              # Start full development environment (assets, worker, scheduler, logs, pulse, reverb)
+composer dev:ssr          # Start with SSR support
+bun run dev               # Assets only
+php artisan serve         # Basic Laravel server
 ```
 
-### Code Quality & Testing
+**Code Quality:**
 
 ```bash
-# Run all tests (base group only)
-composer test
-# OR
-php artisan test --parallel
-
-# Run specific test groups
-composer test:api      # API tests only
-
-# Run specific test file
-php artisan test tests/Feature/ExampleTest.php
-
-# Code quality (runs rector + pint + bun format)
-composer cs
-
-# Individual tools
-composer pint     # PHP code style fixer (uses pint-strict-imports.json config)
-composer rector   # PHP code modernization
-bun run lint     # JavaScript/TypeScript linting with ESLint
-bun run format   # Prettier formatting with Blade plugin
+composer cs               # Run all code style fixes (rector + pint + prettier)
+composer pint             # PHP code style (using strict imports config)
+composer rector           # PHP refactoring
+bun run lint              # ESLint with auto-fix
+bun run format            # Prettier formatting
 ```
 
-### Database & Migrations
+**Testing:**
 
 ```bash
-# Run migrations (includes module migrations)
-php artisan migrate
-
-# Create migration in specific module
-php artisan module:make-migration create_example_table ModuleName
-
-# Seed database
-php artisan db:seed
+composer test             # Base test suite (modules/*/tests)
+composer test:api         # API test suite (modules/*/tests-api)
+php artisan test --filter=SomeTest  # Single test
 ```
 
-### Module Management
+**Module Management:**
 
 ```bash
-# Create new module with Filament integration
-php artisan module:make ModuleName
-
-# Module commands
-php artisan module:enable ModuleName
-php artisan module:disable ModuleName
-php artisan module:migrate ModuleName
+php artisan module:make ModuleName    # Create new module
+php artisan module:list               # List all modules
+php artisan module:make-controller ModuleName ControllerName
+php artisan module:migrate ModuleName # Migrate specific module
 ```
 
-### Utility Commands
+## Architecture
 
-```bash
-# Generate Ziggy routes for JavaScript
-php artisan ziggy:generate
+This is a **modular Laravel application** using `nwidart/laravel-modules` with a sophisticated tech stack:
 
-# Reset application (from aeon module)
-php artisan aeon:reset-application
+### Tech Stack
 
-# Clear all caches
-php artisan optimize:clear
+- **Backend:** Laravel 12, PHP 8.4, PostgreSQL
+- **Frontend:** Vue 3 + Inertia.js, TypeScript, Tailwind CSS v4
+- **Admin:** Filament 4.0 with custom panels
+- **UI Components:** Livewire 3.6 with Flux UI
+- **Real-time:** Laravel Reverb (WebSockets), Laravel Echo
+- **Background Jobs:** Laravel Horizon
+- **Monitoring:** Laravel Pulse, Laravel Telescope
+
+### Module Structure
+
+Current modules: `aeon`, `alpha`, `blueprint`, `home`, `omega`
+
+Each module follows Laravel structure:
+
 ```
-
-## Architecture & Structure
-
-### Modular Architecture
-
-The application uses `nwidart/laravel-modules` for organizing code into self-contained modules:
-
+modules/{module}/
+├── app/              # Controllers, Models, etc.
+├── config/           # Module-specific config
+├── database/         # Migrations, seeders
+├── resources/        # Views, assets
+├── routes/           # Module routes
+├── tests/            # Module tests
+└── module.json       # Module configuration
 ```
-modules/
-├── aeon/          # Core system utilities and Laravel packages integration
-│   ├── Console/Commands/           # Reset & utility commands
-│   ├── Packages/FirstParty/        # Pre-configured Laravel packages
-│   │   ├── Horizon/               # Queue monitoring
-│   │   ├── Pulse/                 # Application monitoring  
-│   │   ├── Reverb/                # WebSocket server
-│   │   ├── Scout/                 # Full-text search
-│   │   └── Telescope/             # Debug assistant
-│   └── Packages/Spatie/           # Pre-configured Spatie packages
-│       ├── ActivityLog/           # Activity logging
-│       ├── MediaLibrary/          # Media management
-│       ├── Permission/            # Role & permission management
-│       ├── Settings/              # Application settings
-│       └── Tags/                  # Tagging system
-├── blueprint/     # Project documentation and style guide module
-│   ├── Concerns/InteractsWithModule.php
-│   ├── DOC_STYLEGUIDE.md          # Documentation style guide
-│   └── Providers/PanelProvider.php
-├── alpha/         # Advanced Filament panel factory and tenancy support
-│   ├── Actions/MakePanel.php      # Filament panel factory with tenancy
-│   └── Models/Team.php            # Multi-tenancy team model
-├── omega/         # Invitation system and team management
-└── home/          # Main application module with dashboard
-    ├── Filament/
-    │   ├── Pages/Dashboard.php    # Main dashboard page
-    │   └── Widgets/               # Dashboard widgets
-    └── Providers/PanelProvider.php
-```
-
-### Frontend Architecture
-
-**Hybrid Stack**: The application uses both Inertia.js and Livewire:
-
-- **Inertia.js + Vue 3**: Main SPA-like pages (`resources/js/pages/`)
-- **Livewire + Volt**: Dynamic components and forms (`app/Livewire/`)
-- **UI Library**: Custom Vue components (`resources/js/components/ui/`)
-- **Styling**: Tailwind CSS v4 with design tokens
-- **Icons**: Lucide Vue
 
 ### Key Patterns
 
-1. **Panel Creation**: Use `MakePanel::handle()` from alpha module for consistent Filament panel setup with tenancy
-2. **Module Traits**: `InteractsWithModule` provides module context utilities
-3. **Authentication**: Dual system - Laravel auth + Filament admin panels
-4. **Component Architecture**: Compound components (Card, CardHeader, CardContent)
-5. **Package Integration**: First-party Laravel packages pre-configured in aeon module
-6. **Development Tooling**: Uses `concurrently` to run multiple processes in parallel:
-    - Horizon (queue worker), Scheduler, Pail (log viewer), Vite dev server, Pulse, Reverb
-7. **Module Composition**: Modules can extend composer.json via merge-plugin for dependencies
-8. **Git Standards**: Conventional commits enforced via Husky and commitlint
-9. **Package Management**: Bun as primary frontend package manager, with npm fallback
-10. **Multi-tenancy**: Team-based tenancy with invitation system (alpha/omega modules)
-11. **Advanced Patterns**: Laravel Actions integration, Saloon API clients, comprehensive Spatie package suite
+**Actions Pattern:**
 
-## Development Environment
+- Business logic organized in Action classes
+- Located in `modules/{module}/app/Actions/`
+- Single responsibility, invokable classes
 
-### Requirements
+**Form Requests:**
 
-- **PHP**: ^8.4
-- **Node**: v22+
-- **Package Manager**: bun (primary), npm (fallback)
-- **Database**: SQLite (default), PostgreSQL (testing - see phpunit.xml.dist)
+- Validation rules in dedicated request classes
+- Located in `modules/{module}/app/Http/Requests/`
 
-### Environment Setup
+**Resource Pattern:**
 
-1. Copy `.env.example` to `.env`
-2. Generate application key: `php artisan key:generate`
-3. Install dependencies: `composer install && bun install`
-4. Run migrations: `php artisan migrate`
-5. Start development: `composer dev`
+- API responses use Resource classes
+- Located in `modules/{module}/app/Http/Resources/`
 
-### Git Commit Standards
+### Database
 
-This project enforces conventional commits via Husky and commitlint:
+- Primary: PostgreSQL (configured for development and testing)
+- Testing: `venture_testing` database
+- Queue: Redis (managed by Horizon)
 
-- Format: `type(scope): description`
-- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-- Example: `feat(auth): add password reset functionality`
-- Commits are automatically linted before being accepted
+## Testing Strategy
 
-### Testing Configuration
+**Pest PHP** is used for all tests with two main suites:
 
-- **Framework**: Pest v4 with Laravel plugin
-- **Configuration**: `phpunit.xml.dist`
-- **Database**: PostgreSQL (testing database: `venture_testing`)
-- **Test Suites**:
-    - Base: `modules/*/tests/` (runs with `composer test`)
-    - API: `modules/*/tests-api/` (runs with `composer test:api`)
-- **Test Structure**:
-    - `modules/*/tests/` - Module-specific Unit / Feature tests
-    - `modules/*/tests-api/` - Module-specific API tests
+- **Base Suite:** `modules/*/tests` - Unit and feature tests
+- **API Suite:** `modules/*/tests-api` - API endpoint tests
 
-### Configuration Files
+Test files are module-specific and follow Pest conventions.
 
-- **Modules**: `config/modules.php`, `modules_statuses.json`
-- **Frontend**: `vite.config.ts`, `tsconfig.json`
-- **Code Quality**:
-    - `rector.php` - PHP modernization rules
-    - `pint-strict-imports.json` - PHP code style with strict imports
-    - `eslint.config.js` - JavaScript/TypeScript linting
-    - `prettier.config.js` - Code formatting with Blade support
-- **Git**:
-    - `commitlint.config.js` - Conventional commit enforcement
-    - `.husky/commit-msg` - Git commit hooks
-- **Testing**: `phpunit.xml.dist`
-- **SSR**: `resources/js/ssr.ts`
+## Development Workflow
 
-## Key Technologies
+1. **Module-First Approach:** New features should be organized within appropriate modules
+2. **Code Style:** All code must pass Pint (with strict imports) and Rector checks
+3. **Frontend Assets:** Use Vite for asset compilation, supports HMR
+4. **Real-time Features:** Utilize Reverb for WebSocket functionality
+5. **Background Jobs:** Queue processing handled by Horizon
 
-- **Backend**: Laravel 12, Filament v4, Livewire v3, Volt v1
-- **Frontend**: Vue 3, Inertia v2, TypeScript, Reka UI components
-- **Testing**: Pest v4
-- **Tooling**: Vite, Tailwind v4, Rector, Pint, Concurrently
-- **Core Packages**: Horizon, Pulse, Reverb, Scout, Telescope, Laravel Boost MCP
-- **Spatie Packages**: Activity Log, Media Library, Permissions, Settings, Tags, Data, Model States
-- **Additional Tools**: Saloon (API client), Sentry (monitoring), Browsershot (PDF generation)
-- **Module System**: nwidart/laravel-modules with dcblogdev/laravel-module-generator
+## Frontend Architecture
+
+**Inertia.js** bridges Laravel and Vue 3:
+
+- Server-side routing with client-side navigation
+- Shared data between backend and frontend via Inertia props
+- Vue components in `resources/js/Components/`
+- Pages in `modules/{module}/resources/js/Pages/`
+
+**UI Components:**
+
+- Flux UI components for Livewire
+- Custom Vue components for Inertia
+- Tailwind CSS v4 for styling
+- Icons via Lucide Vue Next
+
+## Key Configuration Files
+
+- `composer.json` - PHP dependencies and custom scripts
+- `package.json` - Node dependencies and build scripts
+- `vite.config.ts` - Asset bundling configuration
+- `phpunit.xml.dist` - Test suite configuration
+- `pint.json` & `pint-strict-imports.json` - PHP code style rules
+- `rector.php` - PHP refactoring rules
+
+## Special Commands
+
+**Application Reset:**
+
+```bash
+php artisan reset                    # Reset to pristine state
+php artisan aeon:reset-application   # Module-specific reset
+```
+
+**Filament:**
+
+```bash
+php artisan filament:make-resource ModelName --module=ModuleName
+php artisan filament:make-page PageName --module=ModuleName
+```
+
+**Horizon (Queue Management):**
+
+```bash
+php artisan horizon        # Start queue processing
+php artisan horizon:status # Check status
+```
 
 ===
 
@@ -242,20 +179,28 @@ expert with them all. Ensure you abide by these specific packages & versions.
 - filament/filament (FILAMENT) - v4
 - inertiajs/inertia-laravel (INERTIA) - v2
 - laravel/framework (LARAVEL) - v12
+- laravel/horizon (HORIZON) - v5
 - laravel/prompts (PROMPTS) - v0
+- laravel/pulse (PULSE) - v1
 - laravel/reverb (REVERB) - v1
 - laravel/scout (SCOUT) - v10
+- laravel/socialite (SOCIALITE) - v5
+- laravel/telescope (TELESCOPE) - v5
 - livewire/flux (FLUXUI_FREE) - v2
 - livewire/livewire (LIVEWIRE) - v3
 - livewire/volt (VOLT) - v1
 - tightenco/ziggy (ZIGGY) - v2
 - laravel/pint (PINT) - v1
+- laravel/sail (SAIL) - v1
 - pestphp/pest (PEST) - v4
+- phpunit/phpunit (PHPUNIT) - v12
 - rector/rector (RECTOR) - v2
 - @inertiajs/vue3 (INERTIA) - v2
 - tailwindcss (TAILWINDCSS) - v4
 - vue (VUE) - v3
+- eslint (ESLINT) - v9
 - laravel-echo (ECHO) - v2
+- prettier (PRETTIER) - v3
 
 ## Conventions
 
@@ -506,6 +451,7 @@ Forms\Components\Select::make('user_id')
 - Inertia.js components should be placed in the `resources/js/Pages` directory unless specified differently in the JS
   bundler (vite.config.js).
 - Use `Inertia::render()` for server-side routing instead of traditional Blade views.
+- Use `search-docs` for accurate guidance on all things Inertia.
 
 <code-snippet lang="php" name="Inertia::render Example">
 // routes/web.php example
@@ -535,6 +481,11 @@ Route::get('/users', function () {
 ### Deferred Props & Empty States
 
 - When using deferred props on the frontend, you should add a nice empty state with pulsing / animated skeleton.
+
+### Inertia Form General Guidance
+
+- Build forms using the `useForm` helper. Use the code examples and `search-docs` tool with a query of `useForm helper`
+  for guidance.
 
 === laravel/core rules ===
 
@@ -847,16 +798,12 @@ $delete = fn(Product $product) => $product->delete();
 <!-- HTML / UI Here -->
 </code-snippet>
 
-
-
 <code-snippet name="Real-Time Search With Volt" lang="php">
     <flux:input
         wire:model.live.debounce.300ms="search"
         placeholder="Search..."
     />
 </code-snippet>
-
-
 
 <code-snippet name="Loading States With Volt" lang="php">
     <flux:button wire:click="save" wire:loading.attr="disabled">
@@ -983,8 +930,6 @@ it('may reset the password', function () {
 });
 </code-snippet>
 
-
-
 <code-snippet name="Pest Smoke Testing Example" lang="php">
 $pages = visit(['/', '/about', '/contact']);
 
@@ -998,46 +943,44 @@ $pages->assertNoJavascriptErrors()->assertNoConsoleLogs();
 - Vue components must have a single root element.
 - Use `router.visit()` or `<Link>` for navigation instead of traditional links.
 
-<code-snippet lang="vue" name="Inertia Client Navigation">
-    import { Link } from '@inertiajs/vue3'
+<code-snippet name="Inertia Client Navigation" lang="vue">
 
+    import { Link } from '@inertiajs/vue3'
     <Link href="/">Home</Link>
 
 </code-snippet>
 
-- For form handling, use `router.post` and related methods. Do not use regular forms.
 
-<code-snippet lang="vue" name="Inertia Vue Form Example">
-    <script setup>
-    import { reactive } from 'vue'
-    import { router } from '@inertiajs/vue3'
-    import { usePage } from '@inertiajs/vue3'
+=== inertia-vue/v2/forms rules ===
 
-    const page = usePage()
+## Inertia + Vue Forms
 
-    const form = reactive({
-      first_name: null,
-      last_name: null,
-      email: null,
+<code-snippet name="Inertia Vue useForm example" lang="vue">
+
+<script setup>
+    import { useForm } from '@inertiajs/vue3'
+
+    const form = useForm({
+        email: null,
+        password: null,
+        remember: false,
     })
+</script>
 
-    function submit() {
-      router.post('/users', form)
-    }
-    </script>
-
-    <template>
-        <h1>Create {{ page.modelName }}</h1>
-        <form @submit.prevent="submit">
-            <label for="first_name">First name:</label>
-            <input id="first_name" v-model="form.first_name" />
-            <label for="last_name">Last name:</label>
-            <input id="last_name" v-model="form.last_name" />
-            <label for="email">Email:</label>
-            <input id="email" v-model="form.email" />
-            <button type="submit">Submit</button>
-        </form>
-    </template>
+<template>
+    <form @submit.prevent="form.post('/login')">
+        <!-- email -->
+        <input type="text" v-model="form.email">
+        <div v-if="form.errors.email">{{ form.errors.email }}</div>
+        <!-- password -->
+        <input type="password" v-model="form.password">
+        <div v-if="form.errors.password">{{ form.errors.password }}</div>
+        <!-- remember me -->
+        <input type="checkbox" v-model="form.remember"> Remember Me
+        <!-- submit -->
+        <button type="submit" :disabled="form.processing">Login</button>
+    </form>
+</template>
 
 </code-snippet>
 
