@@ -153,17 +153,16 @@
 </div>
 
 @push('show-post-scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mobileNavSelect = document.getElementById('mobile-nav')
+    <script data-navigate-once>
+        document.addEventListener('livewire:navigated', function () {
+            const selectComponent = document.getElementById('mobile-nav')
 
-            if (mobileNavSelect) {
-                mobileNavSelect.addEventListener('change', function (event) {
-                    const selectedValue = event.target.value
+            if (selectComponent) {
+                selectComponent.addEventListener('change', function (event) {
+                    const newUrl = event.target.value
 
-                    if (selectedValue) {
-                        // Navigate to the selected URL
-                        window.location.href = selectedValue
+                    if (newUrl) {
+                        Livewire.navigate(newUrl)
                     }
                 })
             }
