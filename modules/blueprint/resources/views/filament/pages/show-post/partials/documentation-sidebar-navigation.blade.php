@@ -23,6 +23,7 @@
                         {{-- Standalone post --}}
                         <li>
                             <a
+                                wire:navigate.hover
                                 href="{{ $item['post']->getUrl() }}"
                                 @class([
                                     'group relative flex w-full items-center',      // Layout
@@ -126,6 +127,7 @@
                                             ])
                                         >
                                             <a
+                                                wire:navigate.hover
                                                 href="{{ $groupPost->getUrl() }}"
                                                 @class([
                                                     'group relative flex w-full items-center',      // Layout
