@@ -11,3 +11,11 @@ public/js/filament/*
 public/fonts/*
 stubs/*
 storage/framework/views/*
+
+resources/js/components/*
+resources/js/composables/*
+resources/js/pages/*
+resources/js/layouts/*
+resources/views/livewire/*
+resources/views/components/*
+resources/views/flux/*

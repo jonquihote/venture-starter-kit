@@ -1,8 +1,9 @@
 ---
-slug: alpha-home
 title: Home
-is_home_page: true
+slug: alpha-home
+is_home_page: 1
 documentation_group: Alpha
+navigation_sort: 1
 created_at: 2025-09-01T00:00:00+00:00
 updated_at: 2025-09-01T00:00:00+00:00
 ---

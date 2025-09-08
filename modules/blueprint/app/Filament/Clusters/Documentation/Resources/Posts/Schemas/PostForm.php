@@ -35,13 +35,22 @@ class PostForm
                             ->hiddenOn('create')
                             ->required(),
 
+                        Toggle::make('is_home_page')
+                            ->label(__('blueprint::filament/resources/posts/form.fields.is_home_page.label')),
+
                         Select::make('documentation_group')
                             ->label(__('blueprint::filament/resources/posts/form.fields.documentation_group.label'))
                             ->options(DocumentationGroupsEnum::class)
                             ->required(),
 
-                        Toggle::make('is_home_page')
-                            ->label(__('blueprint::filament/resources/posts/form.fields.is_home_page.label')),
+                        TextInput::make('navigation_group')
+                            ->label(__('blueprint::filament/resources/posts/form.fields.navigation_group.label')),
+
+                        TextInput::make('navigation_sort')
+                            ->label(__('blueprint::filament/resources/posts/form.fields.navigation_sort.label'))
+                            ->numeric()
+                            ->hiddenOn('create')
+                            ->required(),
                     ]),
             ])
             ->columns(4);

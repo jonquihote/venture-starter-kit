@@ -24,6 +24,14 @@ return [
             'label' => 'Documentation Group',
         ],
 
+        'navigation_group' => [
+            'label' => 'Navigation Group',
+        ],
+
+        'navigation_sort' => [
+            'label' => 'Navigation Sort',
+        ],
+
     ],
 
 ];

@@ -1,8 +1,9 @@
 ---
-slug: claude-home
 title: Home
-is_home_page: true
+slug: claude-home
+is_home_page: 1
 documentation_group: Claude
+navigation_sort: 1
 created_at: 2025-09-01T00:00:00+00:00
 updated_at: 2025-09-01T00:00:00+00:00
 ---

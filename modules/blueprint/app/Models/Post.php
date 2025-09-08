@@ -3,11 +3,14 @@
 namespace Venture\Blueprint\Models;
 
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Orbit\Concerns\Orbital;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Venture\Blueprint\Concerns\InteractsWithModule;
@@ -25,22 +28,27 @@ use Venture\Blueprint\Models\Post\Events\PostUpdating;
 use Venture\Blueprint\Models\Post\Observers\PostObserver;
 
 #[ObservedBy([PostObserver::class])]
-class Post extends Model
+class Post extends Model implements Sortable
 {
     use HasSlug;
     use InteractsWithModule;
     use Orbital;
-
-    public $incrementing = false;
+    use SortableTrait;
 
     protected $keyType = 'string';
 
+    public $incrementing = false;
+
     protected $fillable = [
         'title',
-        'slug',
         'content',
+
+        'slug',
         'is_home_page',
+
         'documentation_group',
+        'navigation_group',
+        'navigation_sort',
     ];
 
     protected $dispatchesEvents = [
@@ -56,13 +64,22 @@ class Post extends Model
         'replicating' => PostReplicating::class,
     ];
 
+    public array $sortable = [
+        'order_column_name' => 'navigation_sort',
+        'sort_when_creating' => true,
+    ];
+
     public static function schema(Blueprint $table): void
     {
-        $table->string('slug')->primary();
         $table->string('title');
         $table->text('content');
+
+        $table->string('slug')->primary();
         $table->boolean('is_home_page');
+
         $table->string('documentation_group');
+        $table->string('navigation_group')->nullable();
+        $table->integer('navigation_sort');
     }
 
     protected function casts(): array
@@ -72,17 +89,17 @@ class Post extends Model
         ];
     }
 
+    public function getKeyName(): string
+    {
+        return 'slug';
+    }
+
     public static function getOrbitalPath(): string
     {
         return Collection::make([
             module_path('Blueprint', 'resources/orbit'),
             static::getOrbitalName(),
         ])->implode(DIRECTORY_SEPARATOR);
-    }
-
-    public function getKeyName(): string
-    {
-        return 'slug';
     }
 
     public function getSlugOptions(): SlugOptions
@@ -95,5 +112,10 @@ class Post extends Model
                 return "{$group}-{$title}";
             })
             ->saveSlugsTo('slug');
+    }
+
+    public function buildSortQuery(): Builder
+    {
+        return static::query()->where('documentation_group', $this->documentation_group);
     }
 }
