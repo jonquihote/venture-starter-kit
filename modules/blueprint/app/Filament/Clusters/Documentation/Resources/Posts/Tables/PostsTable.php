@@ -57,6 +57,7 @@ class PostsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->reorderable('navigation_sort');
     }
 }
