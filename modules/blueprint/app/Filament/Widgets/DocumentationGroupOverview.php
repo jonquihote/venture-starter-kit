@@ -5,7 +5,6 @@ namespace Venture\Blueprint\Filament\Widgets;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Collection;
 use Venture\Blueprint\Enums\DocumentationGroupsEnum;
-use Venture\Blueprint\Filament\Pages\ShowPost;
 use Venture\Blueprint\Models\Post;
 
 class DocumentationGroupOverview extends Widget
@@ -36,7 +35,7 @@ class DocumentationGroupOverview extends Widget
                         'slug' => $group->slug(),
                         'icon' => $group->icon(),
                         'color' => $group->color(),
-                        'url' => ShowPost::getUrl([$post]),
+                        'url' => $post->getUrl(),
                     ];
                 }
 

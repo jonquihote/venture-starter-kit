@@ -15,6 +15,7 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Venture\Blueprint\Concerns\InteractsWithModule;
 use Venture\Blueprint\Enums\DocumentationGroupsEnum;
+use Venture\Blueprint\Filament\Pages\ShowPost;
 use Venture\Blueprint\Models\Post\Events\PostCreated;
 use Venture\Blueprint\Models\Post\Events\PostCreating;
 use Venture\Blueprint\Models\Post\Events\PostDeleted;
@@ -112,6 +113,11 @@ class Post extends Model implements Sortable
                 return "{$group}-{$title}";
             })
             ->saveSlugsTo('slug');
+    }
+
+    public function getUrl(): string
+    {
+        return ShowPost::getUrl([$this]);
     }
 
     public function buildSortQuery(): Builder
