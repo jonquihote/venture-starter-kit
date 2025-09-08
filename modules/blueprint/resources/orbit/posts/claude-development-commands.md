@@ -1,19 +1,19 @@
 ---
 title: 'Development Commands'
 slug: claude-development-commands
-is_home_page: 0
+is_home_page: false
 documentation_group: Claude
 navigation_group: Context
-navigation_sort: 2
+navigation_sort: 2.0
 created_at: 2025-09-08T02:36:39+00:00
-updated_at: 2025-09-08T02:36:39+00:00
+updated_at: 2025-09-08T10:56:52+00:00
 ---
 ## Development Commands
 
 **Primary Development:**
 
 ```bash
-composer dev              # Start full development environment (assets, worker, scheduler, logs, pulse, reverb)
+composer dev              # Start full development environment
 composer dev:ssr          # Start with SSR support
 bun run dev               # Assets only
 php artisan serve         # Basic Laravel server

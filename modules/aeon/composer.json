@@ -42,6 +42,7 @@
         "spatie/image-optimizer": "^1.8",
         "spatie/laravel-activitylog": "^4.10",
         "spatie/laravel-data": "^4.17",
+        "spatie/laravel-markdown": "^2.7",
         "spatie/laravel-medialibrary": "^11.14",
         "spatie/laravel-model-states": "^2.12",
         "spatie/laravel-login-link": "^1.6",

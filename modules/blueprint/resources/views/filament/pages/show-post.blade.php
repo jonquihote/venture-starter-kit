@@ -33,7 +33,9 @@
                                 'mb-12',                   // Spacing
                             ])
                         >
-                            {!! str($post->content)->markdown()->toHtmlString() !!}
+                            <x-markdown theme="github-dark">
+                                {{ $post->content }}
+                            </x-markdown>
                         </div>
 
                         <!-- Navigation Footer -->
