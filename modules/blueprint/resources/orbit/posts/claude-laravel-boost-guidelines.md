@@ -9,6 +9,7 @@ created_at: 2025-09-08T03:08:44+00:00
 updated_at: 2025-09-08T03:08:44+00:00
 ---
 <laravel-boost-guidelines>
+
 === foundation rules ===
 
 # Laravel Boost Guidelines
