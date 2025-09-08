@@ -4,6 +4,7 @@ namespace Venture\Blueprint\Filament\Clusters\Documentation\Resources\Posts\Page
 
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Venture\Blueprint\Filament\Clusters\Documentation\Resources\Posts\Actions\ShowAction;
 use Venture\Blueprint\Filament\Clusters\Documentation\Resources\Posts\PostResource;
 
 class EditPost extends EditRecord
@@ -13,6 +14,7 @@ class EditPost extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            ShowAction::make(),
             DeleteAction::make(),
         ];
     }

@@ -7,8 +7,8 @@
     >
         @include('blueprint::filament.pages.show-post.partials.documentation-mobile-navigation')
 
-        @if($post->hasEditAccess())
-            <div class="flex justify-end mb-4">
+        @if ($post->hasEditAccess())
+            <div class="mb-4 flex justify-end">
                 <x-filament::link
                     :href="$post->getEditUrl()"
                     icon="lucide-square-pen"
