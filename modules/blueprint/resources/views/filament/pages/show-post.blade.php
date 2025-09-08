@@ -7,6 +7,19 @@
     >
         @include('blueprint::filament.pages.show-post.partials.documentation-mobile-navigation')
 
+        @if($post->hasEditAccess())
+            <div class="flex justify-end mb-4">
+                <x-filament::link
+                    :href="$post->getEditUrl()"
+                    icon="lucide-square-pen"
+                    color="gray"
+                    size="sm"
+                >
+                    {{ __('blueprint::filament/pages/show-post.actions.edit.label') }}
+                </x-filament::link>
+            </div>
+        @endif
+
         <div
             @class([
                 'flex flex-col lg:flex-row', // Layout & Direction

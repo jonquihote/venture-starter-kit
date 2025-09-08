@@ -15,6 +15,7 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Venture\Blueprint\Concerns\InteractsWithModule;
 use Venture\Blueprint\Enums\DocumentationGroupsEnum;
+use Venture\Blueprint\Filament\Clusters\Documentation\Resources\Posts\PostResource;
 use Venture\Blueprint\Filament\Pages\ShowPost;
 use Venture\Blueprint\Models\Post\Events\PostCreated;
 use Venture\Blueprint\Models\Post\Events\PostCreating;
@@ -118,6 +119,16 @@ class Post extends Model implements Sortable
     public function getUrl(): string
     {
         return ShowPost::getUrl([$this]);
+    }
+
+    public function getEditUrl(): string
+    {
+        return PostResource::getUrl('edit', ['record' => $this]);
+    }
+
+    public function hasEditAccess(): bool
+    {
+        return auth()->user()->can('update', $this);
     }
 
     public function buildSortQuery(): Builder
