@@ -8,7 +8,7 @@ created_at: 2025-09-01T00:00:00+00:00
 updated_at: 2025-09-01T00:00:00+00:00
 ---
 
-# Introduction
+# Home
 
 Welcome to **Venture Starter Kit**, a comprehensive Laravel 12 application template designed for building modern,
 scalable web applications. This starter kit combines the power of Laravel with Vue 3, Filament, and a modular

@@ -89,6 +89,7 @@
                 "laravel/scout",
                 "laravel/telescope",
                 "spatie/laravel-activitylog",
+                "spatie/laravel-markdown",
                 "spatie/laravel-medialibrary",
                 "spatie/laravel-permission",
                 "spatie/laravel-settings",

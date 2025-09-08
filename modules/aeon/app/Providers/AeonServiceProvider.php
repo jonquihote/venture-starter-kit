@@ -17,6 +17,7 @@ use Venture\Aeon\Packages\FirstParty\Reverb\Providers\ReverbServiceProvider;
 use Venture\Aeon\Packages\FirstParty\Scout\Providers\ScoutServiceProvider;
 use Venture\Aeon\Packages\FirstParty\Telescope\Providers\TelescopeServiceProvider;
 use Venture\Aeon\Packages\Spatie\Activitylog\Providers\ActivityLogServiceProvider;
+use Venture\Aeon\Packages\Spatie\Markdown\Providers\MarkdownServiceProvider;
 use Venture\Aeon\Packages\Spatie\MediaLibrary\Providers\MediaLibraryServiceProvider;
 use Venture\Aeon\Packages\Spatie\Permission\Providers\PermissionServiceProvider;
 use Venture\Aeon\Packages\Spatie\Settings\Providers\SettingsServiceProvider;
@@ -59,6 +60,7 @@ class AeonServiceProvider extends ServiceProvider
         $this->app->register(TelescopeServiceProvider::class);
 
         $this->app->register(ActivityLogServiceProvider::class);
+        $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(MediaLibraryServiceProvider::class);
         $this->app->register(PermissionServiceProvider::class);
         $this->app->register(SettingsServiceProvider::class);

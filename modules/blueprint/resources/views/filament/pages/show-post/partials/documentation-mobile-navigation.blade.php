@@ -8,6 +8,7 @@
     <el-select
         id="mobile-nav"
         name="mobile-nav"
+        value="{{ $this->post->getUrl() }}"
         @class([
             'w-full',  // Sizing
         ])
@@ -32,7 +33,7 @@
                     'truncate pr-6',             // Text Overflow & Spacing
                 ])
             >
-                Select a section...
+                {{ $this->post->title }}
             </el-selectedcontent>
             <svg
                 viewBox="0 0 16 16"

@@ -33,7 +33,7 @@
                                 'mb-12',                   // Spacing
                             ])
                         >
-                            <x-markdown theme="github-dark">
+                            <x-markdown theme="material-theme-palenight">
                                 {{ $post->content }}
                             </x-markdown>
                         </div>
