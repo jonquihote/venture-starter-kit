@@ -27,9 +27,10 @@
                     <div>
                         <div
                             @class([
-                                'prose prose-lg prose-neutral', // Typography Styles
+                                'prose prose-neutral', // Typography Styles
                                 'dark:prose-invert',             // Dark Mode
                                 'max-w-none',                   // Sizing
+                                'mb-12',                   // Spacing
                             ])
                         >
                             {!! str($post->content)->markdown()->toHtmlString() !!}

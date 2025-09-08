@@ -20,6 +20,10 @@ class ShowPost extends Page
 
     public Collection $navigationItems;
 
+    public ?Post $previousPost = null;
+
+    public ?Post $nextPost = null;
+
     public function mount(Post $post): void
     {
         $this->post = $post;
@@ -32,6 +36,9 @@ class ShowPost extends Page
 
         // Process into navigation structure using Collections
         $this->navigationItems = $this->processNavigationStructure($posts);
+
+        // Calculate previous and next posts based on navigation_sort
+        $this->calculatePreviousNextPosts($posts);
     }
 
     private function processNavigationStructure(Collection $posts): Collection
@@ -59,5 +66,22 @@ class ShowPost extends Page
             ->merge($grouped->values())
             ->sortBy('sort')
             ->values();
+    }
+
+    private function calculatePreviousNextPosts(Collection $posts): void
+    {
+        $currentSort = $this->post->navigation_sort;
+
+        // Find previous post (highest navigation_sort that is less than current)
+        $this->previousPost = $posts
+            ->where('navigation_sort', '<', $currentSort)
+            ->sortByDesc('navigation_sort')
+            ->first();
+
+        // Find next post (lowest navigation_sort that is greater than current)
+        $this->nextPost = $posts
+            ->where('navigation_sort', '>', $currentSort)
+            ->sortBy('navigation_sort')
+            ->first();
     }
 }
