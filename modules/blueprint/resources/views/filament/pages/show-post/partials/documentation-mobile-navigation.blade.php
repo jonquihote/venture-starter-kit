@@ -74,179 +74,79 @@
                 'data-closed:data-leave:opacity-0',       // State Transitions
             ])
         >
-            <!-- Getting Started Group Header -->
-            <el-option
-                disabled
-                @class([
-                    'relative block',                         // Layout
-                    'cursor-not-allowed',                     // Cursor
-                    'py-2 pr-9 pl-3',                        // Spacing
-                    'text-gray-900 dark:text-white',         // Colors
-                    'opacity-100',                            // Opacity
-                    'select-none',                            // Selection
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',  // Display & Text Overflow
-                        'font-bold',       // Typography
-                    ])
-                >
-                    Getting Started
-                </span>
-            </el-option>
+            @foreach ($this->navigationItems as $item)
+                @if ($item['type'] === 'post')
+                    {{-- Standalone post option --}}
+                    <el-option
+                        value="{{ $item['post']->getUrl() }}"
+                        @class([
+                            'group/option relative block cursor-default',  // Layout & Group
+                            'py-2 pr-9 pl-3',                              // Spacing
+                            'text-gray-900 dark:text-white',               // Colors
+                            'select-none',                                 // Selection
+                            'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
+                            'focus:text-white',                            // Focus Text Color
+                            'focus:outline-hidden',                        // Focus Outline
+                        ])
+                    >
+                        <span
+                            @class([
+                                'block truncate',                                  // Display & Text Overflow
+                                'font-normal group-aria-selected/option:font-semibold', // Typography
+                            ])
+                        >
+                            {{ $item['post']->title }}
+                        </span>
+                    </el-option>
+                @else
+                    {{-- Group header --}}
+                    <el-option
+                        disabled
+                        @class([
+                            'relative block',                         // Layout
+                            'cursor-not-allowed',                     // Cursor
+                            'py-2 pr-9 pl-3',                        // Spacing
+                            'text-gray-900 dark:text-white',         // Colors
+                            'opacity-100',                            // Opacity
+                            'select-none',                            // Selection
+                        ])
+                    >
+                        <span
+                            @class([
+                                'block truncate',  // Display & Text Overflow
+                                'font-bold',       // Typography
+                            ])
+                        >
+                            {{ $item['name'] }}
+                        </span>
+                    </el-option>
 
-            <!-- Getting Started Section Items -->
-            <el-option
-                value="#introduction"
-                @class([
-                    'group/option relative block cursor-default',  // Layout & Group
-                    'py-2 pr-9 pl-8',                              // Spacing
-                    'text-gray-900 dark:text-white',               // Colors
-                    'select-none',                                 // Selection
-                    'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
-                    'focus:text-white',                            // Focus Text Color
-                    'focus:outline-hidden',                        // Focus Outline
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',                                  // Display & Text Overflow
-                        'font-normal group-aria-selected/option:font-semibold', // Typography
-                    ])
-                >
-                    Introduction
-                </span>
-            </el-option>
-            <el-option
-                value="#getting-started"
-                @class([
-                    'group/option relative block cursor-default',  // Layout & Group
-                    'py-2 pr-9 pl-8',                              // Spacing
-                    'text-gray-900 dark:text-white',               // Colors
-                    'select-none',                                 // Selection
-                    'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
-                    'focus:text-white',                            // Focus Text Color
-                    'focus:outline-hidden',                        // Focus Outline
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',                                  // Display & Text Overflow
-                        'font-normal group-aria-selected/option:font-semibold', // Typography
-                    ])
-                >
-                    Installation
-                </span>
-            </el-option>
-            <el-option
-                value="#development-workflow"
-                @class([
-                    'group/option relative block cursor-default',  // Layout & Group
-                    'py-2 pr-9 pl-8',                              // Spacing
-                    'text-gray-900 dark:text-white',               // Colors
-                    'select-none',                                 // Selection
-                    'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
-                    'focus:text-white',                            // Focus Text Color
-                    'focus:outline-hidden',                        // Focus Outline
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',                                  // Display & Text Overflow
-                        'font-normal group-aria-selected/option:font-semibold', // Typography
-                    ])
-                >
-                    Development
-                </span>
-            </el-option>
-
-            <!-- Architecture Group Header -->
-            <el-option
-                disabled
-                @class([
-                    'relative block',                         // Layout
-                    'cursor-not-allowed',                     // Cursor
-                    'py-2 pr-9 pl-3',                        // Spacing
-                    'text-gray-900 dark:text-white',         // Colors
-                    'opacity-100',                            // Opacity
-                    'select-none',                            // Selection
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',  // Display & Text Overflow
-                        'font-bold',       // Typography
-                    ])
-                >
-                    Architecture
-                </span>
-            </el-option>
-
-            <!-- Architecture Section Items -->
-            <el-option
-                value="#technology-stack"
-                @class([
-                    'group/option relative block cursor-default',  // Layout & Group
-                    'py-2 pr-9 pl-8',                              // Spacing
-                    'text-gray-900 dark:text-white',               // Colors
-                    'select-none',                                 // Selection
-                    'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
-                    'focus:text-white',                            // Focus Text Color
-                    'focus:outline-hidden',                        // Focus Outline
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',                                  // Display & Text Overflow
-                        'font-normal group-aria-selected/option:font-semibold', // Typography
-                    ])
-                >
-                    Technology Stack
-                </span>
-            </el-option>
-            <el-option
-                value="#module-architecture"
-                @class([
-                    'group/option relative block cursor-default',  // Layout & Group
-                    'py-2 pr-9 pl-8',                              // Spacing
-                    'text-gray-900 dark:text-white',               // Colors
-                    'select-none',                                 // Selection
-                    'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
-                    'focus:text-white',                            // Focus Text Color
-                    'focus:outline-hidden',                        // Focus Outline
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',                                  // Display & Text Overflow
-                        'font-normal group-aria-selected/option:font-semibold', // Typography
-                    ])
-                >
-                    Module System
-                </span>
-            </el-option>
-            <el-option
-                value="#best-practices"
-                @class([
-                    'group/option relative block cursor-default',  // Layout & Group
-                    'py-2 pr-9 pl-8',                              // Spacing
-                    'text-gray-900 dark:text-white',               // Colors
-                    'select-none',                                 // Selection
-                    'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
-                    'focus:text-white',                            // Focus Text Color
-                    'focus:outline-hidden',                        // Focus Outline
-                ])
-            >
-                <span
-                    @class([
-                        'block truncate',                                  // Display & Text Overflow
-                        'font-normal group-aria-selected/option:font-semibold', // Typography
-                    ])
-                >
-                    Best Practices
-                </span>
-            </el-option>
+                    {{-- Group posts --}}
+                    @foreach ($item['posts'] as $groupPost)
+                        <el-option
+                            value="{{ $groupPost->getUrl() }}"
+                            @class([
+                                'group/option relative block cursor-default',  // Layout & Group
+                                'py-2 pr-9 pl-8',                              // Spacing
+                                'text-gray-900 dark:text-white',               // Colors
+                                'select-none',                                 // Selection
+                                'focus:bg-primary-600 dark:focus:bg-primary-500', // Focus Background
+                                'focus:text-white',                            // Focus Text Color
+                                'focus:outline-hidden',                        // Focus Outline
+                            ])
+                        >
+                            <span
+                                @class([
+                                    'block truncate',                                  // Display & Text Overflow
+                                    'font-normal group-aria-selected/option:font-semibold', // Typography
+                                ])
+                            >
+                                {{ $groupPost->title }}
+                            </span>
+                        </el-option>
+                    @endforeach
+                @endif
+            @endforeach
         </el-options>
     </el-select>
 </div>
@@ -261,19 +161,8 @@
                     const selectedValue = event.target.value
 
                     if (selectedValue) {
-                        // Navigate to the selected section
-                        const targetElement =
-                            document.querySelector(selectedValue)
-
-                        if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start',
-                            })
-                        } else {
-                            // Fallback to changing the hash
-                            window.location.hash = selectedValue
-                        }
+                        // Navigate to the selected URL
+                        window.location.href = selectedValue
                     }
                 })
             }

@@ -35,14 +35,6 @@ practices, and a thoughtfully designed module system that grows with your applic
 - **Blueprint Module**: Documentation and style guide hub
 - **Home Module**: Main application dashboard and components
 
-### 🔧 Development Excellence
-
-- **Pest v4** testing framework with parallel execution
-- **Code Quality Tools**: Rector, Laravel Pint, ESLint integration
-- **Conventional Commits** enforced via Husky and commitlint
-- **Hot Reload Development** with concurrent service management
-- **Database Flexibility**: SQLite (development) + PostgreSQL (testing)
-
 ### 🌟 Advanced Features
 
 - **Multi-tenancy Support** with team-based isolation
@@ -166,75 +158,15 @@ The `composer dev` command starts all development services concurrently:
 
 ## Development Workflow
 
-### Essential Commands
+This project follows a streamlined development workflow optimized for Laravel 12 with modern tooling. Key aspects
+include module-first development, automated code quality checks, and comprehensive testing coverage.
 
-**Development Server**
+**For detailed development commands and workflows, see:**
 
-```bash
-composer dev          # Start all development services
-composer dev:ssr       # Start with server-side rendering
-```
-
-**Testing**
-
-```bash
-composer test          # Run all tests (parallel execution)
-composer test:api      # Run API-specific tests
-php artisan test --parallel
-```
-
-**Code Quality**
-
-```bash
-composer cs           # Run all code style tools
-composer pint         # PHP code formatting
-composer rector       # PHP code modernization
-bun run lint          # JavaScript/TypeScript linting
-bun run format        # Prettier formatting
-```
-
-**Asset Management**
-
-```bash
-bun run build        # Production asset build
-bun run build:ssr    # Build with SSR support
-```
-
-**Module Management**
-
-```bash
-php artisan module:make ModuleName
-php artisan module:enable ModuleName
-php artisan module:migrate ModuleName
-```
-
-### Testing Strategy
-
-The application uses **Pest v4** with comprehensive testing coverage:
-
-- **Unit Tests**: Individual class and method testing
-- **Feature Tests**: Full application workflow testing
-- **Browser Tests**: End-to-end user interaction testing
-- **API Tests**: Separated API endpoint validation
-
-Test configuration supports both SQLite (development) and PostgreSQL (testing) databases with parallel execution for
-speed.
-
-### Code Quality Standards
-
-**Automated Quality Checks**
-
-- **PHP**: Laravel Pint with strict import rules
-- **JavaScript/TypeScript**: ESLint + Prettier with Blade support
-- **Commits**: Conventional commit format enforced
-- **Pre-commit**: Husky hooks ensure quality before commits
-
-**Quality Metrics**
-
-- Code coverage tracking
-- Static analysis with Rector
-- Dependency vulnerability scanning
-- Performance monitoring with Pulse
+- [Development Commands](claude-development-commands) - Complete command reference for development, testing, and code
+  quality
+- [Development Workflow](claude-development-workflow) - Detailed workflow patterns and best practices
+- [Testing Strategy](claude-testing-strategy) - Comprehensive testing approach using Pest v4
 
 ## Best Practices
 
@@ -259,54 +191,15 @@ speed.
 - Follow Laravel and Vue.js best practices
 - Document complex business logic
 
-### Performance Optimization
-
-- Leverage Laravel's built-in caching
-- Optimize database queries with eager loading
-- Use queue processing for heavy operations
-- Monitor performance with Laravel Pulse
-
 ## Configuration
 
-### Environment Variables
+The application uses environment-based configuration with module-specific settings and pre-configured packages for
+monitoring, debugging, and real-time features.
 
-Key configuration options in `.env`:
+**For detailed configuration information, see:**
 
-- `APP_URL`: Application base URL
-- `DB_CONNECTION`: Database type (sqlite/pgsql)
-- `QUEUE_CONNECTION`: Queue driver configuration
-- `BROADCAST_DRIVER`: WebSocket configuration
-
-### Module Configuration
-
-Each module includes its own configuration files and service providers. Module-specific settings can be found in
-`config/modules.php` and individual module config directories.
-
-### Package Configuration
-
-Pre-configured packages include optimized settings for:
-
-- Horizon (queue monitoring)
-- Pulse (application monitoring)
-- Telescope (debugging)
-- Scout (full-text search)
-- Reverb (WebSocket server)
-
-## Support & Resources
-
-### Documentation
-
-- Framework documentation: [Laravel Docs](https://laravel.com/docs)
-- Frontend stack: [Vue 3](https://vuejs.org/), [Inertia.js](https://inertiajs.com/)
-- Admin panels: [Filament Docs](https://filamentphp.com/)
-- Testing: [Pest Documentation](https://pestphp.com/)
-
-### Community
-
-- Follow conventional commit standards
-- Submit issues with detailed reproduction steps
-- Contribute improvements via pull requests
-- Maintain code quality and testing standards
+- [Key Configuration Files](claude-key-configuration-files) - Complete reference for configuration files and their
+  purposes
 
 ---
 

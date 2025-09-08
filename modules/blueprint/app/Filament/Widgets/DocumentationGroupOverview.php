@@ -32,7 +32,6 @@ class DocumentationGroupOverview extends Widget
                 if ($post) {
                     return [
                         'name' => $group->value,
-                        'slug' => $group->slug(),
                         'icon' => $group->icon(),
                         'color' => $group->color(),
                         'url' => $post->getUrl(),
