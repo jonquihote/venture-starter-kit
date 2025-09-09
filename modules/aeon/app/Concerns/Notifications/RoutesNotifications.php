@@ -6,6 +6,11 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\RoutesNotifications as BaseRoutesNotifications;
 use Illuminate\Support\Str;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file only exists to accommodate `laravel_` prefix in the database table that handles notifications.
+ */
 trait RoutesNotifications
 {
     use BaseRoutesNotifications;

@@ -28,7 +28,7 @@ trait InteractsWithPermissions
     {
         $permissions = Collection::make($permissions);
 
-        return Collection::make(self::cases())
+        return self::all()
             ->reject(function (BackedEnum $permission) use ($permissions) {
                 return $permissions->contains(function (BackedEnum $enum) use ($permission) {
                     return $enum->value === $permission->value;

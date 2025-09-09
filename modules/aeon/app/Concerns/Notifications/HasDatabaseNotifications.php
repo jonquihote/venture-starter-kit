@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Notifications\HasDatabaseNotifications as BaseHasDatabaseNotifications;
 use Venture\Aeon\Models\DatabaseNotification;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file only exists to accommodate `laravel_` prefix in the database table that handles notifications.
+ */
 trait HasDatabaseNotifications
 {
     use BaseHasDatabaseNotifications;

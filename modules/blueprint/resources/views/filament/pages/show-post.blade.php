@@ -47,7 +47,7 @@
                             ])
                         >
                             <x-markdown theme="material-theme-palenight">
-                                {{ $post->content }}
+                                {!! $post->content !!}
                             </x-markdown>
                         </div>
 
