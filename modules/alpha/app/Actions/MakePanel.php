@@ -93,12 +93,12 @@ class MakePanel extends Action
             ])
             ->tenantMiddleware([
                 UpdateCurrentTeam::class,
-                EnsureTeamHasSubscription::with([
-                    'slug' => $slug,
-                ]),
                 HandleTeamSwitch::class,
                 HandleTeamAccess::class,
                 HandleSingleTeamMode::class,
+                EnsureTeamHasSubscription::with([
+                    'slug' => $slug,
+                ]),
             ], isPersistent: true);
     }
 }

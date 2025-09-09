@@ -14,7 +14,7 @@ class AdministratorSeeder extends Seeder
     public function run(): void
     {
         $this->initializeSuperAdministrator();
-        $this->initializeSingleTeamMode();
+        //        $this->initializeSingleTeamMode();
     }
 
     protected function initializeSuperAdministrator(): void

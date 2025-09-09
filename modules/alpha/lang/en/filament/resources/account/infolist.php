@@ -16,6 +16,17 @@ return [
             'label' => 'Email',
         ],
 
+        'no_roles' => [
+            'label' => 'Roles',
+            'default' => 'No roles assigned for this team',
+        ],
+
+    ],
+
+    'badges' => [
+
+        'owner' => 'Owner',
+
     ],
 
     'sections' => [

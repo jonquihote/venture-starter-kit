@@ -7,6 +7,8 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -35,31 +37,61 @@ class AccountInfolist
                     ->columnSpanFull()
                     ->columns(2),
 
-                Section::make(__('alpha::filament/resources/account/infolist.sections.roles.heading'))
-                    ->schema(self::getRoleComponents())
-                    ->columnSpanFull(),
+                self::getRolesTabs(),
             ]);
     }
 
-    public static function getRoleComponents(): array
+    public static function getRolesTabs(): Tabs
     {
-        $roles = Role::all()
+        return Tabs::make(__('alpha::filament/resources/account/infolist.sections.roles.heading'))
+            ->tabs(function ($record) {
+                // Get owned teams first, then membership teams
+                $ownedTeams = $record->ownedTeams;
+                $membershipTeams = $record->teams;
+
+                // Combine with owned teams first
+                $allTeams = $ownedTeams->merge($membershipTeams)->unique('id');
+
+                return $allTeams
+                    ->map(function ($team) use ($record, $ownedTeams) {
+                        $isOwner = $ownedTeams->contains('id', $team->id);
+
+                        return Tab::make($team->name)
+                            ->label($team->name)
+                            ->badge($isOwner ? __('alpha::filament/resources/account/infolist.badges.owner') : null)
+                            ->schema(self::getTeamRoleComponents($record, $team));
+                    })
+                    ->toArray();
+            })
+            ->columnSpanFull();
+    }
+
+    public static function getTeamRoleComponents($record, $team): array
+    {
+        // Get roles that belong to this team
+        $teamRoles = Role::where('team_id', $team->id)
+            ->get()
             ->mapToGroups(function (Role $role) {
                 $group = Str::of($role->name)->before('::')->toString();
 
                 return [$group => $role->name];
-            })
-            ->map(function (Collection $roles, string $group) {
+            });
+
+        $components = $teamRoles
+            ->map(function (Collection $roles, string $group) use ($record, $team) {
                 return Fieldset::make(__("{$group}::module.name"))
-                    ->schema(function () use ($roles) {
+                    ->schema(function () use ($roles, $record, $team) {
                         return $roles
-                            ->map(function (string $role) {
+                            ->map(function (string $role) use ($record, $team) {
                                 return IconEntry::make('roles')
                                     ->label(__($role))
                                     ->boolean()
                                     ->inlineLabel()
-                                    ->state(function ($record) use ($role) {
-                                        return $record->roles->pluck('name')->contains($role);
+                                    ->state(function () use ($record, $role, $team) {
+                                        return $record->roles()
+                                            ->wherePivot('team_id', $team->id)
+                                            ->where('name', $role)
+                                            ->exists();
                                     });
                             })
                             ->toArray();
@@ -70,7 +102,7 @@ class AccountInfolist
             ->toArray();
 
         return [
-            Grid::make(2)->schema($roles),
+            Grid::make()->schema($components),
         ];
     }
 }
