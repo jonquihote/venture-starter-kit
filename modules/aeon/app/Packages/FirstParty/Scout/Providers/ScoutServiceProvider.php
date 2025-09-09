@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Scout\ScoutServiceProvider as BaseScoutServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate custom configuration for Scout.
+ */
 class ScoutServiceProvider extends ServiceProvider
 {
     public function register(): void

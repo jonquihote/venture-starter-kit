@@ -21,6 +21,8 @@ use Venture\Aeon\Packages\FirstParty\Telescope\Models\EntryModel;
 
 /**
  * @codeCoverageIgnore
+ *
+ * This file exists to accommodate `laravel_` prefixed database table
  */
 class DatabaseEntriesRepository implements ClearableRepository, Contract, PrunableRepository, TerminableRepository
 {

@@ -8,7 +8,7 @@ use Venture\Aeon\Concerns\Notifications\RoutesNotifications;
 /**
  * @codeCoverageIgnore
  *
- * This file has only been modified to accommodate `laravel_` prefix in the database table that handles notifications.
+ * This file exists to accommodate `laravel_` prefix in the database table that handles notifications.
  */
 trait InteractsWithNotifications
 {

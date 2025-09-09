@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Activitylog\ActivitylogServiceProvider as BaseActivityLogServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate `laravel_` prefixed database table & to customize configuration for Activity Log
+ */
 class ActivityLogServiceProvider extends ServiceProvider
 {
     public function register(): void

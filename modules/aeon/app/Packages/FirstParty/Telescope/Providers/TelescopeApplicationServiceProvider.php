@@ -8,6 +8,11 @@ use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider as BaseTelescopeApplicationServiceProvider;
 use Venture\Alpha\Enums\Auth\Permissions\PagePermissionsEnum;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate custom permissions feature to access the Dashboard & to customize configuration for Telescope Dashboard
+ */
 class TelescopeApplicationServiceProvider extends BaseTelescopeApplicationServiceProvider
 {
     /**

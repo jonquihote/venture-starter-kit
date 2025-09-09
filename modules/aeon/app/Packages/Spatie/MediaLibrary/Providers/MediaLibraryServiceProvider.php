@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider as BaseMediaLibraryServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate `spatie_` prefixed database table & to customize configuration for Media Library.
+ */
 class MediaLibraryServiceProvider extends ServiceProvider
 {
     public function register(): void

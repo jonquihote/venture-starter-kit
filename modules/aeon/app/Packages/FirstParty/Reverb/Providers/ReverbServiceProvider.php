@@ -7,6 +7,11 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Reverb\ApplicationManagerServiceProvider;
 use Laravel\Reverb\ReverbServiceProvider as BaseReverbServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate custom configuration for Reverb.
+ */
 class ReverbServiceProvider extends ServiceProvider
 {
     public function register(): void

@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Spatie\LaravelSettings\LaravelSettingsServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate `spatie_` prefixed database table & to customize configuration for Settings.
+ */
 class SettingsServiceProvider extends ServiceProvider
 {
     public function register(): void

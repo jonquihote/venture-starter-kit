@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Spatie\LaravelMarkdown\MarkdownServiceProvider as BaseMarkdownServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to customize configuration for Laravel Markdown.
+ */
 class MarkdownServiceProvider extends ServiceProvider
 {
     public function register(): void

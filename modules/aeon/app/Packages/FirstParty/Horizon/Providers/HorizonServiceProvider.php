@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider as BaseHorizonServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate custom permissions feature to access the Dashboard & to customize configuration for Horizon Dashboard
+ */
 class HorizonServiceProvider extends ServiceProvider
 {
     public function register(): void

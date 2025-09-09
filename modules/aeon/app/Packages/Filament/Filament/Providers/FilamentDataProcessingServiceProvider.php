@@ -10,6 +10,11 @@ use Venture\Aeon\Packages\Filament\Filament\Models\Export;
 use Venture\Aeon\Packages\Filament\Filament\Models\FailedImportRow;
 use Venture\Aeon\Packages\Filament\Filament\Models\Import;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate `filament_` prefix in the database table.
+ */
 class FilamentDataProcessingServiceProvider extends ServiceProvider
 {
     public function register(): void

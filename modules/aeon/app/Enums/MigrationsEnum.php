@@ -2,6 +2,11 @@
 
 namespace Venture\Aeon\Enums;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file contains the name of database tables that Laravel use prefixed with `laravel_`
+ */
 enum MigrationsEnum
 {
     case Cache;

@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Venture\Alpha\Models\Account;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate `filament_` prefix in the database table that handles imports.
+ */
 class Import extends BaseImport
 {
     protected $table = 'filament_imports';

@@ -8,6 +8,11 @@ use Laravel\Pulse\Contracts\Storage;
 use Laravel\Pulse\PulseServiceProvider as BasePulseServiceProvider;
 use Venture\Aeon\Packages\FirstParty\Pulse\Storage\DatabaseStorage;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate custom permissions feature to access the Dashboard & to customize configuration for Pulse Dashboard
+ */
 class PulseServiceProvider extends ServiceProvider
 {
     public function register(): void

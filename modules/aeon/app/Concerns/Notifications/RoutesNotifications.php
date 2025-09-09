@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 /**
  * @codeCoverageIgnore
  *
- * This file only exists to accommodate `laravel_` prefix in the database table that handles notifications.
+ * This file exists to accommodate `laravel_` prefix in the database table that handles notifications.
  */
 trait RoutesNotifications
 {

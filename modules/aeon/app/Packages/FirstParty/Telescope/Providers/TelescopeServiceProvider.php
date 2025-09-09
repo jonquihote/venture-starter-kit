@@ -10,6 +10,11 @@ use Laravel\Telescope\Contracts\PrunableRepository;
 use Laravel\Telescope\TelescopeServiceProvider as BaseTelescopeServiceProvider;
 use Venture\Aeon\Packages\FirstParty\Telescope\Storage\DatabaseEntriesRepository;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate custom permissions feature to access the Dashboard & to customize configuration for Telescope Dashboard
+ */
 class TelescopeServiceProvider extends ServiceProvider
 {
     public function register(): void

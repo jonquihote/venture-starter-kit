@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\PermissionServiceProvider as BasePermissionServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to customize configuration for Permissions.
+ */
 class PermissionServiceProvider extends ServiceProvider
 {
     public function register(): void

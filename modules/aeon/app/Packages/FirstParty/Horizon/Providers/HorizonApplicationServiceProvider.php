@@ -7,6 +7,11 @@ use Laravel\Horizon\Horizon;
 use Laravel\Horizon\HorizonApplicationServiceProvider as BaseHorizonApplicationServiceProvider;
 use Venture\Alpha\Enums\Auth\Permissions\PagePermissionsEnum;
 
+/**
+ * @codeCoverageIgnore
+ *
+ * This file exists to accommodate custom permissions feature to access the Dashboard & to customize configuration for Horizon Dashboard
+ */
 class HorizonApplicationServiceProvider extends BaseHorizonApplicationServiceProvider
 {
     /**
