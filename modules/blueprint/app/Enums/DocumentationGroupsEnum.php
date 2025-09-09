@@ -11,6 +11,7 @@ enum DocumentationGroupsEnum: string implements HasLabel
     case Aeon = 'Aeon';
     case Alpha = 'Alpha';
     case Omega = 'Omega';
+    case Project = 'Project';
 
     public function icon(): string
     {
@@ -19,6 +20,7 @@ enum DocumentationGroupsEnum: string implements HasLabel
             self::Aeon => 'lucide-shield-half',
             self::Alpha => 'lucide-building',
             self::Omega => 'lucide-users',
+            self::Project => 'lucide-briefcase-business',
         };
     }
 
@@ -26,9 +28,10 @@ enum DocumentationGroupsEnum: string implements HasLabel
     {
         return match ($this) {
             self::Claude => 'bg-orange-500',
-            self::Aeon => 'bg-gray-500',
+            self::Aeon => 'bg-red-500',
             self::Alpha => 'bg-indigo-500',
             self::Omega => 'bg-purple-500',
+            self::Project => 'bg-gray-500',
         };
     }
 
