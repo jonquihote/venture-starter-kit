@@ -8,6 +8,7 @@ use Tests\TestCase;
 use Venture\Aeon\Facades\Access;
 use Venture\Alpha\Models\Account;
 use Venture\Alpha\Models\AccountCredential;
+use Venture\Alpha\Models\Team;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\artisan;
@@ -49,16 +50,23 @@ Collection::make(json_decode(file_get_contents(__DIR__ . '/../modules_statuses.j
 
         pest()
             ->beforeEach(function () use ($slug): void {
-                Filament::setCurrentPanel(Filament::getPanel($slug));
-
                 $this->account = Account::factory()
                     ->has(AccountCredential::factory()->username(), 'credentials')
                     ->has(AccountCredential::factory()->email(), 'credentials')
                     ->create();
 
-                $this->account->syncRoles(Access::administratorRoles());
+                $this->team = Team::factory()->for($this->account, 'owner')->create();
+
+                $this->account
+                    ->forceFill([
+                        'current_team_id' => $this->team->id,
+                    ])
+                    ->save();
 
                 actingAs($this->account);
+
+                Filament::setTenant($this->team);
+                Filament::setCurrentPanel(Filament::getPanel($slug));
             })
             ->group($slug)
             ->in(

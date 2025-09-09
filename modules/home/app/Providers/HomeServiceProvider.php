@@ -9,6 +9,9 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Venture\Home\Concerns\InteractsWithModule;
 
+/**
+ * @codeCoverageIgnore
+ */
 class HomeServiceProvider extends ServiceProvider
 {
     use InteractsWithModule;
