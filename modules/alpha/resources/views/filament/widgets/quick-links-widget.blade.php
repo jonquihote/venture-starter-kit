@@ -1,6 +1,6 @@
 <x-filament-widgets::widget>
     <x-filament::section>
-        <div class="flex flex-wrap gap-2">
+        <div class="grid grid-cols-3 gap-2">
             @foreach ($links as $link)
                 <x-filament::button
                     :href="$link['url']"
