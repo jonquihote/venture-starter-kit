@@ -4,6 +4,7 @@ namespace Venture\Alpha\Filament\Pages\Auth;
 
 use Filament\Actions\Action;
 use Filament\Auth\Pages\Login as BaseLogin;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component;
@@ -16,6 +17,17 @@ use SensitiveParameter;
 
 class Login extends BaseLogin
 {
+    public function mount(): void
+    {
+        if (Filament::auth()->check()) {
+            $url = Filament::getPanel('home')->getUrl(Filament::getTenant());
+
+            redirect()->intended($url);
+        }
+
+        $this->form->fill();
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
-class HandleTenantSwitch
+class HandleTeamSwitch
 {
     public function handle(Request $request, Closure $next): Response
     {

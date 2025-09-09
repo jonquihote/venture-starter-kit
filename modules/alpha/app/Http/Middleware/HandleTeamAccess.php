@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Venture\Alpha\Settings\TenancySettings;
 
-class EnsureTeamAccess
+class HandleTeamAccess
 {
     public function handle(Request $request, Closure $next): Response
     {

@@ -17,10 +17,10 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Lorisleiva\Actions\Action;
-use Venture\Alpha\Http\Middleware\EnsureTeamAccess;
 use Venture\Alpha\Http\Middleware\EnsureTeamHasSubscription;
 use Venture\Alpha\Http\Middleware\HandleSingleTeamMode;
-use Venture\Alpha\Http\Middleware\HandleTenantSwitch;
+use Venture\Alpha\Http\Middleware\HandleTeamAccess;
+use Venture\Alpha\Http\Middleware\HandleTeamSwitch;
 use Venture\Alpha\Http\Middleware\UpdateCurrentTeam;
 use Venture\Alpha\Models\Team;
 use Venture\Alpha\Settings\TenancySettings;
@@ -93,11 +93,11 @@ class MakePanel extends Action
             ])
             ->tenantMiddleware([
                 UpdateCurrentTeam::class,
-                HandleTenantSwitch::class,
-                EnsureTeamAccess::class,
                 EnsureTeamHasSubscription::with([
                     'slug' => $slug,
                 ]),
+                HandleTeamSwitch::class,
+                HandleTeamAccess::class,
                 HandleSingleTeamMode::class,
             ], isPersistent: true);
     }
