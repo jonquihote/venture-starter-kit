@@ -69,9 +69,12 @@ class AccessManager
 
     /**
      * Add a single administrator role to the registry.
+     * Supports idempotency - adding the same role multiple times won't create duplicates.
      */
     public function addAdministratorRole(BackedEnum $role): void
     {
-        $this->administratorRoles->push($role);
+        if (! $this->administratorRoles->contains($role)) {
+            $this->administratorRoles->push($role);
+        }
     }
 }

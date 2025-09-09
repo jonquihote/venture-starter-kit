@@ -23,6 +23,9 @@ use Venture\Aeon\Packages\Spatie\Permission\Providers\PermissionServiceProvider;
 use Venture\Aeon\Packages\Spatie\Settings\Providers\SettingsServiceProvider;
 use Venture\Aeon\Packages\Spatie\Tags\Providers\TagsServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ */
 class AeonServiceProvider extends ServiceProvider
 {
     use PathNamespace;

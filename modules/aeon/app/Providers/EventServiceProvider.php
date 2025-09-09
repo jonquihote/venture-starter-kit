@@ -4,6 +4,9 @@ namespace Venture\Aeon\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ */
 class EventServiceProvider extends ServiceProvider
 {
     /**

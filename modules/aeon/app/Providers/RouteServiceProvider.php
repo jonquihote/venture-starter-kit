@@ -6,6 +6,9 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Route;
 use Venture\Aeon\Concerns\InteractsWithModule;
 
+/**
+ * @codeCoverageIgnore
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     use InteractsWithModule;

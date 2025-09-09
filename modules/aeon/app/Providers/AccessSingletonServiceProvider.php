@@ -9,10 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Venture\Aeon\Services\AccessManager;
 
 /**
- * AccessSingletonServiceProvider
- *
- * Dedicated service provider for registering authorization-related services.
- * This provider is deferred to improve application performance.
+ * @codeCoverageIgnore
  */
 class AccessSingletonServiceProvider extends ServiceProvider implements DeferrableProvider
 {
