@@ -42,6 +42,8 @@ practices, and a thoughtfully designed module system that grows with your applic
 - **Package Integration**: Horizon, Pulse, Reverb, Scout, Telescope
 - **Spatie Package Suite**: Permissions, Activity Log, Media Library, Settings
 - **API Client Integration** with Saloon for external services
+- **Laravel Boost Integration** with MCP server for enhanced development
+- **Flux UI Components** for consistent Livewire interfaces
 
 ## Technology Stack
 
@@ -64,6 +66,7 @@ practices, and a thoughtfully designed module system that grows with your applic
 | Tailwind CSS | v4      | Utility-first CSS framework      |
 | TypeScript   | Latest  | Type-safe JavaScript             |
 | Vite         | Latest  | Build tool and dev server        |
+| Flux UI      | v2      | Livewire component library       |
 
 ### Development Tools
 
@@ -74,6 +77,7 @@ practices, and a thoughtfully designed module system that grows with your applic
 | Laravel Pint | v1      | Code style fixer       |
 | ESLint       | Latest  | JavaScript linting     |
 | Prettier     | Latest  | Code formatting        |
+| Laravel Boost| Latest  | MCP server integration |
 
 ## Module Architecture
 
@@ -101,6 +105,7 @@ practices, and a thoughtfully designed module system that grows with your applic
 
 **Blueprint Module** - Documentation Hub
 
+- Orbit CMS integration for documentation management
 - Comprehensive documentation and style guides
 - Component library examples
 - Development best practices and patterns
@@ -108,6 +113,9 @@ practices, and a thoughtfully designed module system that grows with your applic
 **Home Module** - Application Core
 
 - Main dashboard and user interface
+- Vue 3 + Inertia.js page components
+- Authentication system (login, register, password reset)
+- Settings management (profile, password, appearance)
 - Base page layouts and components
 - Primary user workflows
 
@@ -116,8 +124,10 @@ practices, and a thoughtfully designed module system that grows with your applic
 ### Prerequisites
 
 - **PHP** 8.4 or higher
-- **Node.js** v22+ (with bun as primary package manager)
+- **Node.js** v22+ 
+- **Bun** as package manager (used via bunx)
 - **Composer** for PHP dependencies
+- **PostgreSQL** database
 - **Git** for version control
 
 ### Installation
