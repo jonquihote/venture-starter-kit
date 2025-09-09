@@ -1,16 +1,16 @@
 ---
-title: 'Filter Permissions'
-slug: aeon-filter-permissions
+title: 'Manage Permissions'
+slug: aeon-manage-permissions
 is_home_page: false
 documentation_group: Aeon
 navigation_group: Development
 navigation_sort: 2.0
 created_at: 2025-09-09T04:59:53+00:00
-updated_at: 2025-09-09T05:18:45+00:00
+updated_at: 2025-09-09T09:44:27+00:00
 ---
-# Filter Permissions
+# Manage Permissions
 
-**I want to** filter the permissions that is available in each module
+**I want to** manage the permissions that is available in each module
 **So that** I can quickly assign or remove permissions to roles or accounts
 
 **Acceptance Criteria:**
