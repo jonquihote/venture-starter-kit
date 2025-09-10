@@ -29,19 +29,20 @@ class AccountForm
                         TextInput::make('password')
                             ->label(__('alpha::filament/resources/account/form.fields.password.label'))
                             ->password()
-                            ->required()
-                            ->confirmed()
                             ->revealable()
                             ->hiddenOn('edit')
+                            ->required()
+                            ->confirmed()
+                            ->minLength(12)
                             ->columnSpan(1),
 
                         TextInput::make('password_confirmation')
                             ->label(__('alpha::filament/resources/account/form.fields.password_confirmation.label'))
                             ->password()
-                            ->required()
                             ->revealable()
-                            ->dehydrated(false)
                             ->hiddenOn('edit')
+                            ->dehydrated(false)
+                            ->required()
                             ->columnSpan(1),
 
                         Group::make()

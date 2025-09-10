@@ -13,15 +13,16 @@ class EditPasswordForm
             TextInput::make('password')
                 ->label(__('alpha::filament/resources/account/form.fields.password.label'))
                 ->password()
+                ->revealable()
                 ->required()
-                ->minLength(8)
-                ->confirmed(),
+                ->confirmed()
+                ->minLength(12),
 
             TextInput::make('password_confirmation')
                 ->label(__('alpha::filament/resources/account/form.fields.password_confirmation.label'))
                 ->password()
-                ->required()
-                ->dehydrated(false),
+                ->dehydrated(false)
+                ->required(),
         ]);
     }
 }

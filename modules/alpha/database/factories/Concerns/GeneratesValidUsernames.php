@@ -14,54 +14,69 @@ trait GeneratesValidUsernames
      */
     protected function generateValidUsername(): string
     {
-        // Start with a lowercase letter
-        $username = $this->faker->randomElement(range('a', 'z'));
+        // Generate base username from faker
+        $baseOptions = [
+            fn () => strtolower($this->faker->firstName()),
+            fn () => strtolower($this->faker->lastName()),
+            fn () => strtolower($this->faker->userName()),
+            fn () => strtolower($this->faker->word()),
+        ];
 
-        // Determine length (4-16 characters total)
-        $totalLength = $this->faker->numberBetween(4, 16);
+        $base = $baseOptions[array_rand($baseOptions)]();
 
-        // Generate middle characters (need at least 1 more for ending)
-        $middleLength = $totalLength - 2; // -1 for start, -1 for end
+        // Clean the base to only contain allowed characters
+        $base = preg_replace('/[^a-z0-9._]/', '', $base);
 
-        $lastChar = $username[0]; // Track last character to avoid consecutive symbols
-
-        for ($i = 0; $i < $middleLength; $i++) {
-            // Choose from allowed characters
-            $choices = ['letter', 'number'];
-
-            // Only allow symbols if last char wasn't a symbol
-            if (! in_array($lastChar, ['.', '_'])) {
-                $choices[] = 'symbol';
-            }
-
-            $choice = $this->faker->randomElement($choices);
-
-            switch ($choice) {
-                case 'letter':
-                    $char = $this->faker->randomElement(range('a', 'z'));
-
-                    break;
-                case 'number':
-                    $char = (string) $this->faker->numberBetween(0, 9);
-
-                    break;
-                case 'symbol':
-                    $char = $this->faker->randomElement(['.', '_']);
-
-                    break;
-            }
-
-            $username .= $char;
-            $lastChar = $char;
+        // Ensure it starts with a lowercase letter
+        if (empty($base) || ! preg_match('/^[a-z]/', $base)) {
+            $base = $this->faker->randomLetter() . $base;
         }
+
+        // Ensure proper length (4-16 characters)
+        if (strlen($base) < 4) {
+            // Add random suffix to meet minimum length
+            $suffixOptions = [
+                $this->faker->numberBetween(10, 999),
+                $this->faker->randomLetter() . $this->faker->randomLetter(),
+                '_' . $this->faker->randomLetter(),
+                '.' . $this->faker->randomLetter(),
+            ];
+            $base .= $suffixOptions[array_rand($suffixOptions)];
+        } elseif (strlen($base) > 16) {
+            // Truncate to maximum length
+            $base = substr($base, 0, 16);
+        }
+
+        // Fix consecutive symbols (dots or underscores)
+        $base = preg_replace('/([._]){2,}/', '$1', $base);
 
         // Ensure it ends with a letter or number
-        if ($this->faker->boolean()) {
-            $username .= $this->faker->randomElement(range('a', 'z'));
-        } else {
-            $username .= (string) $this->faker->numberBetween(0, 9);
+        if (! preg_match('/[a-z0-9]$/', $base)) {
+            // Remove trailing symbols and add valid ending
+            $base = rtrim($base, '._');
+            if (strlen($base) < 16) {
+                $base .= $this->faker->randomElement([$this->faker->randomLetter(), $this->faker->randomDigit()]);
+            }
         }
 
-        return $username;
+        // Final validation and fallback
+        if (strlen($base) < 4 || strlen($base) > 16 ||
+            ! preg_match('/^[a-z]/', $base) ||
+            ! preg_match('/[a-z0-9]$/', $base) ||
+            ! preg_match('/^[a-z0-9._]+$/', $base) ||
+            preg_match('/[._]{2}/', $base)) {
+            // Fallback to a guaranteed valid username
+            $prefix = $this->faker->randomLetter();
+            $middle = $this->faker->randomLetter() . $this->faker->randomDigit();
+            $suffix = $this->faker->randomElement([$this->faker->randomLetter(), $this->faker->randomDigit()]);
+            $base = $prefix . $middle . $suffix;
+
+            // Add more characters if needed for minimum length
+            while (strlen($base) < 4) {
+                $base .= $this->faker->randomElement([$this->faker->randomLetter(), $this->faker->randomDigit()]);
+            }
+        }
+
+        return $base;
     }
 }

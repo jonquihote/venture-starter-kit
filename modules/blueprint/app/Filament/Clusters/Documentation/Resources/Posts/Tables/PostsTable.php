@@ -50,6 +50,20 @@ class PostsTable
                     ->label(__('blueprint::filament/resources/posts/table.filters.documentation_group.label'))
                     ->options(DocumentationGroupsEnum::class),
             ])
+            ->modifyQueryUsing(function ($query, Table $table) {
+                // Get the Livewire component instance
+                $livewire = $table->getLivewire();
+
+                // Check if documentation group filter is active
+                $filterState = $livewire->getTableFilterState('documentation_group');
+
+                // When filter has a value, apply ordered scope
+                if (! empty($filterState['value'])) {
+                    return $query->ordered();
+                }
+
+                return $query;
+            })
             ->recordActions([
                 EditAction::make(),
             ])

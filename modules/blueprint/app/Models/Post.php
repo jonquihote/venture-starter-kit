@@ -113,7 +113,8 @@ class Post extends Model implements Sortable
 
                 return "{$group}-{$title}";
             })
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate();
     }
 
     public function getUrl(): string

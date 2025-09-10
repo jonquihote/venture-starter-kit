@@ -6,8 +6,11 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Venture\Aeon\Facades\Access;
+use Venture\Alpha\Enums\Auth\RolesEnum;
 use Venture\Alpha\Models\Account;
 use Venture\Alpha\Models\AccountCredential;
+use Venture\Alpha\Models\Application;
+use Venture\Alpha\Models\Subscription;
 use Venture\Alpha\Models\Team;
 
 use function Pest\Laravel\actingAs;
@@ -50,22 +53,43 @@ Collection::make(json_decode(file_get_contents(__DIR__ . '/../modules_statuses.j
 
         pest()
             ->beforeEach(function () use ($slug): void {
-                $this->account = Account::factory()
+                $this->currentAccount = Account::factory()
                     ->has(AccountCredential::factory()->username(), 'credentials')
                     ->has(AccountCredential::factory()->email(), 'credentials')
                     ->create();
 
-                $this->team = Team::factory()->for($this->account, 'owner')->create();
+                $this->currentTeam = Team::factory()->for($this->currentAccount, 'owner')->create();
 
-                $this->account
+                $this->currentAccount
                     ->forceFill([
-                        'current_team_id' => $this->team->id,
+                        'current_team_id' => $this->currentTeam->id,
                     ])
                     ->save();
 
-                actingAs($this->account);
+                if ($slug === 'alpha') {
+                    $this->application = Application::query()
+                        ->where('slug', $slug)
+                        ->first();
 
-                Filament::setTenant($this->team);
+                    $this->subscription = Subscription::factory()->create([
+                        'team_id' => $this->currentTeam->id,
+                        'application_id' => $this->application->id,
+                    ]);
+
+                    setPermissionsTeamId($this->currentTeam->id);
+
+                    $roles = Access::administratorRoles()
+                        ->reject(function (BackedEnum $role) {
+                            return $role === RolesEnum::Administrator;
+                        })
+                        ->push(RolesEnum::SuperAdministrator);
+
+                    $this->currentAccount->syncRoles($roles);
+                }
+
+                actingAs($this->currentAccount);
+
+                Filament::setTenant($this->currentTeam);
                 Filament::setCurrentPanel(Filament::getPanel($slug));
             })
             ->group($slug)

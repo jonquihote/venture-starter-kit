@@ -17,9 +17,9 @@ class ValidName implements ValidationRule
             return;
         }
 
-        // Check if value is string and contains only Unicode letters, marks, and regular spaces
-        // Must contain at least one letter or mark (not just spaces)
-        if (! is_string($value) || ! preg_match('/\A[\pL\pM ]+\z/u', $value) || ! preg_match('/[\pL\pM]/u', $value)) {
+        // Check if value is string and contains only ASCII letters (uppercase, lowercase) and regular spaces
+        // Must contain at least one letter (not just spaces)
+        if (! is_string($value) || ! preg_match('/\A[A-Za-z ]+\z/', $value) || ! preg_match('/[A-Za-z]/', $value)) {
             $fail(__('alpha::rules/valid_name.invalid_characters'));
         }
     }

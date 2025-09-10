@@ -5,6 +5,7 @@ namespace Venture\Alpha\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Venture\Alpha\Database\Factories\Concerns\GeneratesValidNames;
 use Venture\Alpha\Database\Factories\Concerns\GeneratesValidUsernames;
 use Venture\Alpha\Models\Account;
 
@@ -13,6 +14,7 @@ use Venture\Alpha\Models\Account;
  */
 class AccountFactory extends Factory
 {
+    use GeneratesValidNames;
     use GeneratesValidUsernames;
 
     /**
@@ -27,12 +29,8 @@ class AccountFactory extends Factory
      */
     public function definition(): array
     {
-        $firstName = $this->faker->firstName();
-        $lastName = $this->faker->lastName();
-        $name = "{$firstName} {$lastName}";
-
         return [
-            'name' => $name,
+            'name' => $this->generateValidName(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
