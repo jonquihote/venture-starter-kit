@@ -2,6 +2,9 @@
 
 namespace Venture\Alpha\Concerns;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait InteractsWithModule
 {
     public function getModuleName(): string

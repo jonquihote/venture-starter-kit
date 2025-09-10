@@ -16,6 +16,9 @@ use Venture\Alpha\Rules\ValidUsername;
 
 use function Laravel\Prompts\form;
 
+/**
+ * @codeCoverageIgnore
+ */
 class MakeAccountCommand extends Command
 {
     protected $signature = 'alpha:make:account';

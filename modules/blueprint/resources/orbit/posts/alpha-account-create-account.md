@@ -134,7 +134,6 @@ updated_at: 2025-09-10T02:08:55+00:00
 2. ✅ Email credential created with AccountCredentialTypesEnum::Email
 3. ✅ Both credentials marked as is_primary=true
 4. ✅ Credentials properly linked to account via account_id
-5. ✅ updateUsername() and updateEmail() helper methods work correctly
 
 ### CSV Import Features *(Testing Deferred)*
 1. ❌ CSV import with proper field mapping (name, username, email)

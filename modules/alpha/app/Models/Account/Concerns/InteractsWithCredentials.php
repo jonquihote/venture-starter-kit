@@ -35,11 +35,11 @@ trait InteractsWithCredentials
     {
         return $this->credentials()->updateOrCreate(
             [
-                'value' => $value,
                 'type' => AccountCredentialTypesEnum::Username,
+                'is_primary' => true,
             ],
             [
-                'is_primary' => true,
+                'value' => $value,
                 'verified_at' => Carbon::now(),
             ]
         );
@@ -49,11 +49,11 @@ trait InteractsWithCredentials
     {
         return $this->credentials()->updateOrCreate(
             [
-                'value' => $value,
                 'type' => AccountCredentialTypesEnum::Email,
+                'is_primary' => true,
             ],
             [
-                'is_primary' => true,
+                'value' => $value,
                 'verified_at' => null,
             ]
         );

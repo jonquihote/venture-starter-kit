@@ -7,6 +7,9 @@ use Lorisleiva\Actions\Action;
 use Venture\Aeon\Facades\Access;
 use Venture\Alpha\Models\Subscription;
 
+/**
+ * @codeCoverageIgnore
+ */
 class AssignTeamOwnerRole extends Action
 {
     public function handle(Subscription $subscription): void

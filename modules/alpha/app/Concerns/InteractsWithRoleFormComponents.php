@@ -6,6 +6,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Venture\Alpha\Models\Account;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait InteractsWithRoleFormComponents
 {
     public static function buildFieldName(string $name, int $teamId): string

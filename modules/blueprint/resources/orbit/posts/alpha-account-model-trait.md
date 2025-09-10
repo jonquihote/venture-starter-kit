@@ -116,7 +116,7 @@ public function toSearchableArray(): array
 - Policy-based authorization with granular access control
 - Team-scoped role assignments
 
-## Test Scenarios - Model Architecture *(Implementation Status: ✅ Implemented)*
+## Test Scenarios - Model Architecture *(Implementation Status: ✅ Tested)*
 
 ### Account Model Tests
 1. ✅ Account model extends Authenticatable and implements required interfaces
@@ -131,14 +131,16 @@ public function toSearchableArray(): array
 3. ✅ AccountCredential supports verification timestamps
 4. ✅ Primary designation works correctly
 
-### InteractsWithCredentials Trait Tests
+### InteractsWithCredentials Trait Tests *(Comprehensive Coverage: InteractsWithCredentialsTest.php)*
 1. ✅ credentials() relationship returns HasMany
-2. ✅ email() relationship returns primary email credential
+2. ✅ email() relationship returns primary email credential  
 3. ✅ username() relationship returns primary username credential
-4. ✅ updateUsername() creates/updates username credential correctly
-5. ✅ updateEmail() creates/updates email credential correctly
-6. ✅ scopeWhereUsername() filters by username value
-7. ✅ scopeWhereEmail() filters by email value
+4. ✅ updateUsername() creates/updates username credential with verified_at timestamp
+5. ✅ updateEmail() creates/updates email credential with null verified_at
+6. ✅ scopeWhereUsername() filters accounts by username value
+7. ✅ scopeWhereEmail() filters accounts by email value
+8. ✅ Query scopes only match primary credentials (not secondary)
+9. ✅ Update methods handle both create and update scenarios correctly
 
 ### Validation Rule Tests
 1. ✅ ValidName accepts valid ASCII names with letters and spaces

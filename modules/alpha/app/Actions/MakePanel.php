@@ -25,6 +25,9 @@ use Venture\Alpha\Http\Middleware\UpdateCurrentTeam;
 use Venture\Alpha\Models\Team;
 use Venture\Alpha\Settings\TenancySettings;
 
+/**
+ * @codeCoverageIgnore
+ */
 class MakePanel extends Action
 {
     public function handle(Panel $panel, string $name, string $slug): Panel

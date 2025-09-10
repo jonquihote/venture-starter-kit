@@ -20,7 +20,7 @@ updated_at: 2025-09-10T02:08:58+00:00
 - [x] Username validation using ValidUsername rule with proper constraints
 - [x] Email format validation with uniqueness checking
 - [x] Username and email uniqueness excludes current account's credentials
-- [x] Credential updates use updateUsername() and updateEmail() helper methods
+- [x] Credential updates use trait helper methods
 - [x] Primary credential designation is maintained during updates
 - [x] Successful updates show notification and redirect appropriately
 
@@ -36,42 +36,10 @@ updated_at: 2025-09-10T02:08:58+00:00
 
 **Account Update Flow**:
 1. Account name updated directly on Account model
-2. Username updated via `updateUsername()` helper method
-3. Email updated via `updateEmail()` helper method
+2. Username updated via trait helper method
+3. Email updated via trait helper method
 4. Primary credential designation preserved
 5. Relationships maintained throughout update process
-
-**Credential Update Methods**:
-```php
-// InteractsWithCredentials trait methods
-public function updateUsername(string $value): Model
-{
-    return $this->credentials()->updateOrCreate(
-        [
-            'value' => $value,
-            'type' => AccountCredentialTypesEnum::Username,
-        ],
-        [
-            'is_primary' => true,
-            'verified_at' => Carbon::now(),
-        ]
-    );
-}
-
-public function updateEmail(string $value): Model
-{
-    return $this->credentials()->updateOrCreate(
-        [
-            'value' => $value,
-            'type' => AccountCredentialTypesEnum::Email,
-        ],
-        [
-            'is_primary' => true,
-            'verified_at' => null, // Reset verification on change
-        ]
-    );
-}
-```
 
 ### Validation Rules
 
@@ -119,8 +87,8 @@ public function updateEmail(string $value): Model
 
 ### Account Update Success Path
 1. ✅ Can update account name with valid data
-2. ✅ Can update username using updateUsername() helper method
-3. ✅ Can update email using updateEmail() helper method
+2. ✅ Can update username using trait helper method
+3. ✅ Can update email using trait helper method
 4. ✅ Account record updated with new name
 5. ✅ Username credential updated while maintaining primary designation
 6. ✅ Email credential updated while maintaining primary designation
@@ -141,22 +109,17 @@ public function updateEmail(string $value): Model
 5. ✅ Username allows lowercase letters, numbers, dots, underscores
 6. ✅ Username rejects consecutive special characters
 7. ✅ Username uniqueness excludes current account's username
-8. ⚠️ updateUsername() method works correctly during updates *(Implicitly tested via database assertions - explicit trait testing planned)*
 
 ### Email Validation Tests
 1. ✅ Email field is required
 2. ✅ Email must be valid format
 3. ✅ Email uniqueness excludes current account's email
-4. ⚠️ updateEmail() method works correctly during updates *(Implicitly tested via database assertions - explicit trait testing planned)*
-5. ⚠️ Email verification status handled properly on change *(Implicit through method behavior - explicit trait testing planned)*
 
 ### Credential Update Tests
 1. ✅ Primary credential designation maintained during username update
 2. ✅ Primary credential designation maintained during email update
 3. ✅ Credential relationships preserved during updates
-4. ⚠️ updateUsername() sets verified_at timestamp *(Implicit through method behavior - explicit trait testing planned)*
-5. ⚠️ updateEmail() resets verified_at to null *(Implicit through method behavior - explicit trait testing planned)*
-6. ✅ Multiple credential types supported correctly
+4. ✅ Multiple credential types supported correctly
 
 ### Password and Role Management *(Separate Features)*
 1. ✅ EditPassword form accessible as separate action

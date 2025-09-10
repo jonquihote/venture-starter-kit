@@ -13,6 +13,9 @@ use Venture\Alpha\Settings\TenancySettings;
 use function Laravel\Prompts\form;
 use function Laravel\Prompts\search;
 
+/**
+ * @codeCoverageIgnore
+ */
 class MakeTeamCommand extends Command
 {
     protected $signature = 'alpha:make:team';

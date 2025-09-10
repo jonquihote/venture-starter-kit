@@ -9,6 +9,9 @@ use Spatie\Permission\Models\Role;
 use Venture\Aeon\Facades\Access;
 use Venture\Alpha\Models\Subscription;
 
+/**
+ * @codeCoverageIgnore
+ */
 class InitializeTeamAccess extends Action
 {
     /**

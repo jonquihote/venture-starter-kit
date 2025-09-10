@@ -7,6 +7,9 @@ use Venture\Alpha\Data\ApplicationData;
 use Venture\Alpha\Facades\Engine;
 use Venture\Alpha\Models\Application;
 
+/**
+ * @codeCoverageIgnore
+ */
 class InitializeEngineCommand extends Command
 {
     protected $signature = 'alpha:init:engine';

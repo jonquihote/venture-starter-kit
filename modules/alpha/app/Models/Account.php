@@ -18,7 +18,7 @@ use Venture\Aeon\Concerns\InteractsWithNotifications;
 use Venture\Alpha\Concerns\InteractsWithFilamentUser;
 use Venture\Alpha\Database\Factories\AccountFactory;
 use Venture\Alpha\Enums\MigrationsEnum;
-use Venture\Alpha\Models\Account\Concerns\ConfigureActivityLog;
+use Venture\Alpha\Models\Account\Concerns\ConfiguresActivityLog;
 use Venture\Alpha\Models\Account\Concerns\InteractsWithCredentials;
 use Venture\Alpha\Models\Account\Concerns\InteractsWithTeams;
 use Venture\Alpha\Models\Account\Events\AccountCreated;
@@ -38,7 +38,7 @@ use Venture\Alpha\Models\Account\Observers\AccountObserver;
 class Account extends Authenticatable implements FilamentUser, HasDefaultTenant, HasTenants
 {
     use CausesActivity;
-    use ConfigureActivityLog;
+    use ConfiguresActivityLog;
     use HasFactory;
     use HasRoles;
     use InteractsWithCredentials;

@@ -5,7 +5,7 @@ namespace Venture\Alpha\Models\Account\Concerns;
 use Spatie\Activitylog\LogOptions;
 use Venture\Aeon\Packages\Spatie\Activitylog\Models\Activity;
 
-trait ConfigureActivityLog
+trait ConfiguresActivityLog
 {
     public function getActivitylogOptions(): LogOptions
     {
