@@ -61,6 +61,7 @@
             "WebFetch(domain:filamentphp.com)",
             "WebFetch(domain:diataxis.fr)",
             "WebFetch(domain:alpinejs.dev)",
+            "WebFetch(domain:mermaid.js.org)",
             "WebSearch"
         ]
     },

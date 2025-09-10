@@ -8,6 +8,7 @@ navigation_sort: 6.0
 created_at: 2025-09-10T01:56:11+00:00
 updated_at: 2025-09-10T02:08:55+00:00
 ---
+
 # Create Account
 
 **I want to** create new user accounts with secure credentials
@@ -27,6 +28,7 @@ updated_at: 2025-09-10T02:08:55+00:00
 ## Technical Implementation
 
 ### Form Structure
+
 - **Location**: `modules/alpha/app/Filament/Clusters/Administration/Resources/Accounts/Pages/CreateAccount.php`
 - **Schema**: `modules/alpha/app/Filament/Clusters/Administration/Resources/Accounts/Schemas/AccountForm.php`
 - **Form Fields**: name, password, password_confirmation, username.value, email.value
@@ -35,16 +37,19 @@ updated_at: 2025-09-10T02:08:55+00:00
 ### Validation Rules
 
 **Name Field (ValidName)**:
+
 - ASCII characters only (A-Z, a-z, spaces)
 - Must contain at least one letter (not just spaces)
 - No special characters or numbers
 
 **Password Field**:
+
 - Minimum 12 characters using Laravel's `Password::min(12)` rule
 - Confirmation required matching password field
 - Secure hashing using Laravel's default hasher
 
 **Username Field (ValidUsername)**:
+
 - Length: 4-16 characters
 - Must start with lowercase letter (a-z)
 - Must end with letter or number
@@ -53,6 +58,7 @@ updated_at: 2025-09-10T02:08:55+00:00
 - Uniqueness within username credential type
 
 **Email Field**:
+
 - Standard email format validation
 - Uniqueness within email credential type
 - Proper handling during creation
@@ -60,13 +66,16 @@ updated_at: 2025-09-10T02:08:55+00:00
 ### Credential Creation Process
 
 **Account Creation Flow**:
+
 1. Account record created with name and hashed password
 2. Username credential created with type='username', is_primary=true
 3. Email credential created with type='email', is_primary=true
 4. Both credentials linked to account via account_id
 5. Verification timestamps set appropriately
 
+
 ### Password Security
+
 - All passwords hashed using Laravel's default hasher
 - Secure password generation for CSV imports (32-character random)
 - Password confirmation required for all operations
@@ -76,6 +85,7 @@ updated_at: 2025-09-10T02:08:55+00:00
 *These features are documented but testing is deferred:*
 
 ### CSV Import Capability
+
 - **Field Mapping**: name, username, email columns required
 - **Validation**: Full validation using custom rules (ValidName, ValidUsername)
 - **Uniqueness Enforcement**: Username/email uniqueness within credential types
@@ -86,12 +96,14 @@ updated_at: 2025-09-10T02:08:55+00:00
 ## Test Scenarios - Create Account *(Implementation Status: ✅ Implemented)*
 
 ### Form Rendering and Schema
+
 1. ✅ Create account form page can be rendered successfully
 2. ✅ Form schema exists and displays all required fields
 3. ✅ Fields are properly labeled and organized
 4. ✅ Password confirmation field works correctly
 
 ### Account Creation Success Path
+
 1. ✅ Can create account with valid data (name, password, username, email)
 2. ✅ Account record is created in database with correct name
 3. ✅ Username credential is created with proper type and primary designation
@@ -101,6 +113,7 @@ updated_at: 2025-09-10T02:08:55+00:00
 7. ✅ Redirects to appropriate page after creation
 
 ### Name Validation Tests
+
 1. ✅ Name field is required
 2. ✅ Rejects names with non-ASCII characters (José María)
 3. ✅ Rejects names with numbers or special characters (John123)
@@ -108,6 +121,7 @@ updated_at: 2025-09-10T02:08:55+00:00
 5. ✅ Accepts valid names with letters and spaces (John Doe)
 
 ### Password Validation Tests
+
 1. ✅ Password field is required
 2. ✅ Password must be at least 12 characters
 3. ✅ Password confirmation is required
@@ -115,6 +129,7 @@ updated_at: 2025-09-10T02:08:55+00:00
 5. ✅ Password is properly hashed before storage
 
 ### Username Validation Tests
+
 1. ✅ Username field is required
 2. ✅ Username must be 4-16 characters
 3. ✅ Username must start with lowercase letter
@@ -124,18 +139,21 @@ updated_at: 2025-09-10T02:08:55+00:00
 7. ✅ Username uniqueness is enforced within credential type
 
 ### Email Validation Tests
+
 1. ✅ Email field is required
 2. ✅ Email must be valid format
 3. ✅ Email uniqueness is enforced within credential type
 4. ✅ Email credential created with proper relationship
 
 ### Credential Creation Tests
+
 1. ✅ Username credential created with AccountCredentialTypesEnum::Username
 2. ✅ Email credential created with AccountCredentialTypesEnum::Email
 3. ✅ Both credentials marked as is_primary=true
 4. ✅ Credentials properly linked to account via account_id
 
 ### CSV Import Features *(Testing Deferred)*
+
 1. ❌ CSV import with proper field mapping (name, username, email)
 2. ❌ Validation during import process with error handling
 3. ❌ Secure password generation for imported accounts

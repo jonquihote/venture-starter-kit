@@ -1,14 +1,14 @@
 ---
-title: 'Model & Trait'
-slug: alpha-account-model-trait
+title: 'Model Architecture'
+slug: alpha-account-model-architecture
 is_home_page: false
 documentation_group: Alpha
 navigation_group: Account
-navigation_sort: 4.0
+navigation_sort: 3.0
 created_at: 2025-09-10T01:54:47+00:00
-updated_at: 2025-09-10T01:59:28+00:00
+updated_at: 2025-09-10T06:56:13+00:00
 ---
-# Account Model & Trait Architecture
+# Model Architecture
 
 **I want to** have robust models that handle authentication and flexible credential management
 **So that** the system can support multiple credential types while maintaining data integrity and extensibility
@@ -41,21 +41,13 @@ updated_at: 2025-09-10T01:59:28+00:00
 
 ### Core Traits
 
-**InteractsWithCredentials** (`modules/alpha/app/Models/Account/Concerns/InteractsWithCredentials.php`):
-```php
-// Core relationships
-public function credentials(): HasMany
-public function email(): HasOne          // Primary email credential
-public function username(): HasOne       // Primary username credential
+The Account model uses several traits for modular functionality. For comprehensive trait documentation, see [Account Model Traits](alpha-account-traits.md).
 
-// Helper methods
-public function updateUsername(string $value): Model
-public function updateEmail(string $value): Model
-
-// Query scopes
-public function scopeWhereUsername(Builder $query, string $value): Builder
-public function scopeWhereEmail(Builder $query, string $value): Builder
-```
+**Key Traits**:
+- **InteractsWithCredentials**: Flexible credential management (email, username)
+- **InteractsWithTeams**: Multi-tenancy support  
+- **CausesActivity/LogsActivity**: Activity logging integration
+- **HasRoles**: Role-based access control
 
 ### Credential Types
 
@@ -96,25 +88,10 @@ public function toSearchableArray(): array
 
 *The following features are fully implemented but testing focuses on core Account/AccountCredential functionality:*
 
-### Multi-Tenancy Support
-- **InteractsWithTeams**: Team-based organization with ownership and membership
-- **HasDefaultTenant** and **HasTenants**: Filament multi-tenancy integration
-- Team-scoped roles and permissions
-
 ### Event-Driven Architecture
 - Complete lifecycle events (Creating, Created, Updating, etc.)
 - Observer pattern for business logic hooks
 - Extensible event system for custom integrations
-
-### Activity Logging
-- **CausesActivity** and **LogsActivity**: Spatie Activity Log integration
-- Comprehensive audit trail for compliance tracking
-- User action history and change tracking
-
-### Authorization System
-- **HasRoles**: Spatie Permission integration
-- Policy-based authorization with granular access control
-- Team-scoped role assignments
 
 ## Test Scenarios - Model Architecture *(Implementation Status: ✅ Tested)*
 
@@ -131,16 +108,8 @@ public function toSearchableArray(): array
 3. ✅ AccountCredential supports verification timestamps
 4. ✅ Primary designation works correctly
 
-### InteractsWithCredentials Trait Tests *(Comprehensive Coverage: InteractsWithCredentialsTest.php)*
-1. ✅ credentials() relationship returns HasMany
-2. ✅ email() relationship returns primary email credential  
-3. ✅ username() relationship returns primary username credential
-4. ✅ updateUsername() creates/updates username credential with verified_at timestamp
-5. ✅ updateEmail() creates/updates email credential with null verified_at
-6. ✅ scopeWhereUsername() filters accounts by username value
-7. ✅ scopeWhereEmail() filters accounts by email value
-8. ✅ Query scopes only match primary credentials (not secondary)
-9. ✅ Update methods handle both create and update scenarios correctly
+### Trait Tests
+For comprehensive trait testing documentation, see [Account Model Traits](alpha-account-traits.md).
 
 ### Validation Rule Tests
 1. ✅ ValidName accepts valid ASCII names with letters and spaces
