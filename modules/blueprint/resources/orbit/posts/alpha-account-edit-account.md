@@ -87,6 +87,12 @@ updated_at: 2025-09-10T02:08:58+00:00
 
 ## Test Scenarios - Edit Account *(Implementation Status: ✅ Implemented)*
 
+**Legend:**
+- ✅ **Tested** - Explicitly tested in our test suite
+- 🔧 **Framework** - Provided by Laravel/Filament framework (trusted)
+- ⚠️ **Not Tested** - Should be tested but currently isn't
+- ❌ **Deferred** - Intentionally not implemented/tested yet
+
 ### Form Rendering and Data Loading
 
 1. ✅ Edit account form page can be rendered successfully

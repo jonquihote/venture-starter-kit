@@ -103,41 +103,65 @@ public function toSearchableArray(): array
 - Observer pattern for business logic hooks
 - Extensible event system for custom integrations
 
-## Test Scenarios - Model Architecture *(Implementation Status: ✅ Tested)*
+## Test Scenarios - Model Architecture
 
-### Account Model Tests
+**Legend:**
+- ✅ **Tested** - Explicitly tested in our test suite
+- 🔧 **Framework** - Provided by Laravel/Filament framework (trusted)
+- ⚠️ **Not Tested** - Should be tested but currently isn't
+- ❌ **Deferred** - Intentionally not implemented/tested yet
+
+*Note: Model architecture features are fully implemented with comprehensive direct unit tests covering all functionality.*
+
+### Account Model Tests *(Status: ✅ Comprehensive Coverage)*
 
 1. ✅ Account model extends Authenticatable and implements required interfaces
-2. ✅ Account model uses all required traits correctly
+2. ✅ Account model uses all required traits correctly (HasFactory, HasRoles, CausesActivity, LogsActivity, Searchable, InteractsWithCredentials, etc.)
 3. ✅ Account fillable fields include name, password, current_team_id
-4. ✅ Password is properly cast to hashed
-5. ✅ toSearchableArray returns correct structure
+4. ✅ Password is properly cast to hashed and automatically hashes on create/update
+5. ✅ toSearchableArray returns correct structure with credential relationships
+6. ✅ Event dispatching configuration with all 10 lifecycle events
+7. ✅ Database table configuration and integration tests
+8. ✅ Model integration with Eloquent queries and data integrity
 
-### AccountCredential Model Tests
+### AccountCredential Model Tests *(Status: ✅ Comprehensive Coverage)*
 
-1. ✅ AccountCredential belongs to Account
+1. ✅ AccountCredential belongs to Account relationship
 2. ✅ AccountCredential casts type to AccountCredentialTypesEnum
-3. ✅ AccountCredential supports verification timestamps
-4. ✅ Primary designation works correctly
+3. ✅ AccountCredential supports verification timestamps (verified_at cast to datetime)
+4. ✅ Primary designation constraints work correctly (unique constraint on account_id, type, is_primary)
+5. ✅ Value uniqueness constraints across all credentials
+6. ✅ Factory configuration with all states (email, username, verified, secondary)
+7. ✅ Enum integration and querying by enum types
 
 ### Trait Tests
 
 For comprehensive trait testing documentation, see [Account Model Traits](alpha-account-traits.md).
 
-### Validation Rule Tests
+### Validation Rule Tests *(Status: ✅ Comprehensive Direct Testing)*
 
+**ValidName Rule Tests:**
 1. ✅ ValidName accepts valid ASCII names with letters and spaces
-2. ✅ ValidName rejects names with non-ASCII characters
-3. ✅ ValidName rejects names with numbers or special characters
+2. ✅ ValidName rejects names with non-ASCII characters (José, María, etc.)
+3. ✅ ValidName rejects names with numbers and special characters (John123)
 4. ✅ ValidName rejects names that are only spaces
-5. ✅ ValidUsername accepts valid usernames (4-16 chars, proper format)
-6. ✅ ValidUsername rejects usernames outside length requirements
-7. ✅ ValidUsername rejects usernames not starting with lowercase letter
-8. ✅ ValidUsername rejects usernames not ending with letter/number
-9. ✅ ValidUsername rejects usernames with consecutive special characters
+5. ✅ ValidName provides proper error messages for all validation failures
+6. ✅ Additional edge cases and international character validation
 
-### Laravel Scout Integration Tests
+**ValidUsername Rule Tests:**
+1. ✅ ValidUsername accepts valid usernames (4-16 chars, lowercase start, alphanumeric end)
+2. ✅ ValidUsername rejects usernames shorter than 4 characters
+3. ✅ ValidUsername rejects usernames longer than 16 characters
+4. ✅ ValidUsername rejects usernames not starting with lowercase letter
+5. ✅ ValidUsername rejects usernames not ending with letter/number
+6. ✅ ValidUsername rejects consecutive special characters (.. or __)
+7. ✅ ValidUsername allows single dots and underscores
+8. ✅ ValidUsername provides proper error messages for validation failures
+9. ✅ Real-world username validation scenarios and examples
 
-1. ✅ Account model uses Searchable trait
-2. ✅ toSearchableArray includes id, name, username.value, email.value
-3. ✅ Search indexing works correctly with model changes
+### Laravel Scout Integration Tests *(Status: ✅ Tested)*
+
+1. ✅ Account model uses Searchable trait correctly
+2. ✅ toSearchableArray includes id, name, username.value, email.value with proper structure
+3. ✅ Handles missing credentials gracefully (throws expected exceptions)
+4. ✅ Searchable trait methods available (searchableAs, toSearchableArray, getScoutKey)

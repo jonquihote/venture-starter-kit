@@ -113,6 +113,12 @@ Both scopes only match primary credentials (`is_primary=true`), ensuring consist
 
 ## Test Scenarios - Trait Coverage *(Implementation Status: ✅ Tested)*
 
+**Legend:**
+- ✅ **Tested** - Explicitly tested in our test suite
+- 🔧 **Framework** - Provided by Laravel/Filament framework (trusted)
+- ⚠️ **Not Tested** - Should be tested but currently isn't
+- ❌ **Deferred** - Intentionally not implemented/tested yet
+
 ### InteractsWithCredentials Trait Tests *(Comprehensive Coverage: InteractsWithCredentialsTest.php)*
 
 #### Relationship Method Tests
