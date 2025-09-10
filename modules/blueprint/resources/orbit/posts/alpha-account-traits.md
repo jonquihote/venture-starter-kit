@@ -9,7 +9,7 @@ created_at: 2025-09-10T06:52:25+00:00
 updated_at: 2025-09-10T06:52:28+00:00
 ---
 
-# Account Model Traits
+# Traits
 
 **I want to** modular trait-based functionality that enhances the Account model with specific capabilities  
 **So that** I can maintain clean separation of concerns while providing comprehensive account features

@@ -44,7 +44,6 @@ updated_at: 2025-09-10T02:08:58+00:00
 4. Primary credential designation preserved
 5. Relationships maintained throughout update process
 
-
 ### Validation Rules
 
 **Name Field (ValidName)**:

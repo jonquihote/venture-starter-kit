@@ -73,7 +73,6 @@ updated_at: 2025-09-10T02:08:55+00:00
 4. Both credentials linked to account via account_id
 5. Verification timestamps set appropriately
 
-
 ### Password Security
 
 - All passwords hashed using Laravel's default hasher

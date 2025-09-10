@@ -6,9 +6,10 @@ documentation_group: Alpha
 navigation_group: Account
 navigation_sort: 9.0
 created_at: 2025-09-10T06:51:54+00:00
-updated_at: 2025-09-10T06:51:58+00:00
+updated_at: 2025-09-10T07:42:05+00:00
 ---
-# Account Event-Driven Architecture
+
+# Event Subscribers & Observers
 
 **I want to** implement a comprehensive event-driven architecture for the Account model  
 **So that** I can ensure proper lifecycle management, audit trails, and business rule enforcement
@@ -55,7 +56,8 @@ class Account extends Authenticatable
 
 ## Available Events
 
-All Account events extend the abstract `AccountEvent` class, providing consistent structure and access to the Account instance.
+All Account events extend the abstract `AccountEvent` class, providing consistent structure and access to the Account
+instance.
 
 ### Base Event Class
 
@@ -78,6 +80,7 @@ abstract class AccountEvent
 ### Lifecycle Events
 
 #### Before Operations (Can Cancel)
+
 1. **AccountCreating** - Fired before account creation, can prevent creation
 2. **AccountUpdating** - Fired before account updates, can prevent updates
 3. **AccountSaving** - Fired before any save operation (create/update)
@@ -85,38 +88,12 @@ abstract class AccountEvent
 5. **AccountReplicating** - Fired before model replication
 
 #### After Operations (Informational)
+
 6. **AccountCreated** - Fired after successful account creation
 7. **AccountUpdated** - Fired after successful account updates
 8. **AccountSaved** - Fired after any successful save operation
 9. **AccountDeleted** - Fired after successful account deletion
 10. **AccountRetrieved** - Fired when account is retrieved from database
-
-### Event Flow Diagram
-
-```mermaid
-sequenceDiagram
-    participant App as Application
-    participant Model as Account Model
-    participant Observer as AccountObserver
-    participant Subscriber as AccountEventSubscriber
-    participant Event as Event System
-
-    App->>Model: Create Account
-    Model->>Event: Dispatch AccountCreating
-    Event->>Observer: creating() method
-    Event->>Subscriber: handleAccountCreating()
-    
-    Note over Model: If not cancelled, proceed with creation
-    
-    Model->>Model: Persist to database
-    Model->>Event: Dispatch AccountCreated
-    Event->>Observer: created() method
-    Event->>Subscriber: handleAccountCreated()
-    
-    Note over Subscriber: Add to default team if configured
-    
-    Subscriber-->>App: Account ready with team membership
-```
 
 ## Observer Implementation
 
@@ -145,12 +122,14 @@ class AccountObserver
 ### Observer vs Event Listeners
 
 **Use Observers For**:
+
 - Direct model-related business logic
 - Data validation and transformation
 - Preventing operations (return false)
 - Simple, tightly-coupled operations
 
 **Use Event Listeners For**:
+
 - Cross-cutting concerns
 - External system integrations
 - Complex business workflows
@@ -165,6 +144,7 @@ The AccountEventSubscriber handles cross-cutting concerns and automatic system b
 ### Current Implementation
 
 #### Team Membership Automation
+
 The subscriber automatically adds new accounts to the default team in single-team mode:
 
 ```php
@@ -182,6 +162,7 @@ public function handleAccountCreated(AccountCreated $event): void
 ```
 
 #### Event Subscription Mapping
+
 ```php
 public function subscribe(Dispatcher $events): array
 {
@@ -284,46 +265,55 @@ class ProcessAccountCreated implements ShouldQueue
 ## Test Scenarios *(Implementation Status: ✅ Ready for Testing)*
 
 ### Event Dispatching Tests
+
 1. ⚠️ Account creation dispatches AccountCreating and AccountCreated events
 2. ⚠️ Account updates dispatch AccountUpdating and AccountUpdated events
 3. ⚠️ Account deletion dispatches AccountDeleting and AccountDeleted events
 4. ⚠️ All events receive correct Account model instance
 
 ### Observer Method Invocation Tests
+
 5. ⚠️ Observer methods are called in correct order during lifecycle
 6. ⚠️ Observer can prevent operations by returning false
 7. ⚠️ Observer receives accurate model state during events
 
 ### Event Subscriber Tests
+
 8. ⚠️ AccountEventSubscriber handles all registered events
 9. ✅ Team membership is created automatically for new accounts (current implementation)
 10. ⚠️ Subscriber methods receive correct event instances
 
 ### Integration Tests
+
 11. ⚠️ Custom event listeners are triggered correctly
 12. ⚠️ Queued event listeners process asynchronously
 13. ⚠️ Event system works correctly with database transactions
 
-*Note: Event testing infrastructure is ready for comprehensive test implementation covering all lifecycle scenarios and integration points.*
+*Note: Event testing infrastructure is ready for comprehensive test implementation covering all lifecycle scenarios and
+integration points.*
 
 ## Best Practices
 
 ### Event Naming
+
 - Use descriptive, past-tense names for completed events
 - Use present-continuous tense for preventable events
 - Follow Laravel conventions: `ModelAction` and `ModelActioning`
 
 ### Performance Considerations
+
 - Use queued listeners for heavy operations
 - Avoid N+1 queries in event handlers
 - Consider event sourcing for complex business logic
 
 ### Error Handling
+
 - Wrap event handlers in try-catch blocks
 - Log errors without breaking main application flow
 - Consider failed job handling for queued listeners
 
 ### Testing Strategy
+
 - Mock events in unit tests when testing business logic
 - Test event dispatching separately from business logic
 - Use event fakes for integration testing
