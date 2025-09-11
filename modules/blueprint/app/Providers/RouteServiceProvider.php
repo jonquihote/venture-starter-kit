@@ -27,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
         $this->mapWebRoutes();
+        $this->mapBreadcrumbs();
     }
 
     /**
@@ -63,5 +64,10 @@ class RouteServiceProvider extends ServiceProvider
         ], function (): void {
             $this->loadRoutesFrom(module_path($this->getModuleName(), '/routes/api-v1.php'));
         });
+    }
+
+    protected function mapBreadcrumbs(): void
+    {
+        $this->loadRoutesFrom(module_path($this->getModuleName(), '/routes/breadcrumbs.php'));
     }
 }

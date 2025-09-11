@@ -7,8 +7,15 @@
     >
         @include('blueprint::filament.pages.show-post.partials.documentation-mobile-navigation')
 
-        @if ($post->hasEditAccess())
-            <div class="mb-4 flex justify-end">
+        <div class="mb-4 flex justify-end sm:justify-between">
+            <x-filament::breadcrumbs
+                :breadcrumbs="$breadcrumbItems"
+                @class([
+                    'hidden sm:block',
+                ])
+            />
+
+            @if ($post->hasEditAccess())
                 <x-filament::link
                     :href="$post->getEditUrl()"
                     icon="lucide-square-pen"
@@ -17,8 +24,8 @@
                 >
                     {{ __('blueprint::filament/pages/show-post.actions.edit.label') }}
                 </x-filament::link>
-            </div>
-        @endif
+            @endif
+        </div>
 
         <div
             @class([

@@ -2,6 +2,7 @@
 
 namespace Venture\Blueprint\Filament\Pages;
 
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Filament\Pages\Page;
 use Illuminate\Support\Collection;
 use Venture\Blueprint\Models\Post;
@@ -18,30 +19,37 @@ class ShowPost extends Page
 
     public Post $post;
 
-    public Collection $navigationItems;
-
     public ?Post $previousPost = null;
 
     public ?Post $nextPost = null;
+
+    public Collection $breadcrumbItems;
+
+    public Collection $navigationItems;
 
     public function mount(Post $post): void
     {
         $this->post = $post;
 
-        // Get all posts for this documentation group, ordered
         $posts = Post::query()
             ->where('documentation_group', $post->documentation_group)
             ->ordered()
             ->get();
 
-        // Process into navigation structure using Collections
-        $this->navigationItems = $this->processNavigationStructure($posts);
-
-        // Calculate previous and next posts based on navigation_sort
-        $this->calculatePreviousNextPosts($posts);
+        $this->initializeBreadcrumbNavigation();
+        $this->initializeDocumentationNavigation($posts);
+        $this->initializeSimplePagination($posts);
     }
 
-    private function processNavigationStructure(Collection $posts): Collection
+    protected function initializeBreadcrumbNavigation(): void
+    {
+        $this->breadcrumbItems = Breadcrumbs::generate(self::getRouteName(), [$this->post])
+            ->mapWithKeys(function ($breadcrumb) {
+                return [$breadcrumb->url => $breadcrumb->title];
+            });
+    }
+
+    protected function initializeDocumentationNavigation(Collection $posts): void
     {
         // Separate posts into standalone and grouped
         $standalone = $posts->whereNull('navigation_group')
@@ -62,13 +70,13 @@ class ShowPost extends Page
             ]);
 
         // Merge standalone posts and groups, then sort by navigation_sort
-        return $standalone
+        $this->navigationItems = $standalone
             ->merge($grouped->values())
             ->sortBy('sort')
             ->values();
     }
 
-    private function calculatePreviousNextPosts(Collection $posts): void
+    protected function initializeSimplePagination(Collection $posts): void
     {
         $currentSort = $this->post->navigation_sort;
 
