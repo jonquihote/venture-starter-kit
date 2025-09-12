@@ -13,6 +13,7 @@ ONLY INCLUDE THE CONTENT OF THE MARKDOWN
 @modules/blueprint/resources/orbit/posts/claude-frontend-architecture.md
 @modules/blueprint/resources/orbit/posts/claude-key-configuration-files.md
 @modules/blueprint/resources/orbit/posts/claude-special-commands.md
+@modules/blueprint/resources/orbit/posts/claude-code-repository.md
 
 <laravel-boost-guidelines>
 === foundation rules ===
