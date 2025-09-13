@@ -12,7 +12,14 @@
         "php": "^8.4",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "nwidart/laravel-modules": "^12.0"
+        "nwidart/laravel-modules": "^12.0",
+        "squirephp/airlines-en": "*",
+        "squirephp/airports-en": "*",
+        "squirephp/continents-en": "*",
+        "squirephp/countries-en": "*",
+        "squirephp/currencies-en": "*",
+        "squirephp/regions-en": "*",
+        "squirephp/timezones-en": "*"
     },
     "require-dev": {
         "dcblogdev/laravel-module-generator": "^2.0",
