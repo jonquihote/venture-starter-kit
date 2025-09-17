@@ -48,7 +48,8 @@ class MakeTeamCommand extends Command
                             return Account::query()
                                 ->whereLike('name', "%{$value}%", caseSensitive: false)
                                 ->get()
-                                ->pluck('name', 'id');
+                                ->pluck('name', 'id')
+                                ->toArray();
                         },
                     );
                 },
