@@ -16,6 +16,7 @@ class ResetApplicationCommand extends Command
     public function handle(): int
     {
         File::deleteDirectories(storage_path('app/public'));
+        File::deleteDirectories(storage_path('app/private'));
 
         $this->call('migrate:fresh');
         $this->call('aeon:init:access');
