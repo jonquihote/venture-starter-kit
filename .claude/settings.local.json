@@ -48,6 +48,8 @@
             "Bash(php artisan:*)",
             "Bash(php:*)",
             "Bash(git add:*)",
+            "Bash(git commit:*)",
+            "Bash(git stash:*)",
             "Bash(grep:*)",
             "Bash(mkdir:*)",
             "Bash(find:*)",
