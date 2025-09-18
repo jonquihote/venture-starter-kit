@@ -1,0 +1,9 @@
+{
+    "name": "Sigma",
+    "alias": "sigma",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\Sigma\\Providers\\SigmaServiceProvider"],
+    "files": []
+}

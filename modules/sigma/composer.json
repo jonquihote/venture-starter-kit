@@ -1,0 +1,28 @@
+{
+    "name": "venture/sigma",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joni Chandra",
+            "email": "jon@quihote.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Venture\\Sigma\\": "app/",
+            "Venture\\Sigma\\Database\\Factories\\": "database/factories/",
+            "Venture\\Sigma\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Venture\\Sigma\\Tests\\": "tests/"
+        }
+    }
+}

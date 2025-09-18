@@ -1,14 +1,14 @@
 <?php
 
-namespace Venture\{Module}\Enums\Auth;
+namespace Venture\Sigma\Enums\Auth;
 
 use Illuminate\Support\Collection;
-use Venture\{Module}\Enums\Auth\Permissions\PagePermissionsEnum;
+use Venture\Sigma\Enums\Auth\Permissions\PagePermissionsEnum;
 
 enum RolesEnum: string
 {
-    case Administrator = '{module}::authorization/roles.administrator';
-    case User = '{module}::authorization/roles.user';
+    case Administrator = 'sigma::authorization/roles.administrator';
+    case User = 'sigma::authorization/roles.user';
 
     public static function all(): Collection
     {
