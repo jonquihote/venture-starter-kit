@@ -1,6 +1,6 @@
 <?php
 
-namespace Venture\Omega\Providers;
+namespace Venture\Nexus\Providers;
 
 use Filament\Panel;
 use Filament\PanelProvider as BasePanelProvider;
@@ -8,7 +8,7 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Venture\Alpha\Actions\MakePanel;
-use Venture\Omega\Concerns\InteractsWithModule;
+use Venture\Nexus\Concerns\InteractsWithModule;
 
 class PanelProvider extends BasePanelProvider
 {
@@ -21,7 +21,7 @@ class PanelProvider extends BasePanelProvider
 
         return MakePanel::run($panel, $name, $slug)
             ->colors([
-                'primary' => Color::Pink,
+                'primary' => Color::Violet,
             ])
             ->widgets([
                 AccountWidget::class,

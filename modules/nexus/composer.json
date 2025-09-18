@@ -1,0 +1,28 @@
+{
+    "name": "venture/nexus",
+    "description": "",
+    "authors": [
+        {
+            "name": "Joni Chandra",
+            "email": "jon@quihote.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Venture\\Nexus\\": "app/",
+            "Venture\\Nexus\\Database\\Factories\\": "database/factories/",
+            "Venture\\Nexus\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Venture\\Nexus\\Tests\\": "tests/"
+        }
+    }
+}

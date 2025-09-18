@@ -1,0 +1,9 @@
+{
+    "name": "Nexus",
+    "alias": "nexus",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": ["Venture\\Nexus\\Providers\\NexusServiceProvider"],
+    "files": []
+}
