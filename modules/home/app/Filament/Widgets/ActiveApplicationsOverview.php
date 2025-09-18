@@ -11,6 +11,8 @@ class ActiveApplicationsOverview extends Widget
 {
     protected int | string | array $columnSpan = 'full';
 
+    protected static bool $isLazy = false;
+
     protected string $view = 'home::filament.widgets.active-applications-overview';
 
     protected function getViewData(): array
