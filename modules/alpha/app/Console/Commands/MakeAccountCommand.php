@@ -7,7 +7,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Venture\Aeon\Facades\Access;
 use Venture\Alpha\Enums\AccountCredentialTypesEnum;
 use Venture\Alpha\Models\Account;
 use Venture\Alpha\Models\AccountCredential;
@@ -81,11 +80,6 @@ class MakeAccountCommand extends Command
                 required: true,
                 name: 'password'
             )
-            ->confirm(
-                label: 'Grant Super Administrator Role?',
-                default: false,
-                name: 'grant_super_administrator_role'
-            )
             ->submit();
 
         $account = DB::transaction(function () use ($data) {
@@ -97,18 +91,13 @@ class MakeAccountCommand extends Command
             $account->updateUsername($data['username']);
             $account->updateEmail($data['email']);
 
-            if ($data['grant_super_administrator_role']) {
-                $account->syncRoles(Access::administratorRoles());
-            }
-
             return $account;
         });
 
         $this->components->success(
             sprintf(
-                'Account "%s" created successfully%s',
-                $account->name,
-                $data['grant_super_administrator_role'] ? ' with administrator privileges' : ''
+                'Account "%s" created successfully',
+                $account->name
             )
         );
 
