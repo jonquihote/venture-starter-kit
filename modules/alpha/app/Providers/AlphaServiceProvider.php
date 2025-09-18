@@ -10,6 +10,7 @@ use RecursiveIteratorIterator;
 use Venture\Alpha\Concerns\InteractsWithModule;
 use Venture\Alpha\Console\Commands\InitializeEngineCommand;
 use Venture\Alpha\Console\Commands\MakeAccountCommand;
+use Venture\Alpha\Console\Commands\MakeSubscriptionCommand;
 use Venture\Alpha\Console\Commands\MakeTeamCommand;
 
 class AlphaServiceProvider extends ServiceProvider
@@ -56,6 +57,7 @@ class AlphaServiceProvider extends ServiceProvider
             InitializeEngineCommand::class,
             MakeAccountCommand::class,
             MakeTeamCommand::class,
+            MakeSubscriptionCommand::class,
         ]);
     }
 
