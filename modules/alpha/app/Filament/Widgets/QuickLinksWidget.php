@@ -10,15 +10,15 @@ class QuickLinksWidget extends Widget
 {
     protected string $view = 'alpha::filament.widgets.quick-links-widget';
 
+    protected static bool $isLazy = false;
+
     public static function canView(): bool
     {
         $account = filament()->auth()->user();
 
-        return $account && (
-            $account->can(PagePermissionsEnum::HorizonDashboard) ||
-            $account->can(PagePermissionsEnum::PulseDashboard) ||
-            $account->can(PagePermissionsEnum::TelescopeDashboard)
-        );
+        return $account->can(PagePermissionsEnum::HorizonDashboard)
+            || $account->can(PagePermissionsEnum::PulseDashboard)
+            || $account->can(PagePermissionsEnum::TelescopeDashboard);
     }
 
     protected function getViewData(): array
