@@ -4,6 +4,8 @@ namespace Venture\Aeon\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Laravel\Pulse\Facades\Pulse;
+use Laravel\Telescope\Telescope;
 
 class ResetApplicationCommand extends Command
 {
@@ -15,6 +17,9 @@ class ResetApplicationCommand extends Command
 
     public function handle(): int
     {
+        Telescope::stopRecording();
+        Pulse::stopRecording();
+
         File::deleteDirectories(storage_path('app/public'));
         File::deleteDirectories(storage_path('app/private'));
 
