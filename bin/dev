@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Development server script for Laravel application
+# Supports both regular development and SSR modes
+#
+# Usage:
+#   bin/dev         # Regular development mode (Vite HMR)
+#   bin/dev --ssr   # Server-side rendering mode
+
+set -e  # Exit on any error
+
+# Configuration
+COLORS="#93c5fd,#c4b5fd,#fb7185,#fdba74,#bef264,#67e8f9"
+PROCESS_NAMES="assets,worker,scheduler,logger,pulse,reverb"
+
+# Default mode
+MODE="dev"
+
+# Parse arguments
+if [[ "$1" == "--ssr" ]]; then
+    MODE="ssr"
+fi
+
+# Function to run development server
+run_dev_server() {
+    local mode=$1
+
+    echo "🚀 Starting development server in ${mode} mode..."
+
+    # Prepare asset server command based on mode
+    if [[ "$mode" == "ssr" ]]; then
+        echo "📦 Building SSR assets first..."
+        bun run build:ssr
+        ASSET_COMMAND="php artisan inertia:start-ssr"
+    else
+        ASSET_COMMAND="bun run dev"
+    fi
+
+    # Run all services with concurrently
+    exec bunx concurrently \
+        -c "$COLORS" \
+        --names="$PROCESS_NAMES" \
+        --kill-others \
+        "$ASSET_COMMAND" \
+        "sleep 1; php artisan horizon" \
+        "sleep 1; php artisan schedule:work" \
+        "sleep 1; tail -f storage/logs/laravel.log" \
+        "sleep 1; php artisan pulse:check" \
+        "sleep 1; php artisan reverb:start --debug"
+}
+
+# Display help
+show_help() {
+    echo "Laravel Development Server"
+    echo ""
+    echo "Usage:"
+    echo "  bin/dev         Start development server with Vite HMR"
+    echo "  bin/dev --ssr   Start development server with SSR support"
+    echo "  bin/dev --help  Show this help message"
+    echo ""
+    echo "Services started:"
+    echo "  • Asset server (Vite or Inertia SSR)"
+    echo "  • Laravel Horizon (queue worker)"
+    echo "  • Laravel Scheduler"
+    echo "  • Log tail (storage/logs/laravel.log)"
+    echo "  • Laravel Pulse monitoring"
+    echo "  • Laravel Reverb WebSocket server"
+}
+
+# Handle help flag
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    show_help
+    exit 0
+fi
+
+# Validate arguments
+if [[ $# -gt 1 || ( $# -eq 1 && "$1" != "--ssr" ) ]]; then
+    echo "❌ Invalid arguments. Use --help for usage information."
+    exit 1
+fi
+
+# Run the development server
+run_dev_server "$MODE"

@@ -64,12 +64,11 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74,#bef264,#67e8f9\" \"bun run dev\" \"sleep 1; php artisan horizon\" \"sleep 1; php artisan schedule:work\" \"sleep 1; tail -f storage/logs/laravel.log\" \"sleep 1; php artisan pulse:check\" \"sleep 1; php artisan reverb:start --debug\" --names=assets,worker,scheduler,logger,pulse,reverb --kill-others"
+            "bin/dev"
         ],
         "dev:ssr": [
-            "bun run build:ssr",
             "Composer\\Config::disableProcessTimeout",
-            "bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74,#bef264,#67e8f9\" \"php artisan inertia:start-ssr\" \"sleep 1; php artisan horizon\" \"sleep 1; php artisan schedule:work\" \"sleep 1; tail -f storage/logs/laravel.log\" \"sleep 1; php artisan pulse:check\" \"sleep 1; php artisan reverb:start --debug\" --names=assets,worker,scheduler,logger,pulse,reverb --kill-others"
+            "bin/dev --ssr"
         ],
         "test": [
             "@php artisan config:clear --ansi",
