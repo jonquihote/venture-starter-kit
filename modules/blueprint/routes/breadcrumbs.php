@@ -5,6 +5,7 @@ use Diglactic\Breadcrumbs\Generator as Trail;
 use Filament\Facades\Filament;
 use Venture\Blueprint\Filament\Pages\Dashboard;
 use Venture\Blueprint\Filament\Pages\ShowPost;
+use Venture\Blueprint\Models\Post;
 
 $panel = Filament::getPanel('blueprint');
 
@@ -20,7 +21,7 @@ Breadcrumbs::for(ShowPost::getRouteName($panel), function (Trail $trail, array $
     if ($post->is_home_page) {
         $trail->push($post->title, ShowPost::getUrl([$post]));
     } else {
-        $home = \Venture\Blueprint\Models\Post::query()
+        $home = Post::query()
             ->where('is_home_page', true)
             ->first();
 

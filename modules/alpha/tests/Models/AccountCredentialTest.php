@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Carbon;
 use Venture\Alpha\Enums\AccountCredentialTypesEnum;
 use Venture\Alpha\Enums\MigrationsEnum;
 use Venture\Alpha\Models\Account;
@@ -52,7 +53,7 @@ describe('AccountCredential Model', function (): void {
             $verifiedAt = now();
             $credential = AccountCredential::factory()->email()->verified()->create();
 
-            expect($credential->verified_at)->toBeInstanceOf(\Illuminate\Support\Carbon::class);
+            expect($credential->verified_at)->toBeInstanceOf(Carbon::class);
             expect($credential->verified_at)->not->toBeNull();
         });
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use PHPUnit\Framework\AssertionFailedError;
 use Venture\Aeon\Console\Commands\ResetApplicationCommand;
 
 beforeEach(function (): void {
@@ -300,9 +301,9 @@ describe('ResetApplicationCommand Integration', function (): void {
         try {
             $exitCode = $this->artisan('help', ['command_name' => 'aeon:reset-application'])->run();
             expect($exitCode)->toBe(0);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // If the command doesn't exist, this will throw an exception
-            throw new \PHPUnit\Framework\AssertionFailedError(
+            throw new AssertionFailedError(
                 'Command aeon:reset-application is not registered: ' . $e->getMessage()
             );
         }
@@ -315,9 +316,9 @@ describe('ResetApplicationCommand Integration', function (): void {
         try {
             $exitCode = $this->artisan('help', ['command_name' => 'reset'])->run();
             expect($exitCode)->toBe(0);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // If the command doesn't exist, this will throw an exception
-            throw new \PHPUnit\Framework\AssertionFailedError(
+            throw new AssertionFailedError(
                 'Command alias reset is not registered: ' . $e->getMessage()
             );
         }

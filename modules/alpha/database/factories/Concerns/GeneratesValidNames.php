@@ -2,6 +2,8 @@
 
 namespace Venture\Alpha\Database\Factories\Concerns;
 
+use Transliterator;
+
 trait GeneratesValidNames
 {
     /**
@@ -42,7 +44,7 @@ trait GeneratesValidNames
     {
         // Use Transliterator if available (best option)
         if (class_exists('Transliterator')) {
-            $transliterator = \Transliterator::createFromRules(
+            $transliterator = Transliterator::createFromRules(
                 ':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;'
             );
 
