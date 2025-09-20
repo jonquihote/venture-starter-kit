@@ -38,7 +38,7 @@
             <!-- Main Content Area -->
             <div
                 @class([
-                    'flex-1', // Flex Properties
+                    'lg:w-[calc(100%-16rem-2.5rem)]', // Calculated width: 100% - sidebar (16rem) - gap (2.5rem)
                 ])
             >
                 <!-- Article Content -->
