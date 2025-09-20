@@ -17,13 +17,14 @@ class ResetApplicationCommand extends Command
 
     public function handle(): int
     {
-        Telescope::stopRecording();
-        Pulse::stopRecording();
-
         File::deleteDirectories(storage_path('app/public'));
         File::deleteDirectories(storage_path('app/private'));
 
+        Telescope::stopRecording();
+        Pulse::stopRecording();
+
         $this->call('migrate:fresh');
+        $this->call('horizon:forget', ['--all' => true]);
         $this->call('aeon:init:access');
         $this->call('alpha:init:engine');
         $this->call('db:seed');
